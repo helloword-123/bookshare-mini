@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+	<button open-type="" class="wx_login_button" bindtap="login">
+		微信登陆
+	</button>
+	<modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
+		登录成功！根据平台最新要求，微信登陆需要直接自定义账号的昵称和头像
+	</modal>
+</view>

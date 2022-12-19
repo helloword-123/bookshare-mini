@@ -1,0 +1,7 @@
+.wx_login_button{
+  margin-top: 20rpx;
+  width: 400rpx;
+  font-size: 30rpx;
+  background-color: #fee33c;
+  border-radius: 80rpx;
+}

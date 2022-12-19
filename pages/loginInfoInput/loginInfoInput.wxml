@@ -1,0 +1,17 @@
+<view class="container">
+  <van-dialog use-slot title="请先登录享受更多功能" show="{{ show }}" theme="round-button" confirmButtonText="立即登录" show-cancel-button confirm-button-open-type="editConfirm" bind:close="onClose">
+    <!-- 头像 -->
+    <view class="box1">
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{avatarUrl}}" />
+      </button>
+    </view>
+    <!-- 昵称 -->
+    <view class="box2">
+      <van-cell-group>
+        <van-field title-width="3em" class="weui-input" type="nickname" label="昵称：" value="{{ value }}" placeholder="请输入昵称" border="{{ false }}" bind:change="onChange" />
+      </van-cell-group>
+    </view>
+    <view class="note">99%的用户选择使用微信头像和昵称！</view>
+  </van-dialog>
+</view>
