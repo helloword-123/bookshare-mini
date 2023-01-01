@@ -81,6 +81,6 @@ App({
       openid:"",
       session_key:""
     },
-    baseurl: "http://120.77.76.39:8080/"
+    baseurl: "http://localhost:8080/"
   }
 })
