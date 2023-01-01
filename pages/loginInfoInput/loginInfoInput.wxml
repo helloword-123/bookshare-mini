@@ -9,7 +9,7 @@
     <!-- 昵称 -->
     <view class="box2">
       <van-cell-group>
-        <van-field title-width="3em" class="weui-input" type="nickname" label="昵称：" value="{{ value }}" placeholder="请输入昵称" border="{{ false }}" bind:change="onChange" />
+        <van-field title-width="3em" class="weui-input" type="nickname" label="昵称：" value="{{ nickname }}" placeholder="请输入昵称" border="{{ false }}" bind:change="onChange" />
       </van-cell-group>
     </view>
     <view class="note">99%的用户选择使用微信头像和昵称！</view>

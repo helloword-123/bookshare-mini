@@ -8,10 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatarUrl: defaultAvatarUrl,
-    nickname: '',
+    avatarUrl: '',
     // 输入框值
-    value: '',
+    nickname: '',
     // 弹出框是否显示
     show: true,
   },
@@ -34,7 +33,7 @@ Page({
     this.setData({
       avatarUrl,
     })
-    // this.uploadFile();
+    this.uploadFile();
   },
 
   // 上传头像
@@ -46,14 +45,15 @@ Page({
       // formData: this.formData,
       header: {
         'content-type': 'multipart/form-data',
-        'token': app.getStorageSync('header_token')
+        'token': wx.getStorageSync('header_token')
       }, // header 值
       success: res => {
         console.log(res);
-        this.$toast('上传成功')
+        console.log('上传成功')
       },
       fail: e => {
-        this.$toast('上传失败')
+        
+        console.log('上传失败')
       }
     });
   },
@@ -62,7 +62,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      nickname:options.nickname,
+      avatarUrl:options.avatarurl
+    })
+    if(options.avatarurl == null || options.avatarurl.length == 0){
+      this.setData({
+        avatarUrl:defaultAvatarUrl
+      })
+    }
   },
 
   /**

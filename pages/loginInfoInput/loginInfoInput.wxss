@@ -26,5 +26,5 @@
   /* 方向为上右下左 */
   margin: 10rpx 100rpx 100rpx 100rpx;
   background-color: #f3f3f3;
-  font-size: 30rpx;
+  font-size: 25rpx;
 }
