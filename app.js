@@ -23,11 +23,9 @@ App({
         },
         dataType: 'json',
         success: function (res) {
-          // callback(res.data);
           resolve(res.data);
         },
         fail: function (err) {
-          // errFun(err);
           reject(err);
         }
       })
@@ -75,12 +73,8 @@ App({
     secret: "64f86e32405825b44feaa222e0bce6f7"
   },
   globalData: {
-    userInfo: {
-      username:"",
-      avatarUrl:"",
-      openid:"",
-      session_key:""
-    },
+    userinfo: null,
+    openid:'',
     baseurl: "http://localhost:8080/"
   }
 })

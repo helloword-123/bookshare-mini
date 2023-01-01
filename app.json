@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/loginInfoInput/loginInfoInput",
     "pages/login/login",
+    "pages/loginInfoInput/loginInfoInput",
     "pages/logs/logs",
     "pages/mine/mine",
     "pages/home/home"
