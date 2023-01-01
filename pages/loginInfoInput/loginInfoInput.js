@@ -17,13 +17,35 @@ Page({
 
   editConfirm() {
     // 保存信息
+
+  },
+
+  onChangeName(){
+    // console.log(this.data.nickname);
   },
 
   onClose() {
+    console.log(this.data.nickname);
     this.setData({
       show: false
     });
+    // 更新用户信息
+    app.asyncRequest('POST', app.globalData.baseurl + 'user/updateAvatarAndName', {
+        avatarUrl: this.data.avatarUrl,
+        id: app.globalData.userinfo.id,
+        nickName: this.data.nickname
+      })
+      .then(res => {
+        console.log(res);
+        // 跳转道首页
+        wx: wx.switchTab({
+          url: '/pages/home/home'
+        })
+      }).catch(err => {
+        console.log(err)
+      });
   },
+
 
   onChooseAvatar(e) {
     console.log(e);
@@ -33,26 +55,26 @@ Page({
     this.setData({
       avatarUrl,
     })
+    // 上传头像
     this.uploadFile();
   },
 
   // 上传头像
-  uploadFile(){
+  uploadFile() {
+    console.log(this.data.avatarUrl);
     wx.uploadFile({
-      url: app.globalData.baseUrl + 'common/uploadFile', //后台接口
-      filePath: this.avatarUrl, // 上传图片 url
-      name:'image',
+      url: app.globalData.baseurl + 'common/uploadFile', //后台接口
+      filePath: this.data.avatarUrl, // 上传图片 url
+      name: 'image',
       // formData: this.formData,
       header: {
         'content-type': 'multipart/form-data',
         'token': wx.getStorageSync('header_token')
       }, // header 值
       success: res => {
-        console.log(res);
         console.log('上传成功')
       },
       fail: e => {
-        
         console.log('上传失败')
       }
     });
@@ -63,12 +85,12 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      nickname:options.nickname,
-      avatarUrl:options.avatarurl
+      nickname: options.nickname,
+      avatarUrl: options.avatarurl
     })
-    if(options.avatarurl == null || options.avatarurl.length == 0){
+    if (options.avatarurl == null || options.avatarurl.length == 0) {
       this.setData({
-        avatarUrl:defaultAvatarUrl
+        avatarUrl: defaultAvatarUrl
       })
     }
   },
