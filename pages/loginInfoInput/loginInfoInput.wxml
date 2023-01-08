@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container1">
   <van-dialog use-slot title="请先登录享受更多功能" show="{{ show }}" theme="round-button" confirmButtonText="立即登录" confirm-button-open-type="editConfirm" bind:close="onClose">
     <!-- 头像 -->
     <view class="box1">

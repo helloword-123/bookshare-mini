@@ -5,6 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 搜索框值
+    value: '',
+    // 轮播图相关数据
+    imgList: ['/images/swiper/1.jpg', '/images/swiper/2.jpg','/images/swiper/3.jpg'],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 500
+  },
+
+  clickLocation(){
+    
 
   },
 
@@ -12,7 +24,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(111);
+    wx.getLocation({
+      type: 'wgs84',
+      success (res) {
+        console.log('纬度' + res.latitude)
+        console.log('经度' + res.longitude)
+      } 
+     })
   },
 
   /**

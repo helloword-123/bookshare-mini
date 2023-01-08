@@ -1,0 +1,36 @@
+/* pages/share/share.wxss */
+.container1{
+    width: 100vw;
+    height: 100vh;
+}
+.content {
+    margin-top: 30rpx;
+    height: 100%;
+    width: 100%;
+    border-top: 1rpx solid #d3cdcd;
+    padding-top: 100rpx;
+    background-color: #f1f1f1;
+}
+
+.view1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.desc {
+    margin: auto;
+}
+
+.isbn_img {
+    margin: 40rpx auto;
+}
+
+.isbn_img > image{
+    height: 6rem;
+    width: 8rem;
+}
+
+.scan_button{
+    margin: 0 100rpx;
+}

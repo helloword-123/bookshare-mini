@@ -1,0 +1,26 @@
+<!--pages/share/share.wxml-->
+<view class="container1">
+    <!-- 步骤条 -->
+    <view class="steps">
+        <van-steps steps="{{ steps }}" active="{{ active }}" />
+    </view>
+    <!-- 分别显示 -->
+    <view class="content">
+        <view wx:if="{{active == 0}}" class="view1">
+            <view class="desc">扫描书籍封底条形码即可共享</view>
+            <view class="isbn_img">
+                <image src="/images/share/ISBN.jpeg"></image>
+            </view>
+            <view class="scan_button">
+                <van-button type="info" block round size="small">扫一扫共享</van-button>
+            </view>
+        </view>
+        <view wx:elif="{{active == 1}}">
+            <view class="bookinfo">
+                
+            </view>
+        </view>
+        <view wx:elif="{{active == 2}}"> 3 </view>
+    </view>
+
+</view>

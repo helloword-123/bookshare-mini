@@ -1,1 +1,57 @@
 /* pages/home/home.wxss */
+.top {
+    height: 3rem;
+    width: 100%;
+    background-color: pink;
+}
+
+.location {
+    line-height: 3rem;
+}
+
+.location_img {
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+    margin-left: 0.2rem;
+}
+
+.location_text {
+    font-size: small;
+    margin-left: 0.2rem;
+    line-height: 3rem;
+}
+
+.swiper {
+    margin: 0 1rem 0 1rem;
+    overflow: hidden;
+    border-radius: 20rpx;
+    box-sizing: border-box;
+    transform: translateY(0);
+    line-height: 1rpx;
+}
+
+.swiper-item {
+    height: 100%;
+    width: 100%;
+}
+
+.share{
+    margin-top: 2rem;
+    width: 100%;
+    height: 5rem;
+    background-color: #f0f0f0;
+    display: flex;
+}
+.left{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.right{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}

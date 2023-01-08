@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container1">
   <van-image round width="3rem" height="3rem" src="{{picurl}}" />
   <text class="appname">校园图书共享平台</text>
   <button open-type="" class="wx_login_button" bindtap="login">

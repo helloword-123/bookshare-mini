@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/share/share",
+    "pages/home/home",
     "pages/login/login",
     "pages/loginInfoInput/loginInfoInput",
     "pages/logs/logs",
-    "pages/mine/mine",
-    "pages/home/home"
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,12 +34,21 @@
       }
     ]
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取你的当前位置"
+    }
+  },
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
     "van-image": "@vant/weapp/image/index",
     "van-field": "@vant/weapp/field/index",
     "van-popup": "@vant/weapp/popup/index",
     "van-cell": "@vant/weapp/cell/index",
-    "van-dialog": "@vant/weapp/dialog/index"
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-steps": "@vant/weapp/steps/index"
   }
 }

@@ -1,2 +1,38 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<view class="container1">
+    <!-- 顶部栏 -->
+    <van-row class="top">
+        <van-col span="8" class="location" bindtap="clickLocation">
+            <image src="/images/home/location.png" class="location_img"></image>
+            <text class="location_text">广东省茂名市</text>
+        </van-col>
+        <van-col span="12" offset="3" class="search">
+            <van-search shape="round" size="small" value="{{ value }}" placeholder="搜索图书" />
+        </van-col>
+    </van-row>
+    <!-- 轮播图/广告位 -->
+    <view class="swiper">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+            <block wx:for="{{imgList}}" wx:key="*this">
+                <swiper-item>
+                    <image src="{{item}}" class="swiper-item"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <!-- 共享、借阅 -->
+    <view class="share">
+        <view class="left">
+            <van-image round width="2rem" height="2rem" src="/images/home/share.png" />
+            <view style="font-size: small; margin-left: 5rpx;">共享</view>
+        </view>
+        <view class="right">
+            <van-image round width="2rem" height="2rem" src="/images/home/borrow.png" />
+            <view style="font-size: small;">借阅</view>
+        </view>
+    </view>
+    <!-- 图书下拉列表展示 -->
+    <view class="bookList">
+        
+    </view>
+</view>

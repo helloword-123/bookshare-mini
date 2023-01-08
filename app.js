@@ -75,6 +75,6 @@ App({
   globalData: {
     userinfo: null,
     openid:'',
-    baseurl: "http://localhost:8080/"
+    baseurl: "http://192.168.0.104:8080/"
   }
 })
