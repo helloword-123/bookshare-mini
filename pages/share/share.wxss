@@ -34,3 +34,70 @@
 .scan_button{
     margin: 0 100rpx;
 }
+
+.bookinfo{
+    background-color: #fff;
+    padding: 20rpx 0;
+    width: 100%;
+    height: 260rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.bookinfo > image{
+    width: 200rpx;
+    height: 100%;
+    margin: 0 50rpx;
+}
+.bookinfo > view{
+    
+}
+.bookinfo > view{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.bookinfo > view view:first-child{
+    font-weight: 700;
+    margin-bottom: 10rpx;
+}
+
+.bookinfo > view view:not(:first-child){
+    color: #C0C0C0;
+    font-size: 30rpx;
+}
+
+.input{
+    margin-top: 50rpx;
+
+}
+
+.input_location{
+    margin-top: 50rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+}
+
+.input_location > view {
+    margin-left: 50rpx;
+    font-size: 27rpx;
+}
+
+.upload_share_img{
+    border-top: 1rpx solid #f3f5f6;
+    padding-top: 10rpx;
+    padding-left: 10rpx;
+    background-color: #fff;
+}
+.upload_share_img > view{
+    font-size: 28rpx;
+    margin-bottom: 8rpx;
+}
+
+.share_button{
+    margin: 50rpx 100rpx 0 100rpx;
+}

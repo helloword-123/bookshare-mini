@@ -22,7 +22,7 @@
     </view>
     <!-- 共享、借阅 -->
     <view class="share">
-        <view class="left">
+        <view class="left" bindtap="shareClick">
             <van-image round width="2rem" height="2rem" src="/images/home/share.png" />
             <view style="font-size: small; margin-left: 5rpx;">共享</view>
         </view>

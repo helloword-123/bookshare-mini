@@ -37,7 +37,7 @@ Page({
       })
       .then(res => {
         console.log(res);
-        // 跳转道首页
+        // 跳转到首页
         wx: wx.switchTab({
           url: '/pages/home/home'
         })
