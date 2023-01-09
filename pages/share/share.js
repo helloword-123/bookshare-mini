@@ -67,6 +67,34 @@ Page({
     // 点击”我要共享“按钮
     shareCommit() {
         // 上传表单信息到后台
+        const {
+            bookinfo
+        } = this.data;
+        app.asyncRequest('POST', app.globalData.baseurl + 'book/shareBook', {
+                // 传给后端的信息
+                // 图书信息
+                code: bookinfo.code,
+                name: bookinfo.name,
+                author: bookinfo.authod,
+                publishing: bookinfo.publishing,
+                published: bookinfo.published,
+                photoUrl: bookinfo.photoUrl,
+                description: bookinfo.description,
+                // 表单信息
+                userName: this.data.userName,
+                phoneNumber: this.data.phoneNumber,
+                will: this.data.will,
+                location: this.data.location,
+                // fileList: this.fileList[0],
+                userId: app.globalData.userinfo.id
+            })
+            .then(res => {
+                console.log(res);
+
+            })
+            .catch(err => {
+                console.log(res);
+            })
 
         // 弹出框显示
         this.setData({
@@ -90,16 +118,18 @@ Page({
             success: res => {
                 console.log(res.result)
                 // 根据isbn号发起请求，api是豆瓣的
-                var url = 'https://apis.5share.site/books/?isbn=' + res.result
+                var apikey = '14778.d240ab28c857b24b46148ca6351116a2.b03531cb33b522960cdb109e88e651bc';
+                var url = 'https://api.jike.xyz/situ/book/isbn/' + res.result + '?apikey=' + apikey;
                 app.asyncRequest('GET', url)
                     .then(res => {
                         console.log(res);
                         // 跳转下一步
                         this.setData({
-                            bookinfo: res.info,
+                            bookinfo: res.data,
                             active: 1
                         })
-                    }).catch(err => {
+                    })
+                    .catch(err => {
                         console.log(err)
                     });
             },

@@ -19,13 +19,14 @@
         <!-- 步骤二 -->
         <view wx:elif="{{active == 1}}">
             <view class="bookinfo">
-                <image src="/images/home/share.png"></image>
+                <image src="{{bookinfo.photoUrl}}"></image>
                 <view>
                     <view>{{bookinfo.name}}</view>
                     <view>{{bookinfo.authors}}</view>
-                    <view>ISBN：{{bookinfo.isbn_13}}</view>
-                    <view>出版社：{{bookinfo.publisher}}</view>
-                    <view>出版时间：{{bookinfo.publishedDate}}</view>
+                    <view>ISBN：{{bookinfo.code}}</view>
+                    <view>作者：{{bookinfo.author}}</view>
+                    <view>出版社：{{bookinfo.publishing}}</view>
+                    <view>出版时间：{{bookinfo.published}}</view>
                 </view>
             </view>
             <view class="input">

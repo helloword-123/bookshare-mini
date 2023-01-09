@@ -3,6 +3,11 @@
     width: 100vw;
     height: 100vh;
 }
+
+.steps{
+    margin: 0 70rpx;
+}
+
 .content {
     margin-top: 30rpx;
     height: 100%;
@@ -47,11 +52,9 @@
 .bookinfo > image{
     width: 200rpx;
     height: 100%;
-    margin: 0 50rpx;
+    margin: 0 30rpx;
 }
-.bookinfo > view{
-    
-}
+
 .bookinfo > view{
     white-space: nowrap;
     text-overflow: ellipsis;
