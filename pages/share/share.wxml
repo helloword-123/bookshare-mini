@@ -15,6 +15,7 @@
             <view class="scan_button">
                 <van-button type="info" block round size="small" bindtap="clickScanButton">扫一扫共享</van-button>
             </view>
+            <van-toast id="van-toast" />
         </view>
         <!-- 步骤二 -->
         <view wx:elif="{{active == 1}}">

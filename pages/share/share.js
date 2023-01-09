@@ -1,6 +1,8 @@
 // pages/share/share.js
 const app = getApp();
 
+import Toast from '@vant/weapp/toast/toast'
+
 Page({
 
     /**
@@ -47,6 +49,7 @@ Page({
             success: (res) => {
                 // 上传完成需要更新 fileList
                 console.log('上传成功')
+                res = JSON.parse(res.data)
                 const {
                     fileList = []
                 } = this.data;
@@ -70,12 +73,13 @@ Page({
         const {
             bookinfo
         } = this.data;
-        app.asyncRequest('POST', app.globalData.baseurl + 'book/shareBook', {
+        console.log(this.data.fileList);
+        app.asyncRequest('POST', app.globalData.baseurl + 'book-drift/shareBook', {
                 // 传给后端的信息
                 // 图书信息
                 code: bookinfo.code,
                 name: bookinfo.name,
-                author: bookinfo.authod,
+                author: bookinfo.author,
                 publishing: bookinfo.publishing,
                 published: bookinfo.published,
                 photoUrl: bookinfo.photoUrl,
@@ -85,12 +89,11 @@ Page({
                 phoneNumber: this.data.phoneNumber,
                 will: this.data.will,
                 location: this.data.location,
-                // fileList: this.fileList[0],
+                fileList: this.data.fileList,
                 userId: app.globalData.userinfo.id
             })
             .then(res => {
                 console.log(res);
-
             })
             .catch(err => {
                 console.log(res);
@@ -114,20 +117,21 @@ Page({
     clickScanButton() {
         // 调用api扫描ISBN
         wx.scanCode({
-            scanType: ['barCode'],
+            scanType: ['barCode'],  
             success: res => {
                 console.log(res.result)
-                // 根据isbn号发起请求，api是豆瓣的
+                var isbn = res.result;
+                // 根据isbn号发起请求
                 var apikey = '14778.d240ab28c857b24b46148ca6351116a2.b03531cb33b522960cdb109e88e651bc';
-                var url = 'https://api.jike.xyz/situ/book/isbn/' + res.result + '?apikey=' + apikey;
+                var url = 'https://api.jike.xyz/situ/book/isbn/' + isbn + '?apikey=' + apikey;
                 app.asyncRequest('GET', url)
                     .then(res => {
                         console.log(res);
-                        // 跳转下一步
+                        // 设置信息
                         this.setData({
                             bookinfo: res.data,
-                            active: 1
                         })
+                        return this.checkIsbnIsExist(isbn);
                     })
                     .catch(err => {
                         console.log(err)
@@ -137,6 +141,26 @@ Page({
                 console.log(err);
             }
         })
+    },
+
+    // 后台请求，判断改isbn号的图书是否已经在漂流中
+    checkIsbnIsExist(isbn){
+        app.asyncRequest('GET', app.globalData.baseurl + 'book/isDrifting/' + isbn)
+            .then(ret => {
+                console.log(ret);
+                if(ret.code == 20002){
+                    // 提示共享失败
+                    Toast.fail('该图书正在共享中，无法重复共享！');
+                } else{
+                    // 跳转下一步
+                    this.setData({
+                        active: 1
+                    })
+                }
+            })
+            .catch(err=>{
+                Toast.fail('请求出错！');
+            })
     },
 
     /**
