@@ -31,25 +31,6 @@ App({
       })
     });
   },
-  syncRequest(method, url, data) {
-    return new Promise((resolve, reject) => wx.request({
-      url: url,
-      method: method,
-      data: data,
-      header: {
-        //'content-type': method == 'GET'?'application/json':'application/x-www-form-urlencoded',
-        'Accept': 'application/json',
-        'token': wx.getStorageSync('token')
-      },
-      dataType: 'json',
-      success: function (res) {
-        callback(res.data);
-      },
-      fail: function (err) {
-        errFun(res);
-      }
-    }))
-  },
 
   addParamsToUrl(url, params) {
     let str = "?";
@@ -75,6 +56,11 @@ App({
   globalData: {
     userinfo: null,
     openid:'',
-    baseurl: "http://192.168.0.104:8080/"
-  }
+    baseurl: "http://127.0.0.1:8080/"
+  },
+  // 腾讯地图根据经纬度获取位置的apikey
+  mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',
+  location: '111',
+  lat: 0,
+  lng: 0
 })

@@ -2,11 +2,11 @@
 <view class="container1">
     <!-- 顶部栏 -->
     <van-row class="top">
-        <van-col span="8" class="location" bindtap="clickLocation">
+        <van-col span="16" class="location text-ellipsis" bindtap="clickLocation">
             <image src="/images/home/location.png" class="location_img"></image>
-            <text class="location_text">广东省茂名市</text>
+            <text class="location_text">{{location}}</text>
         </van-col>
-        <van-col span="12" offset="3" class="search">
+        <van-col span="8" class="search">
             <van-search shape="round" size="small" value="{{ value }}" placeholder="搜索图书" />
         </van-col>
     </van-row>
@@ -33,6 +33,28 @@
     </view>
     <!-- 图书下拉列表展示 -->
     <view class="bookList">
-        
+        <!-- 分类 -->
+        <view class="all_category">
+            <image src="/images/home/setting.png" />全部分类
+        </view>
+        <block class="van-tabs">
+            <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{categorys.length!=0}}"> 
+                <block wx:for="{{categorys}}" wx:for-item="item" wx:key="*this">
+                    <van-tab title="{{item.name}}">
+                        <scroll-view class="scroll" scroll-y>
+                            <view class="book" wx:for="{{bookList}}" wx:for-item="book" wx:key="*this">
+                                <image src="{{book.picture_url}}"></image>
+                                <view>
+                                    <view>{{book.name}}</view>
+                                    <view>{{book.author}}</view>
+                                    <view>共享人：{{book.sharer}}</view>
+                                    <view>漂流地：<image src="/images/home/location.png"/>{{book.location}}</view>
+                                </view>
+                            </view> 
+                        </scroll-view>
+                    </van-tab>
+                </block>
+            </van-tabs>
+        </block>
     </view>
 </view>

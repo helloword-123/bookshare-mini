@@ -8,3 +8,11 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+/* 单行超出显示省略号 */
+.text-ellipsis{
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow:ellipsis;
+}

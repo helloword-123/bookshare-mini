@@ -31,6 +31,8 @@ Page({
         showDialog: false
     },
 
+    
+
     // 点击图片上传
     afterRead(event) {
         const {

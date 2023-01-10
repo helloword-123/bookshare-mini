@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/login/login",
     "pages/share/share",
-    "pages/home/home",
     "pages/loginInfoInput/loginInfoInput",
     "pages/logs/logs",
     "pages/mine/mine"
@@ -34,11 +34,6 @@
       }
     ]
   },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "获取你的当前位置"
-    }
-  },
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
     "van-image": "@vant/weapp/image/index",
@@ -51,6 +46,14 @@
     "van-col": "@vant/weapp/col/index",
     "van-steps": "@vant/weapp/steps/index",
     "van-uploader": "@vant/weapp/uploader/index",
-    "van-toast": "@vant/weapp/toast/index"
-  }
+    "van-toast": "@vant/weapp/toast/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取你的当前位置"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"]
 }

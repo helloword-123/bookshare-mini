@@ -1,4 +1,16 @@
 // pages/home/home.js
+import {
+  setWatcher
+} from '../../utils/watch'
+const app = getApp();
+
+// 引入SDK核心类，js文件根据自己业务，位置可自行放置
+var QQMapWX = require('../../lib/qqmap-wx-jssdk1.2/qqmap-wx-jssdk');
+// 实例化API核心类
+var qqmapsdk = new QQMapWX({
+  key: app.mapApiKey
+});
+
 Page({
 
   /**
@@ -7,21 +19,182 @@ Page({
   data: {
     // 搜索框值
     value: '',
+    location: app.location,
     // 轮播图相关数据
-    imgList: ['/images/swiper/1.jpg', '/images/swiper/2.jpg','/images/swiper/3.jpg'],
+    imgList: ['/images/swiper/1.jpg', '/images/swiper/2.jpg', '/images/swiper/3.jpg'],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
-    duration: 500
+    duration: 500,
+    // 分类标签
+    tab_active: 0,
+    categorys: [],
+    bookList: [{
+      cate_id: 1,
+      list: [{
+        bookId: 1,
+        name: '奇先生妙小姐',
+        author: '（英）哈格斯维斯',
+        picture_url: '/images/home/share.png',
+        sharerId: 1,
+        sharer: 'Plotu',
+        location: '广东省茂名市茂南区'
+      }, {
+        name: '奇先生妙小姐',
+        author: '（英）哈格斯维斯',
+        picture_url: '/images/home/share.png',
+        sharer: 'Plotu',
+        location: '广东省茂名市茂南区'
+      }]
+    }]
   },
 
-  clickLocation(){
-    
+  getIdByCategoryName(name) {
+    const {
+      categorys
+    } = this.data;
+    for (var item of categorys) {
+      if (item.name == name) {
+        return item.id;
+      }
+    }
+    return 1;
+  },
+
+  getTopCategories() {
+    app.asyncRequest('GET', app.globalData.baseurl + 'book-category/getTopCategories')
+      .then(res => {
+        this.setData({
+          categorys: res.data.categories
+        })
+      })
+  },
+
+  getListWithCategory() {
+    app.asyncRequest('GET', app.globalData.baseurl + 'book/ ')
+      .then(res => {
+        this.setData({
+          categorys: res.data.categories
+        })
+      })
+  },
+
+  // watch:{
+  //   // van-tabs 组件 切换tabs时
+  //   tab_active:{
+  //     immediate:true,
+  //     handler:function(val){
+  //       console.log('第几个',val)
+  //     }
+  //   },
+  // },
+
+  onClickTab(event) {
+    console.log(event);
+    this.setData({
+      tab_active: event.detail.name
+    })
+
+    // 获取分类id
+    var id = this.getIdByCategoryName(event.detail.title);
+
+    // 根据分类id获取对应的图书数据
+    app.asyncRequest('GET', app.globalData.baseurl + `book/${id}`)
+      .then(res => {
+        console.log(res);
+      })
+
+    // wx.showToast({
+    //   title: `点击标签 ${event.detail.name}`,
+    //   icon: 'none',
+    // });
+  },
+
+  clickLocation() {
 
   },
 
-  shareClick(){
-    wx:wx.navigateTo({
+  initGetLocationFlunction() {
+    var that = this
+    // 调用接口，获取用户地理位置
+    qqmapsdk.reverseGeocoder({
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          location: res.result.address
+        })
+        app.location = res.result.address;
+        app.lat = res.result.location.lat;
+        app.lng = res.result.location.lng;
+      },
+      fail: function (res) {
+        console.log(res.status, res.message);
+      },
+      complete: function (res) {
+        // console.log(res.status, res.message);
+      }
+    })
+  },
+
+  // 如果用户第一次拒绝授权定位，则需要调用此方法
+  initLocationPersmiss() {
+    var that = this
+    wx.getSetting({
+      success: (res) => {
+        // res.authSetting['scope.userLocation'] == undefined  表示 初始化进入该页面
+        // res.authSetting['scope.userLocation'] == false  表示 非初始化进入该页面,且未授权
+        // res.authSetting['scope.userLocation'] == true  表示 地理位置授权
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+          //未授权
+          wx.showModal({
+            title: '请求授权当前位置',
+            content: '需要获取您的地理位置，请确认授权',
+            success: function (res) {
+              if (res.cancel) {
+                //取消授权
+                wx.showToast({
+                  title: '拒绝授权 暂时无法使用本功能',
+                  icon: 'none',
+                  duration: 1000
+                })
+              } else if (res.confirm) {
+                //确定授权，通过wx.openSetting发起授权请求
+                wx.openSetting({
+                  success: function (res) {
+                    if (res.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 1000
+                      })
+                      //再次授权，调用wx.getLocation的API
+                      that.initGetLocationFlunction();
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'none',
+                        duration: 1000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.authSetting['scope.userLocation'] == undefined) {
+          //用户首次进入页面,调用wx.getLocation的API
+          that.initGetLocationFlunction();
+        } else {
+          console.log('授权成功')
+          //调用wx.getLocation的API
+          that.initGetLocationFlunction();
+        }
+      }
+    })
+  },
+
+  shareClick() {
+    wx: wx.navigateTo({
       url: '/pages/share/share',
     })
   },
@@ -30,14 +203,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(111);
-    wx.getLocation({
-      type: 'wgs84',
-      success (res) {
-        console.log('纬度' + res.latitude)
-        console.log('经度' + res.longitude)
-      } 
-     })
+
+    // // 在onload的时候调用一次监听函数，然后就可以像vue一样愉快的使用watch了
+    // setWatcher(this);
+
+    // 获取一级目录
+    // this.getTopCategories();
+
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success(res) {
+    //     console.log('纬度' + res.latitude)
+    //     console.log('经度' + res.longitude)
+    //   },
+    //   fail(err) {
+    //     console.log(err);
+    //   }
+    // })
   },
 
   /**
@@ -51,6 +233,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 获取位置信息
+    this.initLocationPersmiss();
 
   },
 

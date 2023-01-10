@@ -38,7 +38,7 @@
                 </van-cell-group>
                 <!-- 定位获取位置 -->
                 <view class="input_location">
-                    <van-button plain type="primary" size="small">获取当前位置</van-button>
+                    <van-button plain type="primary" size="small" bindtap="initGetLocationFlunction">获取当前位置</van-button>
                     <view>{{location}}</view>
                 </view>
                 <view class="upload_share_img">
