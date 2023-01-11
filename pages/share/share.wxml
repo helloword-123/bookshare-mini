@@ -32,9 +32,13 @@
             </view>
             <view class="input">
                 <van-cell-group>
-                    <van-field value="{{ userName }}" required clearable label="姓名" placeholder="请输入姓名" />
-                    <van-field value="{{ phoneNumber }}" label="手机号" placeholder="请输入手机号" required />
-                    <van-field value="{{ will }}" type="textarea" label="共享愿望" placeholder="请输入共享愿望" required />
+                    <van-field value="{{ fieldValue }}" required is-link readonly label="分类" placeholder="请选择共享图书分类" bind:tap="onClickCascader" />
+                    <van-popup show="{{ showCascader }}" round position="bottom">
+                        <van-cascader wx:if="{{ showCascader }}" value="{{ cascaderValue }}" title="请选择分类" options="{{ options }}" field-names="{{ fieldNames }}" bind:close="onCloseCascader" bind:finish="onFinishCascader" />
+                    </van-popup>
+                    <van-field model:value="{{ userName }}" required clearable label="昵称" placeholder="请输入昵称" icon="guide-o" bind:click-icon="onClickUserNameIcon" />
+                    <van-field model:value="{{ phoneNumber }}" label="手机号" placeholder="请输入手机号" required icon="guide-o" bind:click-icon="onClickPhoneNumIcon" />
+                    <van-field value="{{ will }}" type="textarea" label="共享愿望" placeholder="请填写共享愿望" required />
                 </van-cell-group>
                 <!-- 定位获取位置 -->
                 <view class="input_location">
@@ -43,13 +47,13 @@
                 </view>
                 <view class="upload_share_img">
                     <view>上传图书共享处图片:</view>
-                    <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" bind:after-read="afterRead"/>
+                    <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" bind:after-read="afterRead" />
                 </view>
             </view>
             <view class="share_button">
                 <van-button type="info" block round size="small" bindtap="shareCommit">我要共享</van-button>
             </view>
-            <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='共享信息已提交，请耐心等待后台审核！审核通过我们会第一时间通知您，并将图书共享信息发布出去！'/>
+            <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='共享信息已提交，请耐心等待后台审核！审核通过我们会第一时间通知您，并将图书共享信息发布出去！' />
         </view>
     </view>
 

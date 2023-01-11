@@ -38,13 +38,14 @@
             <image src="/images/home/setting.png" />全部分类
         </view>
         <block class="van-tabs">
-            <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{categorys.length!=0}}"> 
-                <block wx:for="{{categorys}}" wx:for-item="item" wx:key="*this">
-                    <van-tab title="{{item.name}}">
-                        <scroll-view class="scroll" scroll-y>
-                            <view class="book" wx:for="{{bookList}}" wx:for-item="book" wx:key="*this">
+            <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{bookList.length!=0}}"> 
+                <block wx:for="{{bookList}}" wx:for-item="item" wx:key="id">
+                    <!-- 这里的item包括category和bookList数据 -->
+                    <van-tab title="{{item.bookCategory.name}}">
+                        <scroll-view class="scroll" scroll-y wx:if="{{item.list.length != 0}}">
+                            <view wx:if="{{item.list.length != 0}}" class="book" wx:for="{{item.list}}" wx:for-item="book" wx:key="id">
                                 <image src="{{book.picture_url}}"></image>
-                                <view>
+                                <view class="text-ellipsis">
                                     <view>{{book.name}}</view>
                                     <view>{{book.author}}</view>
                                     <view>共享人：{{book.sharer}}</view>
@@ -52,6 +53,7 @@
                                 </view>
                             </view> 
                         </scroll-view>
+                        <van-empty description="该分类目前没有漂流的图书" wx:if="{{item.list.length == 0}}"/>
                     </van-tab>
                 </block>
             </van-tabs>

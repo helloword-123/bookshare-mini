@@ -48,7 +48,9 @@
     "van-uploader": "@vant/weapp/uploader/index",
     "van-toast": "@vant/weapp/toast/index",
     "van-tab": "@vant/weapp/tab/index",
-    "van-tabs": "@vant/weapp/tabs/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-cascader": "@vant/weapp/cascader/index"
   },
   "permission": {
     "scope.userLocation": {

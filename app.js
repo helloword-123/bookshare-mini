@@ -1,4 +1,6 @@
 // app.js
+
+
 App({
   /**
    * 封装wx.request请求
@@ -9,7 +11,6 @@ App({
    * errFun： 请求失败回调函数
    **/
   asyncRequest(method, url, data) {
-    // console.log("token " + wx.getStorageSync('header_token'));
     return new Promise(function (resolve, reject) {
       wx.request({
         url: url,
@@ -54,13 +55,13 @@ App({
     secret: "64f86e32405825b44feaa222e0bce6f7"
   },
   globalData: {
-    userinfo: null,
+    userinfo: {},
     openid:'',
     baseurl: "http://127.0.0.1:8080/"
   },
   // 腾讯地图根据经纬度获取位置的apikey
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',
-  location: '111',
+  location: '',
   lat: 0,
   lng: 0
 })

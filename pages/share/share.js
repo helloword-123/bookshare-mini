@@ -3,6 +3,13 @@ const app = getApp();
 
 import Toast from '@vant/weapp/toast/toast'
 
+// 引入SDK核心类，js文件根据自己业务，位置可自行放置
+var QQMapWX = require('../../lib/qqmap-wx-jssdk1.2/qqmap-wx-jssdk');
+// 实例化API核心类
+var qqmapsdk = new QQMapWX({
+    key: app.mapApiKey
+});
+
 Page({
 
     /**
@@ -28,10 +35,122 @@ Page({
         // 图片上传
         fileList: [],
         // 是否显示dialog
-        showDialog: false
+        showDialog: false,
+
+        // 分类级联组件
+        fieldNames: {
+            text: 'name',
+            value: 'id',
+            children: 'children',
+        },
+        options: [],
+        showCascader: false,
+        fieldValue: '',
+        cascaderValue: '',
     },
 
-    
+    initGetLocationFlunction() {
+        if (app.location != '') {
+            this.setData({
+                location: app.location
+            })
+            return;
+        }
+
+        var that = this
+        // 调用接口，获取用户地理位置
+        qqmapsdk.reverseGeocoder({
+            success: function (res) {
+                console.log(res);
+                that.setData({
+                    location: res.result.address
+                })
+                app.location = res.result.address;
+                app.lat = res.result.location.lat;
+                app.lng = res.result.location.lng;
+            },
+            fail: function (res) {
+                console.log(res.status, res.message);
+            },
+            complete: function (res) {
+                // console.log(res.status, res.message);
+            }
+        })
+    },
+
+    onClickUserNameIcon() {
+        if (app.globalData.userinfo.nickName == undefined) {
+            wx.showToast({
+                title: '获取昵称失败',
+                icon: 'error'
+            })
+            return;
+        }
+        this.setData({
+            userName: app.globalData.userinfo.nickName,
+        })
+        wx.showToast({
+            title: '获取昵称成功',
+            icon: 'success'
+        })
+    },
+
+    onClickPhoneNumIcon() {
+        if (app.globalData.userinfo.phone == undefined) {
+            wx.showToast({
+                title: '获取手机号失败',
+                icon: 'error'
+            })
+            return;
+        }
+        this.setData({
+            phoneNumber: app.globalData.userinfo.phone,
+        })
+        wx.showToast({
+            title: '获取手机号成功',
+            icon: 'fail'
+        })
+    },
+
+    // 获取一二级图书分类
+    getCategoryCascader() {
+        app.asyncRequest('GET', app.globalData.baseurl + 'book-category/getCategoryCascader')
+            .then(res => {
+                console.log(res);
+                this.setData({
+                    options: res.data.options
+                })
+            })
+    },
+
+    onClickCascader() {
+        this.setData({
+            showCascader: true,
+        });
+    },
+
+    onCloseCascader() {
+        this.setData({
+            showCascader: false,
+        });
+    },
+
+    onFinishCascader(e) {
+        const {
+            selectedOptions,
+            value
+        } = e.detail;
+        const fieldValue = selectedOptions
+            .map((option) => option.text || option.name)
+            .join('/');
+        this.setData({
+            fieldValue,
+            cascaderValue: value,
+            showCascader: false,
+        })
+        console.log(this.data.fieldValue);
+        console.log(this.data.cascaderValue);
+    },
 
     // 点击图片上传
     afterRead(event) {
@@ -86,6 +205,7 @@ Page({
                 published: bookinfo.published,
                 photoUrl: bookinfo.photoUrl,
                 description: bookinfo.description,
+                cascaderValue: this.data.cascaderValue,
                 // 表单信息
                 userName: this.data.userName,
                 phoneNumber: this.data.phoneNumber,
@@ -96,15 +216,23 @@ Page({
             })
             .then(res => {
                 console.log(res);
+                if (res.code == 20000) {
+                    // 弹出框显示
+                    this.setData({
+                        showDialog: true
+                    })
+                } else if (res.code == 20001){
+                    wx.showToast({
+                      title: '分享出错',
+                      icon:'error'
+                    })
+                }
             })
             .catch(err => {
                 console.log(res);
             })
 
-        // 弹出框显示
-        this.setData({
-            showDialog: true
-        })
+
     },
 
     // 点击”确定“按钮
@@ -119,7 +247,7 @@ Page({
     clickScanButton() {
         // 调用api扫描ISBN
         wx.scanCode({
-            scanType: ['barCode'],  
+            scanType: ['barCode'],
             success: res => {
                 console.log(res.result)
                 var isbn = res.result;
@@ -146,21 +274,25 @@ Page({
     },
 
     // 后台请求，判断改isbn号的图书是否已经在漂流中
-    checkIsbnIsExist(isbn){
+    checkIsbnIsExist(isbn) {
         app.asyncRequest('GET', app.globalData.baseurl + 'book/isDrifting/' + isbn)
             .then(ret => {
                 console.log(ret);
-                if(ret.code == 20002){
+                if (ret.code == 20002) {
                     // 提示共享失败
                     Toast.fail('该图书正在共享中，无法重复共享！');
-                } else{
+                } else {
+                    wx.showToast({
+                        title: '扫码成功',
+                        icon: 'success'
+                    })
                     // 跳转下一步
                     this.setData({
                         active: 1
                     })
                 }
             })
-            .catch(err=>{
+            .catch(err => {
                 Toast.fail('请求出错！');
             })
     },
@@ -169,7 +301,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        // 获取一二级目录
+        this.getCategoryCascader();
     },
 
     /**

@@ -28,25 +28,7 @@ Page({
     duration: 500,
     // 分类标签
     tab_active: 0,
-    categorys: [],
-    bookList: [{
-      cate_id: 1,
-      list: [{
-        bookId: 1,
-        name: '奇先生妙小姐',
-        author: '（英）哈格斯维斯',
-        picture_url: '/images/home/share.png',
-        sharerId: 1,
-        sharer: 'Plotu',
-        location: '广东省茂名市茂南区'
-      }, {
-        name: '奇先生妙小姐',
-        author: '（英）哈格斯维斯',
-        picture_url: '/images/home/share.png',
-        sharer: 'Plotu',
-        location: '广东省茂名市茂南区'
-      }]
-    }]
+    bookList: []
   },
 
   getIdByCategoryName(name) {
@@ -61,23 +43,24 @@ Page({
     return 1;
   },
 
-  getTopCategories() {
-    app.asyncRequest('GET', app.globalData.baseurl + 'book-category/getTopCategories')
+  getListWithCategory() {
+    app.asyncRequest('GET', app.globalData.baseurl + 'book/getListWithCategory')
       .then(res => {
+        console.log(res);
         this.setData({
-          categorys: res.data.categories
+          bookList: res.data.bookList
         })
       })
   },
 
-  getListWithCategory() {
-    app.asyncRequest('GET', app.globalData.baseurl + 'book/ ')
-      .then(res => {
-        this.setData({
-          categorys: res.data.categories
-        })
-      })
-  },
+  // getListWithCategory() {
+  //   app.asyncRequest('GET', app.globalData.baseurl + 'book/ ')
+  //     .then(res => {
+  //       this.setData({
+  //         categorys: res.data.categories
+  //       })
+  //     })
+  // },
 
   // watch:{
   //   // van-tabs 组件 切换tabs时
@@ -98,16 +81,10 @@ Page({
     // 获取分类id
     var id = this.getIdByCategoryName(event.detail.title);
 
-    // 根据分类id获取对应的图书数据
-    app.asyncRequest('GET', app.globalData.baseurl + `book/${id}`)
-      .then(res => {
-        console.log(res);
-      })
-
-    // wx.showToast({
-    //   title: `点击标签 ${event.detail.name}`,
-    //   icon: 'none',
-    // });
+    wx.showToast({
+      title: `点击标签 ${event.detail.name}`,
+      icon: 'none',
+    });
   },
 
   clickLocation() {
@@ -208,7 +185,7 @@ Page({
     // setWatcher(this);
 
     // 获取一级目录
-    // this.getTopCategories();
+    this.getListWithCategory();
 
     // wx.getLocation({
     //   type: 'wgs84',
