@@ -7,7 +7,7 @@
             <text class="location_text">{{location}}</text>
         </van-col>
         <van-col span="8" class="search">
-            <van-search shape="round" size="small" value="{{ value }}" placeholder="搜索图书" />
+            <van-search shape="round" size="small" value="{{ value }}" placeholder="地图搜索" disabled bindtap="clickSearch"/>
         </van-col>
     </van-row>
     <!-- 轮播图/广告位 -->
@@ -23,20 +23,20 @@
     <!-- 共享、借阅 -->
     <view class="share">
         <view class="left" bindtap="shareClick">
-            <van-image round width="2rem" height="2rem" src="/images/home/share.png" />
+            <van-image round width="3rem" height="3rem" src="/images/home/share.png" />
             <view style="font-size: small; margin-left: 5rpx;">共享</view>
         </view>
         <view class="right">
-            <van-image round width="2rem" height="2rem" src="/images/home/borrow.png" />
+            <van-image round width="3rem" height="3rem" src="/images/home/borrow.png" />
             <view style="font-size: small;">借阅</view>
         </view>
     </view>
     <!-- 图书下拉列表展示 -->
     <view class="bookList">
         <!-- 分类 -->
-        <view class="all_category">
+        <!-- <view class="all_category">
             <image src="/images/home/setting.png" />全部分类
-        </view>
+        </view> -->
         <block class="van-tabs">
             <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{bookList.length!=0}}"> 
                 <block wx:for="{{bookList}}" wx:for-item="item" wx:key="id">

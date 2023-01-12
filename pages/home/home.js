@@ -72,6 +72,12 @@ Page({
   //   },
   // },
 
+  clickSearch(){
+    wx.navigateTo({
+      url: '/pages/mapSearch/mapSearch',
+    })
+  },
+
   onClickTab(event) {
     console.log(event);
     this.setData({

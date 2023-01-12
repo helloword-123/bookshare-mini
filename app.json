@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/mapSearch/mapSearch",
     "pages/home/home",
     "pages/login/login",
     "pages/share/share",
@@ -50,7 +51,8 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-empty": "@vant/weapp/empty/index",
-    "van-cascader": "@vant/weapp/cascader/index"
+    "van-cascader": "@vant/weapp/cascader/index",
+    "van-divider": "@vant/weapp/divider/index"
   },
   "permission": {
     "scope.userLocation": {

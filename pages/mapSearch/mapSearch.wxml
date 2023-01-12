@@ -1,0 +1,26 @@
+<!--pages/mapSearch/mapSearch.wxml-->
+
+<view class="page-section-gap">
+    <map id="myMap" style="width: 100vw; height: 70vh;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="{{scale}}" bindmarkertap="bindmarkertap" bindcontroltap="controltap" bindcallouttap="clickCallout" bindtap="clearMap" polyline="{{polyline}}" show-location show-scale>
+        <cover-view class='container2'>
+            <cover-view class="control">
+                <cover-image src="/images/mapSearch/add.png" class="control_img" bindtap="clickAddScale"></cover-image>
+                <cover-image src="/images/mapSearch/sub.png" class="control_img" bindtap="clickSubScale"></cover-image>
+            </cover-view>
+
+            <cover-view class="contentBottomBox">
+                <cover-view class="location" bindtap="controltap">
+                    <cover-image src="/images/home/location.png" class="locationIcon"></cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </map>
+
+    <view>
+        <view class="search">
+            <van-search model:value="{{ searchValue }}" shape="round" placeholder="搜索图书" background="transparent" bind:search="onSearch"/>
+        </view>
+        <van-toast id="van-toast" />
+    </view>
+
+</view>
