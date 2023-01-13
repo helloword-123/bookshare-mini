@@ -49,7 +49,7 @@
                                     <view>{{book.name}}</view>
                                     <view>{{book.author}}</view>
                                     <view>共享人：{{book.sharer}}</view>
-                                    <view>漂流地：<image src="/images/home/location.png"/>{{book.location}}</view>
+                                    <view>漂流地：<image src="/images/home/location.png"/><text class="text-ellipsis">{{book.location}}</text></view>
                                 </view>
                             </view> 
                         </scroll-view>

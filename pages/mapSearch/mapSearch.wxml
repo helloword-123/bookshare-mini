@@ -1,26 +1,53 @@
 <!--pages/mapSearch/mapSearch.wxml-->
 
 <view class="page-section-gap">
-    <map id="myMap" style="width: 100vw; height: 70vh;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="{{scale}}" bindmarkertap="bindmarkertap" bindcontroltap="controltap" bindcallouttap="clickCallout" bindtap="clearMap" polyline="{{polyline}}" show-location show-scale>
+    <map id="myMap" style="width: 100vw; height: 50vh;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" scale="{{scale}}" bindmarkertap="bindmarkertap" bindcontroltap="controltap" bindcallouttap="clickCallout" bindtap="clearMap" polyline="{{polyline}}" show-location show-scale>
         <cover-view class='container2'>
             <cover-view class="control">
                 <cover-image src="/images/mapSearch/add.png" class="control_img" bindtap="clickAddScale"></cover-image>
                 <cover-image src="/images/mapSearch/sub.png" class="control_img" bindtap="clickSubScale"></cover-image>
             </cover-view>
 
-            <cover-view class="contentBottomBox">
+            <!-- <cover-view class="contentBottomBox">
                 <cover-view class="location" bindtap="controltap">
                     <cover-image src="/images/home/location.png" class="locationIcon"></cover-image>
                 </cover-view>
-            </cover-view>
+            </cover-view> -->
         </cover-view>
     </map>
 
     <view>
         <view class="search">
-            <van-search model:value="{{ searchValue }}" shape="round" placeholder="搜索图书" background="transparent" bind:search="onSearch"/>
+            <van-search model:value="{{ searchValue }}" shape="round" placeholder="搜索图书" background="transparent" bind:search="onSearch" />
         </view>
         <van-toast id="van-toast" />
+        <view class="title">图书信息：</view>
+        <view wx:if="{{showBook}}" class="book">
+            <image src="{{bookDetail.picture_url}}"></image>
+            <view class="text-ellipsis">
+                <view>{{bookDetail.name}}</view>
+                <view>{{bookDetail.author}}</view>
+                <view>共享人：{{bookDetail.sharer}}</view>
+                <view>漂流地：
+                    <image src="/images/home/location.png" /><text class="text-ellipsis">{{bookDetail.location}}</text>
+                </view>
+                <view class="text-ellipsis">共享愿望：{{bookDetail.note}}</view>
+            </view>
+        </view>
+        <view class="guide">
+            <view bindtap="onClickRoutePlanning">
+                <van-icon name="guide-o" size="40rpx"/>路线规划
+            </view>
+            <view>
+                <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab">
+                    <van-tab wx:for="{{trafficType}}" wx:key="id" title="{{item.title}}"></van-tab>
+                </van-tabs>
+            </view>
+        </view>
+        <view class="guide_tip">
+            <view>全长：{{routePlanningInfo.distance}}m</view>
+            <view>预计花费时间：{{routePlanningInfo.duration}}分钟</view>
+        </view>
     </view>
 
 </view>

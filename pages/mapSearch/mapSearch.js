@@ -25,12 +25,99 @@ Page({
         scale: 16,
         currMaker: {},
         markers: [],
-        markerIcon: '/images/mapSearch/location.png',
-        markerIconActive: '/images/mapSearch/location.png',
+        polyline: [{
+            points: [],
+            color: "#00a131",
+            width: 4
+        }],
+        routePlanningInfo:[
+
+        ],
+
+        // 图书详情
+        bookDetail: {
+            bookId: 1,
+            name: '人类简史',
+            author: '[以]尤瓦尔.赫拉利',
+            picture_url: 'https://img2.doubanio.com/view/subject/m/public/s34207641.jpg',
+            location: '茂名市茂南区嘉隆公寓',
+            sharer: 'Pluto',
+            sharerId: 1,
+            note: '希望共享者可以继续漂流下去！'
+        },
+        showBook: true,
+
+        // 导航标签
+        tab_active: 0,
+        trafficType: [{
+                title: '驾车'
+            },
+            {
+                title: '步行'
+            },
+            {
+                title: '骑行'
+            }
+        ]
+    },
+
+    onClickRoutePlanning() {
+        let url = 'https://apis.map.qq.com/ws/direction/v1/driving/'
+        // 三种交通类型，分别操作
+        // api文档：https://lbs.qq.com/service/webService/webServiceGuide/webServiceRoute#2
+        switch (this.data.tab_active) {
+            case 0: { // 驾车
+                app.asyncRequest('GET', url, {
+                        key: app.mapApiKey,
+                        from: `${this.data.latitude},${this.data.longitude}`,
+                        to: `${this.data.currMaker.latitude},${this.data.currMaker.longitude}`,
+                        output: 'json'
+                    })
+                    .then(res => {
+                        console.log(res);
+                        
+                        // polyline 坐标解压
+                        let points = [];
+                        let polyline = res.result.routes[0].polyline;
+                        for (var i = 2; i < polyline.length; i++) {
+                            polyline[i] = polyline[i - 2] + polyline[i] / 1000000;
+                        }
+                        for(var i = 0; i < polyline.length; i += 2){
+                            points.push({
+                                latitude: polyline[i],
+                                longitude: polyline[i + 1]
+                            })
+                        }
+                        this.setData({
+                            polyline: [{
+                                points,
+                                color: "#00a131",
+                                width: 4,
+                            }]
+                        })
+                        this.setData({
+                            routePlanningInfo: res.result.routes[0]
+                        })
+                    })
+            }
+            case 1: { // 步行
+
+            }
+            case 2: { //骑行
+
+            }
+        }
+    },
+
+    onClickTab(event) {
+        console.log(event);
+        this.setData({
+            tab_active: event.detail.name
+        })
     },
 
     // 点击气泡
-    clickCallout(e){
+    clickCallout(e) {
         console.log(e);
     },
 
@@ -96,6 +183,10 @@ Page({
                     Toast.success(`标红${matchLoc}处地点`);
                 } else {
                     Toast.fail('搜索不到相关图书！');
+                    // 清除路线
+                    this.setData({
+                        polyline: []
+                    })
                 }
             },
         })
@@ -124,7 +215,7 @@ Page({
         this.mapCtx.moveToLocation()
         this.getMyLocation()
         this.setData({
-            scale: 17
+            scale: 14
         })
     },
     /**
@@ -151,6 +242,7 @@ Page({
                     latitude: res.latitude,
                     longitude: res.longitude
                 })
+
                 let arr = [{
                     iconPath: '/images/mapSearch/location.png',
                     width: 35,
@@ -218,6 +310,24 @@ Page({
             longitude: currMaker.longitude
         });
 
+        // 连线
+        let points = [{
+            latitude: this.data.latitude,
+            longitude: this.data.longitude
+        }, {
+            latitude: currMaker.latitude,
+            longitude: currMaker.longitude
+        }];
+        this.setData({
+            polyline: [{
+                points,
+                color: "#00a131",
+                width: 4,
+            }]
+        })
+
+        console.log(points);
+
         qqmapsdk.calculateDistance({
             to: [{
                 latitude: currMaker.latitude,
@@ -238,7 +348,7 @@ Page({
                             height: 35,
                             iconPath: '/images/mapSearch/location_active.png',
                             callout: {
-                                content: `名称：${_markers[i].address}\n距您：${distanceKm}\n点击我查看详情`,
+                                content: `名称：${_markers[i].address}\n直线距离：${distanceKm}\n点击我查看详情`,
                                 display: 'ALWAYS',
                                 color: '#333333',
                                 bgColor: '#fff',
