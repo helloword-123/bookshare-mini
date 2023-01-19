@@ -1,0 +1,116 @@
+/* pages/bookDetail/bookDetail.wxss */
+.book1 {
+    background-color: #f8f3e7;
+    padding: 20rpx 0;
+}
+
+.bookinfo {
+    width: 100%;
+    height: 230rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.bookinfo>image {
+    width: 160rpx;
+    height: 100%;
+    margin: 0 30rpx;
+}
+
+.bookinfo>view {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.bookinfo>view view:first-child {
+    font-weight: 700;
+    margin-bottom: 10rpx;
+}
+
+.bookinfo>view view:not(:first-child) {
+    color: #C0C0C0;
+    font-size: 28rpx;
+}
+
+.category {
+    margin-left: 30rpx;
+    font-size: 25rpx;
+}
+
+.detail {
+    margin: 20rpx 30rpx 0 30rpx;
+
+}
+
+.title {
+    font-weight: 700;
+}
+
+.content {
+    line-height: 27px;
+    text-indent: 24px;
+    color: #696969;
+    font-size: 28rpx;
+
+    display: -webkit-box;
+    /*弹性伸缩盒子*/
+    -webkit-box-orient: vertical;
+    /*垂直排列*/
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    /*只显示6行*/
+    overflow: hidden;
+    /*溢出隐藏*/
+    text-overflow: ellipsis;
+    /*省略号代替*/
+}
+
+.drift_info {
+    border-top: 1rpx solid #f1f1f1;
+    padding-top: 10rpx;
+    margin: 20rpx 30rpx 0 30rpx;
+    overflow: hidden;
+    /*溢出隐藏*/
+    text-overflow: ellipsis;
+    /*省略号代替*/
+}
+
+.row {
+    font-size: 28rpx;
+
+}
+
+.col1 {
+    color: #2c2c2d;
+}
+
+.col2 {
+    color: #8b8c8e;
+}
+
+.divide {
+    border-bottom: 1rpx solid #f3f4f6;
+    margin: 10rpx 0;
+}
+
+
+.img{
+    margin-right: 20rpx;
+    height: 150rpx;
+    width: 150rpx;
+}
+
+.borrow_button {
+    margin: 20rpx 100rpx 0 100rpx;
+}
+
+.scroll-container {
+    margin-top: 10rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    height: 180rpx;
+    width: 100%;
+}

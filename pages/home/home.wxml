@@ -33,17 +33,13 @@
     </view>
     <!-- 图书下拉列表展示 -->
     <view class="bookList">
-        <!-- 分类 -->
-        <!-- <view class="all_category">
-            <image src="/images/home/setting.png" />全部分类
-        </view> -->
         <block class="van-tabs">
             <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{bookList.length!=0}}">
                 <block wx:for="{{bookList}}" wx:for-item="item" wx:key="id">
                     <!-- 这里的item包括category和bookList数据 -->
                     <van-tab title="{{item.bookCategory.name}}">
                         <scroll-view class="scroll" scroll-y wx:if="{{item.list.length != 0}}">
-                            <view wx:if="{{item.list.length != 0}}" class="book" wx:for="{{item.list}}" wx:for-item="book" wx:key="id">
+                            <view wx:if="{{item.list.length != 0}}" class="book" wx:for="{{item.list}}" wx:for-item="book" wx:key="id" bindtap="clickBook" data-categoryId="{{item.bookCategory.id}}" data-bookId="{{book.bookId}}">
                                 <image src="{{book.picture_url}}"></image>
                                 <view class="text-ellipsis">
                                     <view>{{book.name}}</view>

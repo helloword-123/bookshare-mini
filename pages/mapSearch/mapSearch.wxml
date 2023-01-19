@@ -23,7 +23,7 @@
         <van-toast id="van-toast" />
         <view wx:if="{{showBook}}">
             <view class="title">图书信息：</view>
-            <view class="book">
+            <view class="book" bindtap="clickBook">
                 <image src="{{bookDetail.picture_url}}"></image>
                 <view class="text-ellipsis">
                     <view>{{bookDetail.name}}</view>

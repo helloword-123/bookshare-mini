@@ -58,6 +58,12 @@ Page({
         isShow: false,
     },
 
+    clickBook(e) {
+        wx.navigateTo({
+          url: `/pages/bookDetail/bookDetail?bookinfo=${JSON.stringify(this.data.bookDetail)}`,
+        })
+      },
+
     onClickRoutePlanning() {
         // 三种交通类型，分别操作
         // api文档：https://lbs.qq.com/service/webService/webServiceGuide/webServiceRoute#2

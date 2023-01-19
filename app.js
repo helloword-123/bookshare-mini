@@ -32,6 +32,7 @@ App({
       })
     });
   },
+  
 
   addParamsToUrl(url, params) {
     let str = "?";

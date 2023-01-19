@@ -31,7 +31,26 @@ Page({
     bookList: []
   },
 
-  borrowClick(){
+  clickBook(e) {
+    const {categoryid, bookid} = e.currentTarget.dataset;
+    
+    let param = {}
+    this.data.bookList.forEach(b=>{
+      if(b.bookCategory.id == categoryid){
+        b.list.forEach(book=>{
+          if(book.bookId == bookid){
+            param = book;
+            return;
+          }
+        })
+      }
+    })
+    wx.navigateTo({
+      url: `/pages/bookDetail/bookDetail?bookinfo=${JSON.stringify(param)}`,
+    })
+  },
+
+  borrowClick() {
     wx.navigateTo({
       url: '/pages/borrow/borrow',
     })
@@ -53,7 +72,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    app.asyncRequest('GET', app.globalData.baseurl + 'book/getListWithCategory')
+    app.asyncRequest('GET', app.globalData.baseurl + `book/getListWithCategory`)
       .then(res => {
         console.log(res);
         this.setData({
@@ -85,7 +104,7 @@ Page({
   //   },
   // },
 
-  clickSearch(){
+  clickSearch() {
     wx.navigateTo({
       url: '/pages/mapSearch/mapSearch',
     })

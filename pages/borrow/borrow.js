@@ -24,32 +24,32 @@ Page({
         option1: [{
                 text: '距离近',
                 value: 0,
-                detail:{
+                detail: {
                     sortColumn: 'distance',
-                    sortOrder:'asc'
+                    sortOrder: 'asc'
                 }
             },
             {
                 text: '距离远',
                 value: 1,
-                detail:{
+                detail: {
                     sortColumn: 'distance',
-                    sortOrder:'desc'
+                    sortOrder: 'desc'
                 }
             }, {
                 text: '发布时间近',
                 value: 2,
-                detail:{
+                detail: {
                     sortColumn: 'releaseTime',
-                    sortOrder:'asc'
+                    sortOrder: 'asc'
                 }
             },
             {
                 text: '发布时间远',
                 value: 3,
-                detail:{
+                detail: {
                     sortColumn: 'releaseTime',
-                    sortOrder:'desc'
+                    sortOrder: 'desc'
                 }
             }
         ],
@@ -59,25 +59,42 @@ Page({
         list: []
     },
 
-    changeDropdownItem(e){
+    clickBook(e) {
+        const {
+            bookid
+        } = e.currentTarget.dataset;
+        let param = {}
+        this.data.list.forEach(book => {
+            if (book.bookId == bookid) {
+                param = book;
+                return;
+            }
+        })
+
+        wx.navigateTo({
+            url: `/pages/bookDetail/bookDetail?bookinfo=${JSON.stringify(param)}`,
+        })
+    },
+
+    changeDropdownItem(e) {
         // 重新加载数据
         this.getListWithCondition();
     },
 
-    getConditons(){
+    getConditons() {
         let params = {};
         params.categoryId = this.data.cascaderValue;
         params.keyword = this.data.searchValue;
         params.latitude = app.lat;
         params.longitude = app.lng;
-        this.data.option1.forEach(item=>{
-            if(item.value == this.data.value1){
+        this.data.option1.forEach(item => {
+            if (item.value == this.data.value1) {
                 params.sortColumn = item.detail.sortColumn;
                 params.sortOrder = item.detail.sortOrder;
             }
         })
 
-        console.log('params',params);
+        console.log('params', params);
 
         return params;
     },
@@ -85,9 +102,9 @@ Page({
     getListWithCondition() {
         wx.showLoading({
             title: '加载中',
-          })
+        })
         let params = this.getConditons();
-        
+
         let url = app.addParamsToUrl(app.globalData.baseurl + 'book/getListWithCondition', params);
         console.log(url);
 
@@ -99,14 +116,14 @@ Page({
                 })
 
                 wx.hideLoading({
-              
+
                 })
             })
-            .catch(err=>{
+            .catch(err => {
                 wx.hideLoading({
-                  fail: (res) => {
-                      console.log('加载失败');
-                  },
+                    fail: (res) => {
+                        console.log('加载失败');
+                    },
                 })
             })
     },

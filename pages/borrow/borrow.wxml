@@ -23,7 +23,7 @@
     </view>
     <!-- 图书列表 -->
     <view class="bookList">
-        <view class="book" wx:for="{{list}}" wx:for-item="book" wx:key="id">
+        <view class="book" wx:for="{{list}}" wx:for-item="book" wx:key="id" bindtap="clickBook" data-bookId="{{book.bookId}}">
         <image src="{{book.picture_url}}"></image>
         <view class="text-ellipsis">
             <view>{{book.name}}</view>
