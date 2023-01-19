@@ -119,6 +119,7 @@ Page({
                 console.log(res);
                 this.setData({
                     options: res.data.options
+                    
                 })
             })
     },
@@ -194,45 +195,73 @@ Page({
         const {
             bookinfo
         } = this.data;
-        console.log(this.data.fileList);
-        app.asyncRequest('POST', app.globalData.baseurl + 'book-drift/shareBook', {
-                // 传给后端的信息
-                // 图书信息
-                code: bookinfo.code,
-                name: bookinfo.name,
-                author: bookinfo.author,
-                publishing: bookinfo.publishing,
-                published: bookinfo.published,
-                photoUrl: bookinfo.photoUrl,
-                description: bookinfo.description,
-                cascaderValue: this.data.cascaderValue,
-                // 表单信息
-                userName: this.data.userName,
-                phoneNumber: this.data.phoneNumber,
-                will: this.data.will,
-                location: this.data.location,
-                fileList: this.data.fileList,
-                userId: app.globalData.userinfo.id
-            })
-            .then(res => {
-                console.log(res);
-                if (res.code == 20000) {
-                    // 弹出框显示
-                    this.setData({
-                        showDialog: true
-                    })
-                } else if (res.code == 20001){
-                    wx.showToast({
-                      title: '分享出错',
-                      icon:'error'
-                    })
-                }
-            })
-            .catch(err => {
-                console.log(res);
-            })
 
-
+        // 检验必填信息
+        if (this.data.cascaderValue == '') {
+            wx.showToast({
+                title: '请选择图书分类',
+                icon: 'error'
+            })
+        } else if (this.data.userName == '') {
+            wx.showToast({
+                title: '请输入名称',
+                icon: 'error'
+            })
+        } else if (this.data.phoneNumber == '') {
+            wx.showToast({
+                title: '请输入手机号',
+                icon: 'error'
+            })
+        } else if (this.data.will == '') {
+            wx.showToast({
+                title: '请输入共享愿望',
+                icon: 'error'
+            })
+        } else if (this.data.location == '点击按钮获取位置') {
+            wx.showToast({
+                title: '未获取当前位置',
+                icon: 'error'
+            })
+        } else {
+            app.asyncRequest('POST', app.globalData.baseurl + 'book-drift/shareBook', {
+                    // 传给后端的信息
+                    // 图书信息
+                    code: bookinfo.code,
+                    name: bookinfo.name,
+                    author: bookinfo.author,
+                    publishing: bookinfo.publishing,
+                    published: bookinfo.published,
+                    photoUrl: bookinfo.photoUrl,
+                    description: bookinfo.description,
+                    cascaderValue: this.data.cascaderValue,
+                    // 表单信息
+                    userName: this.data.userName,
+                    phoneNumber: this.data.phoneNumber,
+                    will: this.data.will,
+                    location: this.data.location,
+                    latitude: app.lat,
+                    longitude: app.lng,
+                    fileList: this.data.fileList,
+                    userId: app.globalData.userinfo.id
+                })
+                .then(res => {
+                    console.log(res);
+                    if (res.code == 20000) {
+                        // 弹出框显示
+                        this.setData({
+                            showDialog: true
+                        })
+                    } else if (res.code == 20001) {
+                        wx.showToast({
+                            title: '分享出错',
+                            icon: 'error'
+                        })
+                    }
+                })
+                .catch(err => {
+                    console.log(res);
+                })
+        }
     },
 
     // 点击”确定“按钮
@@ -286,6 +315,8 @@ Page({
                         title: '扫码成功',
                         icon: 'success'
                     })
+                    // 获取一二级目录
+                    this.getCategoryCascader();
                     // 跳转下一步
                     this.setData({
                         active: 1
@@ -301,8 +332,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // 获取一二级目录
-        this.getCategoryCascader();
+
     },
 
     /**

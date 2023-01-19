@@ -1,0 +1,38 @@
+<!--pages/borrow/borrow.wxml-->
+<view class="container1">
+    <view class="top">
+        <view class="search">
+            <van-search model:value="{{ searchValue }}" placeholder="请输入搜索关键词" shape="round" bind:search="onSearch"/>
+            <van-button type="default" icon="location-o" round size="small" bindtap="clickMapSearch">地图搜索</van-button>
+        </view>
+        <!-- 分类 -->
+        <view class="condition">
+            <view>
+                <van-field value="{{ fieldValue }}" is-link readonly label="分类" placeholder="选择图书分类" bind:tap="onClickCascader" />
+                <van-popup show="{{ showCascader }}" round position="bottom">
+                    <van-cascader wx:if="{{ showCascader }}" value="{{ cascaderValue }}" title="选择分类" options="{{ options }}" field-names="{{ fieldNames }}" bind:close="onCloseCascader" bind:finish="onFinishCascader" />
+                </van-popup>
+            </view>
+            <!-- 筛选需要包括：默认、距离、共享次数 -->
+            <view>
+                <van-dropdown-menu>
+                    <van-dropdown-item model:value="{{ value1 }}" options="{{ option1 }}" bind:change="changeDropdownItem"/>
+                </van-dropdown-menu>
+            </view>
+        </view>
+    </view>
+    <!-- 图书列表 -->
+    <view class="bookList">
+        <view class="book" wx:for="{{list}}" wx:for-item="book" wx:key="id">
+        <image src="{{book.picture_url}}"></image>
+        <view class="text-ellipsis">
+            <view>{{book.name}}</view>
+            <view>{{book.author}}</view>
+            <view>共享人：{{book.sharer}}</view>
+            <view>漂流地：
+                <image src="/images/home/location.png" /><text class="text-ellipsis">{{book.location}}</text>
+            </view>
+        </view>
+    </view></view>
+    <van-empty description="该筛选条件目前没有漂流的图书" wx:if="{{list.length == 0}}" />
+</view>

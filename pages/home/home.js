@@ -31,6 +31,12 @@ Page({
     bookList: []
   },
 
+  borrowClick(){
+    wx.navigateTo({
+      url: '/pages/borrow/borrow',
+    })
+  },
+
   getIdByCategoryName(name) {
     const {
       categorys
@@ -44,11 +50,18 @@ Page({
   },
 
   getListWithCategory() {
+    wx.showLoading({
+      title: '加载中',
+    })
     app.asyncRequest('GET', app.globalData.baseurl + 'book/getListWithCategory')
       .then(res => {
         console.log(res);
         this.setData({
           bookList: res.data.bookList
+        })
+
+        wx.hideLoading({
+          success: (res) => {},
         })
       })
   },
@@ -194,7 +207,7 @@ Page({
     this.getListWithCategory();
 
     // wx.getLocation({
-    //   type: 'wgs84',
+    //   type: 'gcj02',
     //   success(res) {
     //     console.log('纬度' + res.latitude)
     //     console.log('经度' + res.longitude)

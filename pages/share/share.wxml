@@ -38,7 +38,7 @@
                     </van-popup>
                     <van-field model:value="{{ userName }}" required clearable label="昵称" placeholder="请输入昵称" icon="guide-o" bind:click-icon="onClickUserNameIcon" />
                     <van-field model:value="{{ phoneNumber }}" label="手机号" placeholder="请输入手机号" required icon="guide-o" bind:click-icon="onClickPhoneNumIcon" />
-                    <van-field value="{{ will }}" type="textarea" label="共享愿望" placeholder="请填写共享愿望" required />
+                    <van-field model:value="{{ will }}" type="textarea" label="共享愿望" placeholder="请填写共享愿望" required />
                 </van-cell-group>
                 <!-- 定位获取位置 -->
                 <view class="input_location">

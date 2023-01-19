@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/mapSearch/mapSearch",
     "pages/home/home",
+    "pages/borrow/borrow",
     "pages/login/login",
+    "pages/mapSearch/mapSearch",
     "pages/share/share",
     "pages/loginInfoInput/loginInfoInput",
     "pages/logs/logs",
@@ -53,7 +54,9 @@
     "van-empty": "@vant/weapp/empty/index",
     "van-cascader": "@vant/weapp/cascader/index",
     "van-divider": "@vant/weapp/divider/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },
   "permission": {
     "scope.userLocation": {

@@ -7,7 +7,7 @@
             <text class="location_text">{{location}}</text>
         </van-col>
         <van-col span="8" class="search">
-            <van-search shape="round" size="small" value="{{ value }}" placeholder="地图搜索" disabled bindtap="clickSearch"/>
+            <van-search shape="round" size="small" value="{{ value }}" placeholder="地图搜索" disabled bindtap="clickSearch" />
         </van-col>
     </van-row>
     <!-- 轮播图/广告位 -->
@@ -26,7 +26,7 @@
             <van-image round width="3rem" height="3rem" src="/images/home/share.png" />
             <view style="font-size: small; margin-left: 5rpx;">共享</view>
         </view>
-        <view class="right">
+        <view class="right" bindtap="borrowClick">
             <van-image round width="3rem" height="3rem" src="/images/home/borrow.png" />
             <view style="font-size: small;">借阅</view>
         </view>
@@ -38,7 +38,7 @@
             <image src="/images/home/setting.png" />全部分类
         </view> -->
         <block class="van-tabs">
-            <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{bookList.length!=0}}"> 
+            <van-tabs active="{{ tab_active }}" animated bind:click="onClickTab" wx:if="{{bookList.length!=0}}">
                 <block wx:for="{{bookList}}" wx:for-item="item" wx:key="id">
                     <!-- 这里的item包括category和bookList数据 -->
                     <van-tab title="{{item.bookCategory.name}}">
@@ -49,11 +49,13 @@
                                     <view>{{book.name}}</view>
                                     <view>{{book.author}}</view>
                                     <view>共享人：{{book.sharer}}</view>
-                                    <view>漂流地：<image src="/images/home/location.png"/><text class="text-ellipsis">{{book.location}}</text></view>
+                                    <view>漂流地：
+                                        <image src="/images/home/location.png" /><text class="text-ellipsis">{{book.location}}</text>
+                                    </view>
                                 </view>
-                            </view> 
+                            </view>
                         </scroll-view>
-                        <van-empty description="该分类目前没有漂流的图书" wx:if="{{item.list.length == 0}}"/>
+                        <van-empty description="该分类目前没有漂流的图书" wx:if="{{item.list.length == 0}}" />
                     </van-tab>
                 </block>
             </van-tabs>

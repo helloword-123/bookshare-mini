@@ -13,7 +13,7 @@
     height: 100%;
     width: 100%;
     border-top: 1rpx solid #d3cdcd;
-    padding-top: 100rpx;
+    padding-top: 50rpx;
     background-color: #f1f1f1;
 }
 
@@ -73,11 +73,10 @@
 
 .input{
     margin-top: 50rpx;
-
 }
 
 .input_location{
-    margin-top: 50rpx;
+    margin-top: 20rpx;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -102,5 +101,5 @@
 }
 
 .share_button{
-    margin: 50rpx 100rpx 0 100rpx;
+    margin: 20rpx 100rpx 0 100rpx;
 }

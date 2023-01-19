@@ -29,6 +29,10 @@ Page({
 
   // 点击登录
   login() {
+    wx.showLoading({
+      title: '登录中',
+    })
+
     wx.login({
       success: res => {
         console.log("login code is: " + res.code);
@@ -42,11 +46,29 @@ Page({
           success: (ret) => {
             console.log(ret);
             wx.setStorageSync('header_token', ret.data.data.token)
-            console.log(wx.getStorageSync('header_token'))
+            // console.log(wx.getStorageSync('header_token'))
             app.globalData.userinfo = ret.data.data.userinfo;
             app.globalData.openid = ret.data.data.openid;
+            // 登陆成功后，提示用户
+            this.setData({
+              modalHidden: false
+            });
+            wx.hideLoading({
+              
+            })
+          },
+          fail: ret=>{
+            wx.hideLoading({
+              fail: (err) => {
+                wx.showToast({
+                  title: '登录失败',
+                })
+              },
+            })
           }
         })
+
+        
 
         //   // 发送 res.code 到后台换取 openId, sessionKey, unionId
         //   // 后台处理，不用前台请求
@@ -70,10 +92,5 @@ Page({
         //     });
       }
     })
-
-    // 登陆成功后，提示用户
-    this.setData({
-      modalHidden: false
-    });
   }
 })

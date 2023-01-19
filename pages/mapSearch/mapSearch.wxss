@@ -102,12 +102,13 @@
 
 .guide{
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     margin: 25rpx;
     font-size: 27rpx;
 }
 
 .guide > view{
+    margin-right: 10rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -118,5 +119,7 @@
 }
 
 .guide_tip{
-    margin-left: 25rpx;
+    display: flex;
+    flex-direction: column !important;
+    font-size: 27.5rpx;
 }
