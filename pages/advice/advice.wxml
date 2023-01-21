@@ -1,0 +1,22 @@
+<!--pages/advice/advice.wxml-->
+<view class="container1">
+    <!--pages/feedback/feedback.wxml-->
+    <view class="opinion_wrap">
+        <form bindsubmit="formSubmit">
+            <view class="content_wrap">
+                <view class="content">
+                    <textarea name="opinion" maxlength="50" value="{{content}}" auto-height placeholder-class="placeholder" placeholder="期待您的反馈，我们将会不断改进（50字以内）" />
+                </view>
+            </view>
+            <view class="phone">
+                <input name="contact" value="{{contact}}" placeholder-class="placeholder" placeholder="请留下您的手机号或邮箱，方便我们及时回复" />
+            </view>
+            <van-rate class="rate" model:value="{{ value }}" size="{{ 25 }}" color="#ffd21e" void-icon="star" void-color="#eee" allow-half bind:change="onChange" />
+            <view class="upload_share_img">
+                <view>添加图片（选填）</view>
+                <van-uploader file-list="{{ fileList }}" deletable="{{ true }}" bind:after-read="afterRead" />
+            </view>
+            <button formType="submit" hover-class="button_active" loading="{{loading}}">提交</button>
+        </form>
+    </view>
+</view>

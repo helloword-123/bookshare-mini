@@ -1,4 +1,4 @@
-<!--pages/bookDetail/bookDetail.wxml-->
+<!--pages/bookBorrowDetail/bookBorrowDetail.wxml-->
 <view class="container1">
     <view class="book1">
         <view class="bookinfo">
@@ -12,6 +12,10 @@
             </view>
         </view>
         <view class="category">分类：{{bookinfo.categoryFullName}}</view>
+    </view>
+    <view class="detail">
+        <view class="title">内容简介</view>
+        <view class="content">{{bookinfo.detail}}</view>
     </view>
     <view class="drift_info">
         <van-row class="row">
@@ -53,17 +57,17 @@
         <van-row class="row">
             <van-col span="8" class="col1">漂流图片：</van-col>
         </van-row>
-        <scroll-view scroll-x class='scroll-container' wx:if="{{bookinfo.imgList.length != 0}}">
+        <scroll-view scroll-x class='scroll-container'>
             <image class="img" src="{{item}}" bindtap="preView" data-src="{{item}}" wx:for="{{bookinfo.imgList}}" wx:key="index"></image>
         </scroll-view>
 
     </view>
 
-    <view class="drift">
-        <view>漂流记录：</view>
-        <!-- 步骤条 -->
-        <view class="steps">
-            <van-steps direction="vertical" steps="{{ steps }}" active="{{ active }}" bind:click-step="clickStep"/>
-        </view>
+    <view class="borrow_button">
+        <van-button type="info" block round size="small" bindtap="borrowCommit">我要借阅</van-button>
     </view>
+    <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='系统检测您不在发布点附近，借阅失败！' />
+    <modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
+        请扫描图书封底条形码
+    </modal>
 </view>

@@ -30,7 +30,7 @@ Page({
       show: false
     });
     // 更新用户信息
-    app.asyncRequest('POST', app.globalData.baseurl + 'user/updateAvatarAndName', {
+    app.asyncRequest('POST', app.globalData.baseurl + 'user/updateUserInfo', {
         avatarUrl: this.data.avatarUrl,
         id: app.globalData.userinfo.id,
         nickName: this.data.nickname

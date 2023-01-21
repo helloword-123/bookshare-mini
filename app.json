@@ -1,14 +1,20 @@
 {
   "pages": [
+    "pages/shareBorrowRecords/shareBorrowRecords",
+    "pages/mine/mine",
     "pages/home/home",
-    "pages/login/login",
-    "pages/share/share",
     "pages/bookDetail/bookDetail",
+    "pages/contact/contact",
+    "pages/help/help",
+    "pages/advice/advice",
+    "pages/login/login",
+    "pages/userinfo/userinfo",
+    "pages/share/share",
+    "pages/bookBorrowDetail/bookBorrowDetail",
     "pages/borrow/borrow",
     "pages/mapSearch/mapSearch",
     "pages/loginInfoInput/loginInfoInput",
-    "pages/logs/logs",
-    "pages/mine/mine"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,6 +34,12 @@
         "text": "首页",
         "iconPath": "images/tabbar/home.png",
         "selectedIconPath": "images/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/shareBorrowRecords/shareBorrowRecords",
+        "text": "记录",
+        "iconPath": "images/tabbar/record.png",
+        "selectedIconPath": "images/tabbar/record-active.png"
       },
       {
         "pagePath": "pages/mine/mine",
@@ -57,7 +69,10 @@
     "van-divider": "@vant/weapp/divider/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
-    "van-dropdown-item": "@vant/weapp/dropdown-item/index"
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index"
   },
   "permission": {
     "scope.userLocation": {

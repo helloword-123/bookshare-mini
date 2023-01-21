@@ -24,15 +24,15 @@
         <view wx:if="{{showBook}}">
             <view class="title">图书信息：</view>
             <view class="book" bindtap="clickBook">
-                <image src="{{bookDetail.picture_url}}"></image>
+                <image src="{{bookBorrowDetail.picture_url}}"></image>
                 <view class="text-ellipsis">
-                    <view>{{bookDetail.name}}</view>
-                    <view>{{bookDetail.author}}</view>
-                    <view>共享人：{{bookDetail.sharer}}</view>
+                    <view>{{bookBorrowDetail.name}}</view>
+                    <view>{{bookBorrowDetail.author}}</view>
+                    <view>共享人：{{bookBorrowDetail.sharer}}</view>
                     <view>漂流地：
-                        <image src="/images/home/location.png" /><text class="text-ellipsis">{{bookDetail.location}}</text>
+                        <image src="/images/home/location.png" /><text class="text-ellipsis">{{bookBorrowDetail.location}}</text>
                     </view>
-                    <view class="text-ellipsis">共享愿望：{{bookDetail.note}}</view>
+                    <view class="text-ellipsis">共享愿望：{{bookBorrowDetail.note}}</view>
                 </view>
             </view>
             <view class="guide">

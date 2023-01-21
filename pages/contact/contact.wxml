@@ -1,0 +1,16 @@
+<!--pages/contact/contact.wxml-->
+<view class="container1">
+    <view class="title">官方客服</view>
+    <van-cell-group>
+        <van-field value="{{ email }}" center clearable label="邮件邮箱" border="{{ false }}" use-button-slot>
+            <van-button slot="button" size="small" type="primary" bindtap="copy" data-id="1">复制</van-button>
+        </van-field>
+        <van-field value="{{ weixin }}" center clearable label="微信客服" border="{{ false }}" use-button-slot>
+            <van-button slot="button" size="small" type="primary" bindtap="copy" data-id="2">复制</van-button>
+        </van-field>
+        <van-field value="{{ qq }}" center clearable label="QQ客服" border="{{ false }}" use-button-slot>
+            <van-button slot="button" size="small" type="primary" bindtap="copy" data-id="3">复制</van-button>
+        </van-field>
+    </van-cell-group>
+
+</view>

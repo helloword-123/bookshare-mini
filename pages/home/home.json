@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "图书漂流"
+  "navigationBarTitleText": "图书漂流",
+  "navigationBarBackgroundColor": "#57b193"
 }

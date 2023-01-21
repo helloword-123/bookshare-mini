@@ -1,0 +1,24 @@
+<!--pages/shareBorrowRecords/shareBorrowRecords.wxml-->
+<view class="container1">
+    <view>
+        <van-tabs bind:click="onClickTab" active="{{ tab_active }}" animated>
+            <!-- 这里的item包括category和bookList数据 -->
+            <van-tab title="{{title}}" wx:for="{{titles}}" wx:for-item="title" wx:key="id">
+                <scroll-view class="scroll" scroll-y wx:if="{{bookList[tab_active].length != 0}}">
+                    <view class="book" wx:for="{{bookList[tab_active]}}" wx:for-item="book" wx:key="id" bindtap="clickBook" data-bookId="{{book.bookId}}">
+                        <image src="{{book.picture_url}}"></image>
+                        <view class="text-ellipsis">
+                            <view>{{book.name}}</view>
+                            <view>{{tab_active == 0 ? '共享时间：'+book.releaseTime : '借阅时间：'+book.driftTime}}</view>
+                            <view>共享人：{{book.sharer}}</view>
+                            <view>漂流地：
+                                <image src="/images/home/location.png" /><text class="text-ellipsis">{{book.location}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+                <van-empty description="没有记录！" wx:if="{{bookList[tab_active].length == 0}}" />
+            </van-tab>
+        </van-tabs>
+    </view>
+</view>

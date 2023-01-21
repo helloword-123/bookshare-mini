@@ -1,0 +1,33 @@
+/* pages/userinfo/userinfo.wxss */
+.t1{
+    padding: 20rpx 0;
+}
+
+.avatar-wrapper {
+    width: 5rem;
+    height: 5rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+}
+
+.avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.div{
+    background-color: #f9f9f9;
+    padding-top: 30rpx;
+    width: 100vw; 
+    height: 100vh;
+}
+
+.saveButton{
+    margin: 30rpx 150rpx;
+}
+
+.logoutButton{
+    margin: 30rpx 150rpx;
+}

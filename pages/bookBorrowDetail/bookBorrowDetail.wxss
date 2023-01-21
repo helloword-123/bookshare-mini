@@ -1,4 +1,5 @@
-/* pages/bookDetail/bookDetail.wxss */
+/* pages/bookBorrowDetail/
+.wxss */
 .book1 {
     background-color: #f8f3e7;
     padding: 20rpx 0;
@@ -43,7 +44,31 @@
 
 }
 
+.title {
+    font-weight: 700;
+}
+
+.content {
+    line-height: 27px;
+    text-indent: 24px;
+    color: #696969;
+    font-size: 28rpx;
+
+    display: -webkit-box;
+    /*弹性伸缩盒子*/
+    -webkit-box-orient: vertical;
+    /*垂直排列*/
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    /*只显示6行*/
+    overflow: hidden;
+    /*溢出隐藏*/
+    text-overflow: ellipsis;
+    /*省略号代替*/
+}
+
 .drift_info {
+    border-top: 1rpx solid #f1f1f1;
     padding-top: 10rpx;
     margin: 20rpx 30rpx 0 30rpx;
     overflow: hidden;
@@ -89,17 +114,4 @@
     white-space: nowrap;
     height: 180rpx;
     width: 100%;
-}
-
-.drift{
-    border-top: 1rpx solid #f3f4f6;
-    margin: 10rpx 30rpx 0 30rpx;
-    padding-top: 20rpx;
-}
-
-.drift view:first-child{
-    font-weight: 700;
-}
-
-.steps{
 }

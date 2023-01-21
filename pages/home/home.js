@@ -46,7 +46,7 @@ Page({
       }
     })
     wx.navigateTo({
-      url: `/pages/bookDetail/bookDetail?bookinfo=${JSON.stringify(param)}`,
+      url: `/pages/bookBorrowDetail/bookBorrowDetail?bookinfo=${JSON.stringify(param)}`,
     })
   },
 

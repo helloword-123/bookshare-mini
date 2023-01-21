@@ -36,7 +36,7 @@ Page({
         driftingBooks: [],
 
         // 图书详情
-        bookDetail: {
+        bookBorrowDetail: {
 
         },
         showBook: false,
@@ -60,7 +60,7 @@ Page({
 
     clickBook(e) {
         wx.navigateTo({
-          url: `/pages/bookDetail/bookDetail?bookinfo=${JSON.stringify(this.data.bookDetail)}`,
+          url: `/pages/bookBorrowDetail/bookBorrowDetail?bookinfo=${JSON.stringify(this.data.bookBorrowDetail)}`,
         })
       },
 
@@ -135,7 +135,7 @@ Page({
             .then(res => {
                 console.log(res);
                 this.setData({
-                    bookDetail: res.data.bookDrift,
+                    bookBorrowDetail: res.data.bookDrift,
                     showBook: true
                 })
                 wx.showToast({

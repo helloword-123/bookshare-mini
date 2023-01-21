@@ -32,7 +32,7 @@ App({
       })
     });
   },
-  
+
 
   addParamsToUrl(url, params) {
     let str = "?";
@@ -41,6 +41,22 @@ App({
     });
     str = str.slice(0, -1);
     return url + str;
+  },
+
+  formatDate: function (inputTime) {
+    var date = new Date(inputTime);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
   },
 
   onLaunch() {
@@ -56,8 +72,13 @@ App({
     secret: "64f86e32405825b44feaa222e0bce6f7"
   },
   globalData: {
-    userinfo: {},
-    openid:'',
+    userinfo: {
+      avatarUrl: "https://edu-wuhaojie.oss-cn-shenzhen.aliyuncs.com/bookshare/2023/01/20/d6a8453705584563b112e28beda766cfG1jZ02UyzoQE056c6edcd4ccc3e544d636fbed23d0fe.jpeg",
+      id: 1,
+      nickName: "Pluto",
+      phone: "18888888888",
+    },
+    openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
     baseurl: "http://127.0.0.1:8080/"
   },
   // 腾讯地图根据经纬度获取位置的apikey

@@ -1,0 +1,6 @@
+/* pages/contact/contact.wxss */
+.title{
+    color: #00b85d;
+    margin-left: 30rpx;
+    margin-top: 60rpx;
+}

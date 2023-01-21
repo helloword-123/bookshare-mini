@@ -1,0 +1,15 @@
+<!--pages/help/help.wxml-->
+<view class="container1">
+    <van-collapse value="{{ activeNames }}" bind:change="onChange">
+        <van-collapse-item title="如何共享图书" name="1">
+            进入首页，点击“共享”；扫描图书底部条形码。扫码成功后，填写基本信息，再拍照图书放置地即可共享！
+        </van-collapse-item>
+        <van-collapse-item title="如何借阅图书" name="2">
+            点击图书卡片，进入图书详情页面；查看图书详细信息，接着点击“我要借阅”，前提条件是本人当前位置与图书分享地定位距离在50m以内；然后再扫描图书底部的条形码，检验通过即可成功借阅！
+        </van-collapse-item>
+        <van-collapse-item title="微信登录流程为何与其他小程序不同" name="3">
+            根据最新的微信小程序官方文档，普通个人开发者所开发的小程序无法直接获取微信用户的信息。目前可以获取的只有用户的头像和昵称。
+        </van-collapse-item>
+    </van-collapse>
+
+</view>
