@@ -1,13 +1,14 @@
 {
   "pages": [
-    "pages/shareBorrowRecords/shareBorrowRecords",
     "pages/mine/mine",
+    "pages/auth/auth",
+    "pages/login/login",
     "pages/home/home",
+    "pages/shareBorrowRecords/shareBorrowRecords",
     "pages/bookDetail/bookDetail",
     "pages/contact/contact",
     "pages/help/help",
     "pages/advice/advice",
-    "pages/login/login",
     "pages/userinfo/userinfo",
     "pages/share/share",
     "pages/bookBorrowDetail/bookBorrowDetail",

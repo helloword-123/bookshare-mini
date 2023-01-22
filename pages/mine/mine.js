@@ -47,6 +47,11 @@ Page({
         url: '/pages/shareBorrowRecords/shareBorrowRecords?type=borrow',
       })
     }
+    else if (id == 5) {
+      wx.navigateTo({
+        url: '/pages/auth/auth',
+      })
+    }
   },
 
   clickSetting() {

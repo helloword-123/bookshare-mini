@@ -13,7 +13,7 @@
                 <image src="/images/share/ISBN.jpeg"></image>
             </view>
             <view class="scan_button">
-                <van-button type="info" block round size="small" bindtap="clickScanButton">扫一扫共享</van-button>
+                <van-button color="#47a78a" block round size="small" bindtap="clickScanButton">扫一扫共享</van-button>
             </view>
             <van-toast id="van-toast" />
         </view>
@@ -51,7 +51,7 @@
                 </view>
             </view>
             <view class="share_button">
-                <van-button type="info" block round size="small" bindtap="shareCommit">我要共享</van-button>
+                <van-button color="#47a78a" block round size="small" bindtap="shareCommit">我要共享</van-button>
             </view>
             <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='共享信息已提交，请耐心等待后台审核！审核通过我们会第一时间通知您，并将图书共享信息发布出去！' />
         </view>

@@ -64,7 +64,7 @@
     </view>
 
     <view class="borrow_button">
-        <van-button type="info" block round size="small" bindtap="borrowCommit">我要借阅</van-button>
+        <van-button color="#47a78a" block round size="small" bindtap="borrowCommit">我要借阅</van-button>
     </view>
     <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='系统检测您不在发布点附近，借阅失败！' />
     <modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
