@@ -47,9 +47,24 @@ Page({
         url: '/pages/shareBorrowRecords/shareBorrowRecords?type=borrow',
       })
     }
+    else if (id == 3) {
+      wx.navigateTo({
+        url: '/pages/bookCollect/bookCollect',
+      })
+    }
+    else if (id == 4) {
+      wx.showToast({
+        title: '功能正在开发中...',
+      })
+    }
     else if (id == 5) {
       wx.navigateTo({
         url: '/pages/auth/auth',
+      })
+    }
+    else if (id == 6) {
+      wx.showToast({
+        title: '功能正在开发中...',
       })
     }
     else if (id == 7) {

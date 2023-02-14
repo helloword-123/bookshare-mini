@@ -23,18 +23,13 @@ Page({
     clickIcon(e) {
         let id = e.currentTarget.dataset.id;
         if (id == 1) {
-          wx.reLaunch({
+          wx.navigateTo({
             url: '/pages/admin-auth/admin-auth',
           })
         }
-        else if (id == 2) {
-          wx.reLaunch({
-            url: '/pages/admin-book/admin-book',
-          })
-        }
-        else if (id == 3) {
-          wx.navigateTo({
-            url: '/pages/admin-user/admin-user',
+        else{
+          wx.showToast({
+            title: '功能正在开发中...',
           })
         }
       },

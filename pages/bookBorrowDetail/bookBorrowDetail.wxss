@@ -35,8 +35,12 @@
 }
 
 .category {
-    margin-left: 30rpx;
+    margin: 0 30rpx;
     font-size: 25rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .detail {

@@ -11,7 +11,12 @@
                 <view>出版时间：{{bookinfo.publishingTime}}</view>
             </view>
         </view>
-        <view class="category">分类：{{bookinfo.categoryFullName}}</view>
+        <view class="category">
+            <view>分类：{{bookinfo.categoryFullName}}</view>
+            <view>
+                <image src="{{collectPic}}" style="height: 60rpx; width: 60rpx;" bindtap="clickCollectPic"/>
+            </view>
+        </view>
     </view>
     <view class="detail">
         <view class="title">内容简介</view>

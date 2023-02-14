@@ -18,12 +18,12 @@
         <view>审核意见：</view>
         <view class="content_wrap">
                 <view class="content">
-                    <textarea name="opinion" maxlength="50" value="{{content}}" auto-height placeholder-class="placeholder" placeholder="期待您的反馈，我们将会不断改进（50字以内）" />
+                    <textarea name="opinion" maxlength="50" model:value="{{content}}" auto-height placeholder-class="placeholder" placeholder="期待您的反馈，我们将会不断改进（50字以内）" />
                 </view>
             </view>
     </view>
     <view class="commit">
-        <van-button type="danger" round bindtap="saveCheckData">驳回</van-button>
-        <van-button type="primary" round bindtap="saveCheckData">通过</van-button>
+        <van-button type="danger" round bindtap="saveCheckData" data-type="0">驳回</van-button>
+        <van-button type="primary" round bindtap="saveCheckData" data-type="1">通过</van-button>
     </view>
 </view>

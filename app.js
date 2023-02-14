@@ -86,5 +86,5 @@ App({
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',
   location: '',
   lat: 0,
-  lng: 0
+  lng: 0,
 })

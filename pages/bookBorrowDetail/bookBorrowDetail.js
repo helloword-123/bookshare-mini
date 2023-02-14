@@ -17,9 +17,47 @@ Page({
         bookinfo: {},
 
         showDialog: false,
-        modalHidden: true
+        modalHidden: true,
+        collectPic: "/images/common/collect.png"
     },
 
+    getBookCollectByIds() {
+        app.asyncRequest('GET', app.globalData.baseurl + `book-collect/getBookCollectByIds/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
+            .then(res => {
+                console.log(res);
+                if (res.data.code == 1) {
+                    this.setData({
+                        collectPic: "/images/common/collect_selected.png"
+                    })
+                } else{
+                    this.setData({
+                        collectPic: "/images/common/collect.png"
+                    })
+                }
+            })
+    },
+
+    clickCollectPic() {
+        app.asyncRequest('GET', app.globalData.baseurl + `book-collect/update/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
+            .then(res => {
+                console.log(res);
+                if (res.data.code == 1) {
+                    wx.showToast({
+                        title: '收藏成功',
+                    })
+                    this.setData({
+                        collectPic: "/images/common/collect_selected.png"
+                    })
+                } else{
+                    wx.showToast({
+                        title: '取消收藏',
+                    })
+                    this.setData({
+                        collectPic: "/images/common/collect.png"
+                    })
+                } 
+            })
+    },
 
     // 对话框-取消按钮事件
     modalBindCancel() {
@@ -156,6 +194,8 @@ Page({
         this.setData({
             ['bookinfo.releaseTime']: app.formatDate(this.data.bookinfo.releaseTime)
         })
+
+        this.getBookCollectByIds();
     },
 
     /**

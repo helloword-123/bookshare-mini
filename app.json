@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/admin-auth/admin-auth",
     "pages/mine/mine",
+    "pages/bookCollect/bookCollect",
+    "pages/admin-auth/admin-auth",
     "pages/admin-auth-detail/admin-auth--detail",
     "pages/admin/admin",
     "pages/admin-book/admin-book",

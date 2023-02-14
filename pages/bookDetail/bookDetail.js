@@ -26,13 +26,52 @@ Page({
                 desc: '填写信息',
             }
         ],
-        bookDriftSeries: []
+        bookDriftSeries: [],
+        collectPic: "/images/common/collect.png"
+    },
+
+    getBookCollectByIds() {
+        app.asyncRequest('GET', app.globalData.baseurl + `book-collect/getBookCollectByIds/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
+            .then(res => {
+                console.log(res);
+                if (res.data.code == 1) {
+                    this.setData({
+                        collectPic: "/images/common/collect_selected.png"
+                    })
+                } else{
+                    this.setData({
+                        collectPic: "/images/common/collect.png"
+                    })
+                }
+            })
+    },
+
+    clickCollectPic() {
+        app.asyncRequest('GET', app.globalData.baseurl + `book-collect/update/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
+            .then(res => {
+                console.log(res);
+                if (res.data.code == 1) {
+                    wx.showToast({
+                        title: '收藏成功',
+                    })
+                    this.setData({
+                        collectPic: "/images/common/collect_selected.png"
+                    })
+                } else{
+                    wx.showToast({
+                        title: '取消收藏',
+                    })
+                    this.setData({
+                        collectPic: "/images/common/collect.png"
+                    })
+                } 
+            })
     },
 
     initSteps() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-drift/getBookDriftSeries/${this.data.bookinfo.bookId}`)
             .then(res => {
-                for(var i = 0; i < res.data.bookDriftSeries.length; ++i){
+                for (var i = 0; i < res.data.bookDriftSeries.length; ++i) {
                     var book = res.data.bookDriftSeries[i];
                     book.releaseTime = app.formatDate(book.releaseTime);
                     book.driftTime = app.formatDate(book.driftTime);
@@ -41,12 +80,12 @@ Page({
                     bookDriftSeries: res.data.bookDriftSeries,
                     active: res.data.bookDriftSeries.length - 1
                 })
-                
+
                 let steps = [];
-                for(var i = 0; i < res.data.bookDriftSeries.length; ++i){
+                for (var i = 0; i < res.data.bookDriftSeries.length; ++i) {
                     var book = res.data.bookDriftSeries[i];
                     let step = {};
-                    if(i == 0){
+                    if (i == 0) {
                         step.text = '共享者';
                         step.desc = `${book.sharer}，发布时间：${book.releaseTime}`
                     } else {
@@ -55,7 +94,7 @@ Page({
                     }
                     steps.push(step);
                 }
-                
+
                 this.setData({
                     steps: steps
                 })
@@ -115,6 +154,8 @@ Page({
 
         // 初始化漂流记录数据
         this.initSteps();
+
+        this.getBookCollectByIds();
     },
 
     /**

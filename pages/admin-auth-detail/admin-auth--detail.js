@@ -43,14 +43,32 @@ Page({
             })
     },
 
-    saveCheckData() {
-        app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/check`,{
-            id: this.auth.id,
+    saveCheckData(e) {
+        let status = e.currentTarget.dataset.type;
+
+        app.asyncRequest('POST', app.globalData.baseurl + `campus-staff-auth/check`,{
+            id: this.data.auth.id,
             description: this.data.content,
-            checkerId: app.globalData.userinfo.id
+            checkerId: app.globalData.userinfo.id,
+            status
         })
             .then(res=>{
                 console.log(res);
+                if(res.code == 20000){
+                    wx.showToast({
+                        title: '提交成功',
+                        duration: 1000
+                    })
+                    wx.navigateBack({
+                      delta: 1,
+                    })
+                } else{
+                    wx.showToast({
+                        title: '提交出错',
+                        duration: 1000
+                    })
+                }
+                
             })
     },
 
