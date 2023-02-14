@@ -52,6 +52,11 @@ Page({
         url: '/pages/auth/auth',
       })
     }
+    else if (id == 7) {
+      wx.navigateTo({
+        url: '/pages/admin/admin',
+      })
+    }
   },
 
   clickSetting() {
@@ -85,6 +90,20 @@ Page({
     this.setData({
       userinfo: app.globalData.userinfo
     })
+
+    var userRoles = app.globalData.userRoles;
+    for(var i = 0; i < userRoles.length; ++i){
+      if(userRoles[i] == 'admin' || userRoles == 'super_admin'){
+        var icon = {
+          img: '/images/mine/admin.png',
+          title: '后台管理',
+          id: 7
+        }
+        this.setData({
+          icons: this.data.icons.concat(icon)
+        })
+      }
+    }
   },
 
   /**

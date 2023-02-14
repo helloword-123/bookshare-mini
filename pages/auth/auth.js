@@ -34,17 +34,18 @@ Page({
     getAuthInfo() {
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthInfo/${app.globalData.userinfo.id}`)
             .then(res=>{
+                // 未验证
+                if(res.data.campusStaffAuth == null){
+                    this.setData({
+                        status: -1
+                    })
+                    return;
+                }
                 this.setData({
                     status: res.data.campusStaffAuth.status,
                     description: res.data.campusStaffAuth.description,
                 })
             })
-    },
-
-    reAuth() {
-        this.setData({
-            status: -1
-        })
     },
 
     commit() {

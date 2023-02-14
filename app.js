@@ -78,6 +78,7 @@ App({
       nickName: "Pluto",
       phone: "18888888888",
     },
+    userRoles: ['super_admin', 'admin', 'user'],
     openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
     baseurl: "http://127.0.0.1:8080/"
   },

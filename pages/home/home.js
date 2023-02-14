@@ -31,6 +31,13 @@ Page({
     bookList: []
   },
 
+  getAllRolesById(userId){
+    app.asyncRequest('GET', app.globalData.baseurl + `user/getUserRoles/${userId}`)
+    .then(res=>{
+      app.globalData.userRoles = res.data.roles;
+    })
+  },
+
   clickBook(e) {
     const {categoryid, bookid} = e.currentTarget.dataset;
     
@@ -84,15 +91,6 @@ Page({
         })
       })
   },
-
-  // getListWithCategory() {
-  //   app.asyncRequest('GET', app.globalData.baseurl + 'book/ ')
-  //     .then(res => {
-  //       this.setData({
-  //         categorys: res.data.categories
-  //       })
-  //     })
-  // },
 
   // watch:{
   //   // van-tabs 组件 切换tabs时
@@ -221,6 +219,9 @@ Page({
 
     // // 在onload的时候调用一次监听函数，然后就可以像vue一样愉快的使用watch了
     // setWatcher(this);
+
+    // 获取用户所有角色
+    this.getAllRolesById(app.globalData.userinfo.id);
 
     // 获取一级目录
     this.getListWithCategory();

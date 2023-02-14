@@ -1,9 +1,14 @@
 {
   "pages": [
+    "pages/admin-auth/admin-auth",
     "pages/mine/mine",
-    "pages/auth/auth",
-    "pages/login/login",
+    "pages/admin-auth-detail/admin-auth--detail",
+    "pages/admin/admin",
+    "pages/admin-book/admin-book",
+    "pages/admin-user/admin-user",
     "pages/home/home",
+    "pages/login/login",
+    "pages/auth/auth",
     "pages/shareBorrowRecords/shareBorrowRecords",
     "pages/bookDetail/bookDetail",
     "pages/contact/contact",
@@ -24,7 +29,6 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents",
   "tabBar": {
     "color": "#000000",
     "selectedColor": "#005b26",
@@ -75,10 +79,11 @@
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index"
   },
+  "requiredPrivateInfos": ["getLocation"],
   "permission": {
     "scope.userLocation": {
       "desc": "获取你的当前位置"
     }
-  },
-  "requiredPrivateInfos": ["getLocation"]
+  }
+  
 }

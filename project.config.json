@@ -48,7 +48,7 @@
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.27.3",
+    "libVersion": "2.28.1",
     "appid": "wx64e73796f64380c0",
     "projectname": "bookshare-mini",
     "simulatorType": "wechat",

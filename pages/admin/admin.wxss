@@ -1,0 +1,48 @@
+/* pages/mine/mine.wxss */
+.container1{
+    background-color: #f5f5f5;
+    width: 100vw; 
+    height: 100vh;
+    padding-top: 50rpx;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50rpx;
+}
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    clear: both;
+    background-color: #fff;
+    border-radius: 30rpx;
+    padding: 20rpx;
+    margin: 0 20rpx;
+    box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
+}
+
+.icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 21%;
+    margin: 2%;
+}
+
+.icon image{
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.icon view{
+    font-size: 22rpx;
+}
+
+.bottom{
+    margin: 40rpx;
+    border-radius: 30rpx;
+    box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
+}
