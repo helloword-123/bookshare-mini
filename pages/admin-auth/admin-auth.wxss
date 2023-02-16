@@ -1,29 +1,35 @@
 .table {
     border: 0px solid darkgray;
-   }
-   .tr {
+}
+
+.tr {
     display: flex;
     width: 100%;
     justify-content: center;
     height: 3rem;
     align-items: center;
-   }
-   .td {
-    width:40%;
+}
+
+.td {
+    width: 40%;
     justify-content: center;
     text-align: center;
     font-size: 12px;
-   }
-   .bg-w{
+}
+
+.bg-w {
     background: snow;
-   }
-   .bg-g{
+}
+
+.bg-g {
     background: #E6F3F9;
-   }
-   .bg-e{
+}
+
+.bg-e {
     background: #c7ccce;
-   }
-   .th {
+}
+
+.th {
     width: 40%;
     justify-content: center;
     background: #E1B368;
@@ -32,5 +38,11 @@
     height: 3rem;
     align-items: center;
     font-size: 13px;
-   }
-  
+}
+
+.title {
+    margin-bottom: 25rpx;
+    margin-left: 50rpx;
+    font-weight: 700;
+    font-size: 34rpx;
+}

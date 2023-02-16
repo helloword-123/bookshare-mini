@@ -1,10 +1,11 @@
 {
   "pages": [
     "pages/mine/mine",
+    "pages/admin/admin",
+    "pages/bookCheckDetail/bookCheckDetail",
     "pages/bookCollect/bookCollect",
     "pages/admin-auth/admin-auth",
     "pages/admin-auth-detail/admin-auth--detail",
-    "pages/admin/admin",
     "pages/admin-book/admin-book",
     "pages/admin-user/admin-user",
     "pages/home/home",

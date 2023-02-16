@@ -31,6 +31,12 @@ Page({
         ]
     },
 
+    reAuth(){
+        this.setData({
+            status: -1
+        })
+    },
+
     getAuthInfo() {
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthInfo/${app.globalData.userinfo.id}`)
             .then(res=>{

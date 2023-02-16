@@ -23,7 +23,7 @@
             </view>
     </view>
     <view class="commit">
-        <van-button type="danger" round bindtap="saveCheckData" data-type="0">驳回</van-button>
+        <van-button type="danger" round bindtap="saveCheckData" data-type="2">驳回</van-button>
         <van-button type="primary" round bindtap="saveCheckData" data-type="1">通过</van-button>
     </view>
 </view>

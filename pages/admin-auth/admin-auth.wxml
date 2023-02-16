@@ -1,5 +1,6 @@
 <!--pages/admin-auth/admin-auth.wxml-->
 <view class="container1">
+    <view class="title">未审核的用户如下：</view>
     <view class="tr bg-w">
         <view class="th">姓名</view>
         <view class="th ">学号/工号</view>

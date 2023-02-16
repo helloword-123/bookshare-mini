@@ -11,7 +11,7 @@ Page({
             id: 1
           }, {
             img: '/images/mine/icon2.png',
-            title: '图书管理',
+            title: '图书审核',
             id: 2
           }, {
             img: '/images/mine/icon3.png',
@@ -26,8 +26,11 @@ Page({
           wx.navigateTo({
             url: '/pages/admin-auth/admin-auth',
           })
-        }
-        else{
+        } else if(id == 2){
+          wx.navigateTo({
+            url: '/pages/admin-book/admin-book',
+          })
+        } else{
           wx.showToast({
             title: '功能正在开发中...',
           })

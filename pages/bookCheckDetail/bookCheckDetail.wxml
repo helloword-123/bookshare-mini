@@ -1,0 +1,83 @@
+<!--pages/bookBorrowDetail/bookBorrowDetail.wxml-->
+<view class="container1">
+    <view class="book1">
+        <view class="bookinfo">
+            <image src="{{bookinfo.picture_url}}"></image>
+            <view>
+                <view>{{bookinfo.name}}</view>
+                <!-- <view>ISBN：{{bookinfo.isbn}}</view> -->
+                <view>作者：{{bookinfo.author}}</view>
+                <view>出版社：{{bookinfo.publishingHouse}}</view>
+                <view>出版时间：{{bookinfo.publishingTime}}</view>
+            </view>
+        </view>
+        <view class="category">
+            <view>分类：{{bookinfo.categoryFullName}}</view>
+            <view>
+                <image src="{{collectPic}}" style="height: 60rpx; width: 60rpx;" bindtap="clickCollectPic"/>
+            </view>
+        </view>
+    </view>
+    <view class="detail">
+        <view class="title">内容简介</view>
+        <view class="content">{{bookinfo.detail}}</view>
+    </view>
+    <view class="drift_info">
+        <van-row class="row">
+            <van-col span="8" class="col1">分享者昵称：</van-col>
+            <van-col span="16" class="col2">{{bookinfo.sharer}}</van-col>
+        </van-row>
+        <view class="divide" />
+
+        <van-row class="row">
+            <van-col span="8" class="col1">分享者手机号：</van-col>
+            <van-col span="16" class="col2">{{bookinfo.sharerPhone}}</van-col>
+        </van-row>
+        <view class="divide" />
+
+        <van-row class="row text-ellipsis">
+            <van-col span="8" class="col1">分享者愿望：</van-col>
+            <van-col span="16" class="col2">{{bookinfo.note}}</van-col>
+        </van-row>
+        <view class="divide" />
+
+        <van-row class="row">
+            <van-col span="8" class="col1">发布时间：</van-col>
+            <van-col span="16" class="col2">{{bookinfo.releaseTime}}</van-col>
+        </van-row>
+        <view class="divide" />
+
+        <van-row class="row text-ellipsis">
+            <van-col span="8" class="col1">地址：</van-col>
+            <van-col span="16" class="col2">{{bookinfo.location}}</van-col>
+        </van-row>
+        <view class="divide" />
+
+        <van-row class="row">
+            <van-col span="8" class="col1">距离：</van-col>
+            <van-col span="16" class="col2">{{bookinfo.distance}} m</van-col>
+        </van-row>
+        <view class="divide" />
+
+        <van-row class="row">
+            <van-col span="8" class="col1">漂流图片：</van-col>
+        </van-row>
+        <scroll-view scroll-x class='scroll-container'>
+            <image class="img" src="{{item}}" bindtap="preView" data-src="{{item}}" wx:for="{{bookinfo.imgList}}" wx:key="index"></image>
+        </scroll-view>
+
+    </view>
+
+    <view class="pic">
+        <view class="title">审核意见：</view>
+        <view class="content_wrap">
+                <view class="content">
+                    <textarea name="opinion" maxlength="50" model:value="{{content}}" auto-height placeholder-class="placeholder" placeholder="请填写审核意见..." />
+                </view>
+            </view>
+    </view>
+    <view class="commit">
+        <van-button type="danger" round bindtap="saveCheckData" data-type="2">驳回</van-button>
+        <van-button type="primary" round bindtap="saveCheckData" data-type="1">通过</van-button>
+    </view>
+</view>

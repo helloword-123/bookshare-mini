@@ -5,7 +5,7 @@
             <image src="{{book.picture_url}}"></image>
             <view class="text-ellipsis">
                 <view>{{book.name}}</view>
-                <view>{{tab_active == 0 ? '共享时间：'+book.releaseTime : '借阅时间：'+book.driftTime}}</view>
+                <view>{{'共享时间：'+book.releaseTime}}</view>
                 <view>共享人：{{book.sharer}}</view>
                 <view>漂流地：
                     <image src="/images/home/location.png" /><text class="text-ellipsis">{{book.location}}</text>

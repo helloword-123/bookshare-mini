@@ -10,9 +10,34 @@ Page({
         bookList: []
     },
 
+    clickBook(e) {
+        const {
+            bookid
+        } = e.currentTarget.dataset;
+
+        let param = {}
+        this.data.bookList.forEach(book => {
+            if (book.bookId == bookid) {
+                param = book;
+                return;
+            }
+        })
+        wx.navigateTo({
+            url: `/pages/bookDetail/bookDetail?bookinfo=${JSON.stringify(param)}`,
+        })
+    },
+
     getCollectedBookList() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/getCollectedBooks/${app.globalData.userinfo.id}`)
             .then(res => {
+                // 修改时间格式
+                for (var j = 0; j < res.data.bookList.length; ++j) {
+                    let book = res.data.bookList[j];
+                    book.releaseTime = app.formatDate(book.releaseTime);
+                    if (book.driftTime != null) {
+                        book.driftTime = app.formatDate(book.driftTime);
+                    }
+                }
                 this.setData({
                     bookList: res.data.bookList
                 })
