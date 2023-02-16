@@ -62,6 +62,9 @@ Page({
                     wx.navigateBack({
                       delta: 1,
                     })
+
+                    // 修改用户是否认证
+                    app.globalData.userinfo.isAuth = true;
                 } else{
                     wx.showToast({
                         title: '提交出错',

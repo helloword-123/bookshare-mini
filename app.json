@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/mine/mine",
     "pages/admin/admin",
     "pages/bookCheckDetail/bookCheckDetail",
@@ -9,7 +10,6 @@
     "pages/admin-book/admin-book",
     "pages/admin-user/admin-user",
     "pages/home/home",
-    "pages/login/login",
     "pages/auth/auth",
     "pages/shareBorrowRecords/shareBorrowRecords",
     "pages/bookDetail/bookDetail",

@@ -119,7 +119,7 @@ Page({
                 console.log(res);
                 this.setData({
                     options: res.data.options
-                    
+
                 })
             })
     },
@@ -274,6 +274,25 @@ Page({
 
     // 点击扫一扫
     clickScanButton() {
+
+        // 检测是否认证通过
+        if (app.globalData.userinfo.isAuth == false) {
+            wx.showModal({
+                title: '提示',
+                content: '您未认证或者认证未通过，请先认证！',
+                success(res) {
+                    if (res.confirm) {
+                        wx.navigateTo({
+                            url: '/pages/auth/auth',
+                        })
+                    } else if (res.cancel) {
+
+                    }
+                }
+            })
+            return;
+        }
+
         // 调用api扫描ISBN
         wx.scanCode({
             scanType: ['barCode'],

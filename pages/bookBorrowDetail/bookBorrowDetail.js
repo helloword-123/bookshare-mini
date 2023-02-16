@@ -157,6 +157,25 @@ Page({
     },
 
     borrowCommit() {
+
+        // 检测是否认证通过
+        if(app.globalData.userinfo.isAuth == false){
+            wx.showModal({
+                title: '提示',
+                content: '您未认证或者认证未通过，请先认证！',
+                success (res) {
+                    if (res.confirm) {
+                      wx.navigateTo({
+                        url: '/pages/auth/auth',
+                      })
+                    } else if (res.cancel) {
+                      
+                    }
+                  }
+            })
+            return;
+        }
+
         const {
             bookinfo
         } = this.data

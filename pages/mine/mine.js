@@ -106,7 +106,7 @@ Page({
       userinfo: app.globalData.userinfo
     })
 
-    var userRoles = app.globalData.userRoles;
+    var userRoles = app.globalData.userinfo.roles;
     for(var i = 0; i < userRoles.length; ++i){
       if(userRoles[i] == 'admin' || userRoles == 'super_admin'){
         var icon = {
@@ -117,6 +117,7 @@ Page({
         this.setData({
           icons: this.data.icons.concat(icon)
         })
+        break;
       }
     }
   },
