@@ -17,6 +17,10 @@ Page({
             img: '/images/mine/icon3.png',
             title: '用户管理',
             id: 3
+          }, {
+            img: '/images/mine/icon4.png',
+            title: '评价管理',
+            id: 4
           }]
     },
 

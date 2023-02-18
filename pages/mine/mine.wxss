@@ -82,3 +82,29 @@
     border-radius: 30rpx;
     box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
 }
+
+.message {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    margin-top: 0.8rem ;
+    margin-right: 3px;
+}
+.message image {
+    width: 26px;    
+    height: 26px;
+}
+.divright {
+    position: absolute;
+    color: white;
+    font-size: 15px;
+    background-color: red;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    left: 70%;
+    top: -4px;
+    text-align: center;
+    -webkit-border-radius: 24px;
+    border-radius: 24px;
+}

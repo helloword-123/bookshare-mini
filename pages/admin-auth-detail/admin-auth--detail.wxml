@@ -18,7 +18,7 @@
         <view>审核意见：</view>
         <view class="content_wrap">
                 <view class="content">
-                    <textarea name="opinion" maxlength="50" model:value="{{content}}" auto-height placeholder-class="placeholder" placeholder="期待您的反馈，我们将会不断改进（50字以内）" />
+                    <textarea name="opinion" maxlength="50" model:value="{{content}}" auto-height placeholder-class="placeholder" placeholder="请填写审核信息..." />
                 </view>
             </view>
     </view>

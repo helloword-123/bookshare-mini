@@ -1,0 +1,20 @@
+<!--pages/shareBorrowRecords/shareBorrowRecords.wxml-->
+<view class="container1">
+    <view>
+        <van-tabs bind:click="onClickTab" active="{{ tab_active }}" animated>
+            <!-- 这里的item包括category和bookList数据 -->
+            <van-tab title="{{title}}" wx:for="{{titles}}" wx:for-item="title" wx:key="id">
+                <scroll-view class="scroll" scroll-y wx:if="{{messageList[tab_active].length != 0}}">
+                    <view class="message" wx:for="{{messageList[tab_active]}}" wx:for-item="message" wx:key="id" bindtap="clickMessage" data-msgId="{{message.msgId}}" data-tab="{{tab_active}}">
+                        <view class="title">{{message.data.title}}</view>
+                        <view class="msg">{{message.data.message}}</view>
+                        <view class="time">
+                            <view>{{message.produceTime}}</view>
+                        </view>
+                    </view>
+                </scroll-view>
+                <van-empty description="没有消息！" wx:if="{{messageList[tab_active].length == 0}}" />
+            </van-tab>
+        </van-tabs>
+    </view>
+</view>

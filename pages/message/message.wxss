@@ -1,0 +1,50 @@
+/* pages/shareBorrowRecords/shareBorrowRecords.wxss */
+.container1{
+    height: 100vh;
+    width: 100vw;
+    background-color: #f1f1f1;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    padding: 20rpx 30rpx;
+    height: 170rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+    margin: 45rpx 25rpx;
+    box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
+}
+
+.title{
+    font-weight: 700;
+    font-size: 30rpx;
+    margin-bottom: 10rpx;
+}
+
+.msg{
+    line-height: 35rpx;
+    color: #696969;
+    font-size: 28rpx;
+
+    display: -webkit-box;
+    /*弹性伸缩盒子*/
+    -webkit-box-orient: vertical;
+    /*垂直排列*/
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    /*只显示6行*/
+    overflow: hidden;
+    /*溢出隐藏*/
+    text-overflow: ellipsis;
+    /*省略号代替*/
+
+    margin-bottom: 10rpx;
+}
+
+.time{
+    font-size: 26rpx;
+    color: #a59d9d;
+    display: flex;
+    flex-direction: row-reverse;
+}

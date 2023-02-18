@@ -20,31 +20,30 @@ Page({
         modalHidden: true,
         collectPic: "/images/common/collect.png",
 
-        content:''
+        content: ''
     },
 
     saveCheckData(e) {
         let status = e.currentTarget.dataset.type;
 
-        app.asyncRequest('POST', app.globalData.baseurl + `book-drift/checkBook`,{
-            id: this.data.bookinfo.driftId,
-            checkerReply: this.data.content,
-            checkerId: app.globalData.userinfo.id,
-            status
-        })
-            .then(res=>{
-                if(status == 1){
-                    wx.showToast({
-                        title: '审核通过',
-                    })
-                } else if(status == 1){
-                    wx.showToast({
-                        title: '审核不通过',
-                    })
-                } 
-               
-                wx.navigateTo({
-                  url: '/pages/admin/admin',
+        app.asyncRequest('POST', app.globalData.baseurl + `book-drift/checkBook`, {
+                id: this.data.bookinfo.driftId,
+                checkerReply: this.data.content,
+                checkerId: app.globalData.userinfo.id,
+                status
+            })
+            .then(res => {
+                wx.showModal({
+                    title: '提示',
+                    content: '提交成功',
+                    showCancel: false,
+                    success(res) {
+                        if (res.confirm) {
+                            wx.navigateTo({
+                                url: '/pages/admin/admin',
+                            })
+                        }
+                    }
                 })
             })
     },
@@ -57,7 +56,7 @@ Page({
                     this.setData({
                         collectPic: "/images/common/collect_selected.png"
                     })
-                } else{
+                } else {
                     this.setData({
                         collectPic: "/images/common/collect.png"
                     })
@@ -76,14 +75,14 @@ Page({
                     this.setData({
                         collectPic: "/images/common/collect_selected.png"
                     })
-                } else{
+                } else {
                     wx.showToast({
                         title: '取消收藏',
                     })
                     this.setData({
                         collectPic: "/images/common/collect.png"
                     })
-                } 
+                }
             })
     },
 

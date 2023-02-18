@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/mine/mine",
+    "pages/login/login",
+    "pages/message/message",
     "pages/admin/admin",
     "pages/bookCheckDetail/bookCheckDetail",
     "pages/bookCollect/bookCollect",

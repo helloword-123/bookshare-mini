@@ -32,7 +32,29 @@ Page({
       img: '/images/mine/icon6.png',
       title: '会员中心',
       id: 6
-    }]
+    }, {
+      img: '/images/mine/admin.png',
+      title: '后台管理',
+      id: 7
+    }],
+    msgNum: 0
+  },
+
+  getMsgSize() {
+    app.asyncRequest('GET', app.globalData.baseurl + `message/getUnReadMessagesSize/${app.globalData.userinfo.id}`)
+      .then(res => {
+        console.log(res);
+        this.setData({
+          msgNum: res.data.msgSize
+        })
+      })
+
+  },
+
+  clickMsg() {
+    wx.navigateTo({
+      url: '/pages/message/message',
+    })
   },
 
   clickIcon(e) {
@@ -41,33 +63,28 @@ Page({
       wx.reLaunch({
         url: '/pages/shareBorrowRecords/shareBorrowRecords?type=share',
       })
-    }
-    else if (id == 2) {
+    } else if (id == 2) {
       wx.reLaunch({
         url: '/pages/shareBorrowRecords/shareBorrowRecords?type=borrow',
       })
-    }
-    else if (id == 3) {
+    } else if (id == 3) {
       wx.navigateTo({
         url: '/pages/bookCollect/bookCollect',
       })
-    }
-    else if (id == 4) {
+    } else if (id == 4) {
       wx.showToast({
         title: '功能正在开发中...',
       })
-    }
-    else if (id == 5) {
+    } else if (id == 5) {
       wx.navigateTo({
         url: '/pages/auth/auth',
       })
-    }
-    else if (id == 6) {
+    } else if (id == 6) {
       wx.showToast({
         title: '功能正在开发中...',
       })
-    }
-    else if (id == 7) {
+    } else if (id == 7) {
+
       wx.navigateTo({
         url: '/pages/admin/admin',
       })
@@ -102,24 +119,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userinfo: app.globalData.userinfo
-    })
-
-    var userRoles = app.globalData.userinfo.roles;
-    for(var i = 0; i < userRoles.length; ++i){
-      if(userRoles[i] == 'admin' || userRoles == 'super_admin'){
-        var icon = {
-          img: '/images/mine/admin.png',
-          title: '后台管理',
-          id: 7
-        }
-        this.setData({
-          icons: this.data.icons.concat(icon)
-        })
-        break;
-      }
-    }
+    
   },
 
   /**
@@ -133,7 +133,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      userinfo: app.globalData.userinfo
+    })
 
+    this.getMsgSize();
   },
 
   /**

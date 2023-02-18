@@ -30,7 +30,7 @@ Page({
     getNotCheckedBooks() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-drift/getNotCheckedBooks`)
             .then(res => {
-                
+               
                 // 修改时间格式
                 for (var j = 0; j < res.data.bookList.length; ++j) {
                     let book = res.data.bookList[j];
@@ -49,7 +49,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getNotCheckedBooks();
+        
     },
 
     /**
@@ -63,7 +63,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.getNotCheckedBooks();
     },
 
     /**

@@ -24,6 +24,20 @@ App({
         },
         dataType: 'json',
         success: function (res) {
+          // 统一拦截权限不足
+          if (res.data.status == 403) {
+            wx.showModal({
+              title: '错误',
+              content: '权限不足',
+              showCancel: false,
+              success(res) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            })
+            return;
+          }
           resolve(res.data);
         },
         fail: function (err) {
@@ -78,7 +92,7 @@ App({
       nickName: "Pluto",
       phone: "18888888888",
       roles: ['super_admin', 'admin', 'user'],
-      isAuth: false
+      isAuth: true
     },
     openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
     baseurl: "http://127.0.0.1:8080/"

@@ -7,9 +7,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        auth:{},
-        imgList:["/images/mine/icon2.png","/images/mine/icon2.png","/images/mine/icon2.png"],
-        content:''
+        auth: {},
+        imgList: ["/images/mine/icon2.png", "/images/mine/icon2.png", "/images/mine/icon2.png"],
+        content: ''
     },
 
     preView(e) {
@@ -22,7 +22,7 @@ Page({
 
     getAuthInfo(userId) {
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthInfo/${userId}`)
-            .then(res=>{
+            .then(res => {
                 this.setData({
                     auth: res.data.campusStaffAuth
                 })
@@ -35,8 +35,8 @@ Page({
     },
 
     getAuthImgListByAuthId() {
-        app.asyncRequest('GET', app.globalData.baseurl + `auth-picture/getAuthImgList/${this.data.auth.id}`)
-            .then(res=>{
+        app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthImgList/${this.data.auth.id}`)
+            .then(res => {
                 this.setData({
                     imgList: res.data.imgList
                 })
@@ -46,32 +46,28 @@ Page({
     saveCheckData(e) {
         let status = e.currentTarget.dataset.type;
 
-        app.asyncRequest('POST', app.globalData.baseurl + `campus-staff-auth/check`,{
-            id: this.data.auth.id,
-            description: this.data.content,
-            checkerId: app.globalData.userinfo.id,
-            status
-        })
-            .then(res=>{
-                console.log(res);
-                if(res.code == 20000){
-                    wx.showToast({
-                        title: '提交成功',
-                        duration: 1000
-                    })
-                    wx.navigateBack({
-                      delta: 1,
-                    })
+        app.asyncRequest('POST', app.globalData.baseurl + `campus-staff-auth/check`, {
+                id: this.data.auth.id,
+                description: this.data.content,
+                checkerId: app.globalData.userinfo.id,
+                status
+            })
+            .then(res => {
+                // 修改用户是否认证
+                app.globalData.userinfo.isAuth = true;
 
-                    // 修改用户是否认证
-                    app.globalData.userinfo.isAuth = true;
-                } else{
-                    wx.showToast({
-                        title: '提交出错',
-                        duration: 1000
-                    })
-                }
-                
+                wx.showModal({
+                    title: '提示',
+                    content: '提交成功',
+                    showCancel: false,
+                    success(res) {
+                        if (res.confirm) {
+                            wx.navigateBack({
+                                delta: 1,
+                            })
+                        }
+                    }
+                })
             })
     },
 

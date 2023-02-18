@@ -5,8 +5,12 @@
             <view class="userinfo">
                 <van-image fit="cover" round width="3rem" height="3rem" src="{{userinfo.avatarUrl}}" />
                 <view class="username">{{userinfo.nickName}}</view>
+                <van-icon name="setting-o" bindtap="clickSetting" style="margin-left: 20rpx;" />
             </view>
-            <van-icon name="setting-o" bindtap="clickSetting"/>
+            <view class="message" bindtap="clickMsg">
+                <image src="/images/mine/message.png" />
+                <view class="divright" wx:if="{{msgNum > 0}}">{{msgNum}}</view>
+            </view>
         </view>
         <view class="card">
             <view class="t1">普通用户</view>
@@ -24,9 +28,9 @@
             </view>
         </view>
         <view class="bottom">
-            <van-cell title="我要评价" is-link icon='records' bindtap="clickAdvice"/>
-            <van-cell title="帮助中心" is-link icon='question-o' bindtap="clickHelp"/>
-            <van-cell title="联系我们" is-link icon='phone-o' bindtap="clickContact"/>
+            <van-cell title="我要评价" is-link icon='records' bindtap="clickAdvice" />
+            <van-cell title="帮助中心" is-link icon='question-o' bindtap="clickHelp" />
+            <van-cell title="联系我们" is-link icon='phone-o' bindtap="clickContact" />
         </view>
     </view>
 </view>
