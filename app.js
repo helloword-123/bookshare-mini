@@ -2,6 +2,7 @@
 
 
 App({
+  
   /**
    * 封装wx.request请求
    * method： 请求方式
@@ -95,11 +96,15 @@ App({
       isAuth: true
     },
     openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
-    baseurl: "http://127.0.0.1:8080/"
+    baseurl: "http://127.0.0.1:8080/",
+    websocketUrl: "ws://127.0.0.1:8080/websocket/"
   },
   // 腾讯地图根据经纬度获取位置的apikey
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',
   location: '',
   lat: 0,
   lng: 0,
+
+  // 消息数据
+  messages:[]
 })
