@@ -1,4 +1,5 @@
 // pages/mine/mine.js
+import Notify from '@vant/weapp/notify/notify';
 const app = getApp();
 var websocket = require('../../utils/websocket') 
 
@@ -121,7 +122,12 @@ Page({
    */
   onLoad: function (options) {
     // 连接websocket
-    // websocket.ws_connect()
+    websocket.ws_connect(this.receiveMsg);
+  },
+
+  receiveMsg: function (res) {
+    console.log("receiveMsg>> ", res);
+    Notify({ type: 'success', message: '通知内容', color: '#323535', background: '#ffffff'});
   },
 
   /**

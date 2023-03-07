@@ -9,7 +9,7 @@ const websocketUrl = app.globalData.websocketUrl + app.globalData.userinfo.id; /
 let sotk = null;
 let socketOpen =false;
 
-function ws_connect(reMsg){
+function ws_connect(func){
   sotk = wx.connectSocket({
     url: websocketUrl,
     header: {
@@ -31,8 +31,8 @@ function ws_connect(reMsg){
   })
 
   // 收到消息
-  sotk.onMessage(onMessage => {
-    this.receiveMsg(onMessage);
+  sotk.onMessage(res => {
+    func(res);
   })
 }
 
@@ -47,12 +47,5 @@ function sendMsg(msg, success){
   }
 }
 
-function receiveMsg(message){
-    // 1. 收到消息push到app.js的messages
-    app.messages.push(JSON.parse(message.data))
-    console.log(app.messages);
-}
-
 module.exports.ws_connect = ws_connect;
 module.exports.sendMsg = sendMsg;
-module.exports.receiveMsg = receiveMsg;
