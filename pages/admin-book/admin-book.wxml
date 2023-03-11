@@ -17,4 +17,6 @@
         </view>
     </view>
     <van-empty description="没有需要审核的图书！" wx:if="{{bookList.length == 0}}" />
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

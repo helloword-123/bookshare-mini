@@ -3,6 +3,7 @@ import {
   setWatcher
 } from '../../utils/watch'
 const app = getApp();
+var websocket = require('../../utils/websocket') 
 
 // 引入SDK核心类，js文件根据自己业务，位置可自行放置
 var QQMapWX = require('../../lib/qqmap-wx-jssdk1.2/qqmap-wx-jssdk');
@@ -216,7 +217,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 连接websocket
+    websocket.ws_connect(app.receiveMsg);
     // // 在onload的时候调用一次监听函数，然后就可以像vue一样愉快的使用watch了
     // setWatcher(this);
 

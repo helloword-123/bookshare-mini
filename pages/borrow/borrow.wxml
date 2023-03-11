@@ -35,4 +35,6 @@
         </view>
     </view></view>
     <van-empty description="该筛选条件目前没有漂流的图书" wx:if="{{list.length == 0}}" />
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

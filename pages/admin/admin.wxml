@@ -6,4 +6,6 @@
             <view>{{icon.title}}</view>
         </view>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

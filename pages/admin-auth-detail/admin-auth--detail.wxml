@@ -26,4 +26,6 @@
         <van-button type="danger" round bindtap="saveCheckData" data-type="2">驳回</van-button>
         <van-button type="primary" round bindtap="saveCheckData" data-type="1">通过</van-button>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

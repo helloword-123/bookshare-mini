@@ -47,5 +47,14 @@ function sendMsg(msg, success){
   }
 }
 
+function onClose(){
+  console.log("111");
+  sotk.close()
+  // if (socketOpen) {
+  //   sotk.onClose()
+  // }
+}
+
 module.exports.ws_connect = ws_connect;
 module.exports.sendMsg = sendMsg;
+module.exports.onClose = onClose;

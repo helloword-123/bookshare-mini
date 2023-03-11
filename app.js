@@ -1,5 +1,5 @@
 // app.js
-
+import Notify from '@vant/weapp/notify/notify';
 
 App({
   
@@ -81,6 +81,18 @@ App({
     wx.setStorageSync('logs', logs)
   },
 
+  clickMsgNotify(){
+    wx.navigateTo({
+      url: '/pages/message/message',
+    })
+  },
+
+  // 小程序收到服务器消息通知
+  receiveMsg: function (res) {
+    console.log("receiveMsg>> ", res);
+    Notify({ type: 'success', message: '你有新的消息！', color: '#323535', background: '#ffffff', onClick: this.clickMsgNotify});
+  },
+
   // 小程序信息
   appInfo: {
     appid: "wx64e73796f64380c0",
@@ -96,8 +108,8 @@ App({
       isAuth: true
     },
     openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
-    baseurl: "http://127.0.0.1:8080/",
-    websocketUrl: "ws://127.0.0.1:8080/websocket/"
+    baseurl: "http://120.77.76.39:8080/",
+    websocketUrl: "ws://120.77.76.39:8080/websocket/"
   },
   // 腾讯地图根据经纬度获取位置的apikey
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',

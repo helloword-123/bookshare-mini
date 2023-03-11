@@ -33,5 +33,6 @@
             <van-cell title="联系我们" is-link icon='phone-o' bindtap="clickContact" />
         </view>
     </view>
+    <!-- 全局消息通知 -->
     <van-notify id="van-notify" />
 </view>

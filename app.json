@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/mine/mine",
+    "pages/home/home",
     "pages/login/login",
+    "pages/mine/mine",
     "pages/message/message",
     "pages/admin/admin",
     "pages/bookCheckDetail/bookCheckDetail",
@@ -10,7 +11,6 @@
     "pages/admin-auth-detail/admin-auth--detail",
     "pages/admin-book/admin-book",
     "pages/admin-user/admin-user",
-    "pages/home/home",
     "pages/auth/auth",
     "pages/shareBorrowRecords/shareBorrowRecords",
     "pages/bookDetail/bookDetail",

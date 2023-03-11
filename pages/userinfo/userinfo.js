@@ -1,5 +1,6 @@
 // pages/userinfo/userinfo.js
 const app = getApp();
+var websocket = require('../../utils/websocket') 
 
 Page({
 
@@ -36,6 +37,8 @@ Page({
                 app.location='',
                 app.laat='',
                 app.lng=''
+                // 断开socket连接
+                websocket.onClose();
 
                 wx.navigateTo({
                   url: '/pages/login/login',

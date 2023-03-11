@@ -20,4 +20,6 @@
             确定要退出登录吗？
         </modal>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

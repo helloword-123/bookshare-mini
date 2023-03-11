@@ -12,5 +12,6 @@
             <van-button slot="button" size="small" type="primary" bindtap="copy" data-id="3">复制</van-button>
         </van-field>
     </van-cell-group>
-
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

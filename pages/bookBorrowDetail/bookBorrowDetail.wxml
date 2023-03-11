@@ -75,4 +75,6 @@
     <modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
         请扫描图书封底条形码
     </modal>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

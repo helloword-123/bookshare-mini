@@ -71,4 +71,6 @@
             <van-steps direction="vertical" steps="{{ steps }}" active="{{ active }}" bind:click-step="clickStep"/>
         </view>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

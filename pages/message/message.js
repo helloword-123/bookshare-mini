@@ -14,13 +14,13 @@ Page({
 
     clickMessage(e) {
         const {
-            msgId, tab
+            msgid, tab
         } = e.currentTarget.dataset;
         if(tab == 1){
             return
         }
         
-        app.asyncRequest('GET', app.globalData.baseurl + `message/readMessage/${app.globalData.userinfo.id}/${msgId}`)
+        app.asyncRequest('GET', app.globalData.baseurl + `message/readMessage/${app.globalData.userinfo.id}/${msgid}`)
             .then(res => {
                 wx.showModal({
                     title: '提示',

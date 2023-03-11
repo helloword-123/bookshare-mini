@@ -5,7 +5,7 @@
             <!-- 这里的item包括category和bookList数据 -->
             <van-tab title="{{title}}" wx:for="{{titles}}" wx:for-item="title" wx:key="id">
                 <scroll-view class="scroll" scroll-y wx:if="{{messageList[tab_active].length != 0}}">
-                    <view class="message" wx:for="{{messageList[tab_active]}}" wx:for-item="message" wx:key="id" bindtap="clickMessage" data-msgId="{{message.msgId}}" data-tab="{{tab_active}}">
+                    <view class="message" wx:for="{{messageList[tab_active]}}" wx:for-item="message" wx:key="id" bindtap="clickMessage" data-msgid="{{message.msgId}}" data-tab="{{tab_active}}">
                         <view class="title">{{message.data.title}}</view>
                         <view class="msg">{{message.data.message}}</view>
                         <view class="time">
@@ -17,4 +17,6 @@
             </van-tab>
         </van-tabs>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

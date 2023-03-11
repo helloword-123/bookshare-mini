@@ -27,4 +27,6 @@
             <van-button color="#47a78a" block round size="small" bindtap="reAuth">重新申请</van-button>
         </view>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

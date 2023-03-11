@@ -8,4 +8,6 @@
   <modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
     登录成功！根据平台最新要求，微信登陆需要自定义账号的昵称和头像
   </modal>
+  <!-- 全局消息通知 -->
+  <van-notify id="van-notify" />
 </view>

@@ -1,4 +1,5 @@
 // index.js
+var websocket = require('../../utils/websocket') 
 // 获取应用实例
 const app = getApp()
 
@@ -50,6 +51,8 @@ Page({
             app.globalData.userinfo = ret.data.data.userinfo;
             app.globalData.openid = ret.data.data.openid;
             // 登陆成功后，提示用户
+            // 连接websocket
+            //websocket.ws_connect(app.receiveMsg);
             this.setData({
               modalHidden: false
             });
@@ -67,29 +70,6 @@ Page({
             })
           }
         })
-
-        
-
-        //   // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //   // 后台处理，不用前台请求
-        //   // 1.拼接请求url
-        //   var url = app.addParamsToUrl("https://api.weixin.qq.com/sns/jscode2session", {
-        //     appid: app.appInfo.appid,
-        //     secret: app.appInfo.secret,
-        //     js_code: res.code,
-        //     grant_type: "authorization_code"
-        //   });
-        //   console.log(url);
-        //   // 2.发起请求
-        //   app.asyncRequest('GET', url)
-        //     .then(res => {
-        //       app.globalData.userInfo.openid = res.openid;
-        //       app.globalData.userInfo.session_key = res.session_key;
-        //       console.log(app.globalData.userInfo);
-
-        //     }).catch(err => {
-        //       console.log(err)
-        //     });
       }
     })
   }

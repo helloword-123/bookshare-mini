@@ -56,5 +56,6 @@
             <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='共享信息已提交，请耐心等待后台审核！审核通过我们会第一时间通知您，并将图书共享信息发布出去！' />
         </view>
     </view>
-
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>

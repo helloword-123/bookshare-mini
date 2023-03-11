@@ -19,4 +19,6 @@
             <button formType="submit" hover-class="button_active" loading="{{loading}}">提交</button>
         </form>
     </view>
+    <!-- 全局消息通知 -->
+    <van-notify id="van-notify" />
 </view>
