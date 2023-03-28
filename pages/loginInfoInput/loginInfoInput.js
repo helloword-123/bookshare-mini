@@ -73,6 +73,9 @@ Page({
       }, // header 值
       success: res => {
         console.log('上传成功')
+        this.setData({
+          avatarUrl: JSON.parse(res.data).data.url
+        })
       },
       fail: e => {
         console.log('上传失败')

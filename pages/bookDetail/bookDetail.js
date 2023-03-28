@@ -77,26 +77,28 @@ Page({
                     book.driftTime = app.formatDate(book.driftTime);
                 }
                 this.setData({
-                    bookDriftSeries: res.data.bookDriftSeries,
-                    active: res.data.bookDriftSeries.length - 1
+                    bookDriftSeries: res.data.bookDriftSeries
                 })
 
                 let steps = [];
                 for (var i = 0; i < res.data.bookDriftSeries.length; ++i) {
                     var book = res.data.bookDriftSeries[i];
-                    let step = {};
-                    if (i == 0) {
-                        step.text = '共享者';
-                        step.desc = `${book.sharer}，发布时间：${book.releaseTime}`
-                    } else {
-                        step.text = '借阅者';
-                        step.desc = `${book.sharer}，借阅时间：${book.driftTime}`
+                    steps.push({
+                        text: '共享者',
+                        desc: `${book.sharer}，发布时间：${book.releaseTime}`
+                    });
+                    
+                    if(book.borrowerId != null){
+                        steps.push({
+                            text: '借阅者',
+                            desc: `${book.borrowerName}，借阅时间：${book.driftTime}`
+                        });
                     }
-                    steps.push(step);
                 }
 
                 this.setData({
-                    steps: steps
+                    steps: steps,
+                    active: steps.length - 1
                 })
             })
     },

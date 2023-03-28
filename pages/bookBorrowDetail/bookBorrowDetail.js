@@ -97,7 +97,6 @@ Page({
                                 driftId: this.data.bookinfo.driftId
                             })
                             .then(ret => {
-                                
                                 // 跳转到首页
                                 wx: wx.switchTab({
                                     url: '/pages/home/home'
