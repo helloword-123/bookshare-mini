@@ -35,6 +35,9 @@ Page({
     })
 
     wx.login({
+      fail: res=>{
+        console.log(res);
+      },
       success: res => {
         console.log("login code is: " + res.code);
         // 发送 res.code 到后台换取token，openid和userinfo

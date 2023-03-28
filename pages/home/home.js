@@ -1,7 +1,4 @@
 // pages/home/home.js
-import {
-  setWatcher
-} from '../../utils/watch'
 const app = getApp();
 var websocket = require('../../utils/websocket') 
 
@@ -219,9 +216,6 @@ Page({
   onLoad: function (options) {
     // 连接websocket
     websocket.ws_connect(app.receiveMsg);
-    // // 在onload的时候调用一次监听函数，然后就可以像vue一样愉快的使用watch了
-    // setWatcher(this);
-
     // 获取用户所有角色
     this.getAllRolesById(app.globalData.userinfo.id);
 

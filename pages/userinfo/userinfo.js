@@ -11,6 +11,7 @@ Page({
         userinfo: {
             avatarUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
             username: 'Pluto',
+            
             phone: '1888888888',
         },
         isReadonly: [true, true],

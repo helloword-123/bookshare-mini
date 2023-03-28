@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/login/login",
+    "pages/home/home",
     "pages/mine/mine",
     "pages/message/message",
     "pages/admin/admin",
@@ -22,8 +22,7 @@
     "pages/bookBorrowDetail/bookBorrowDetail",
     "pages/borrow/borrow",
     "pages/mapSearch/mapSearch",
-    "pages/loginInfoInput/loginInfoInput",
-    "pages/logs/logs"
+    "pages/loginInfoInput/loginInfoInput"
   ],
   "window": {
     "backgroundTextStyle": "light",

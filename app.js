@@ -48,7 +48,11 @@ App({
     });
   },
 
-
+  /**
+   * Get请求拼接url和请求参数
+   * @param {*} url url
+   * @param {*} params 参数
+   */
   addParamsToUrl(url, params) {
     let str = "?";
     Object.keys(params).forEach((item) => {
@@ -58,6 +62,10 @@ App({
     return url + str;
   },
 
+  /**
+   * 转换时间格式
+   * @param {*} inputTime 输入时间
+   */
   formatDate: function (inputTime) {
     var date = new Date(inputTime);
     var y = date.getFullYear();
@@ -98,7 +106,9 @@ App({
     appid: "wx64e73796f64380c0",
     secret: "64f86e32405825b44feaa222e0bce6f7"
   },
+  // 全局信息
   globalData: {
+    // 用户信息
     userinfo: {
       avatarUrl: "https://edu-wuhaojie.oss-cn-shenzhen.aliyuncs.com/bookshare/2023/01/20/d6a8453705584563b112e28beda766cfG1jZ02UyzoQE056c6edcd4ccc3e544d636fbed23d0fe.jpeg",
       id: 1,
@@ -108,15 +118,12 @@ App({
       isAuth: true
     },
     openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
-    baseurl: "http://120.77.76.39:8080/",
-    websocketUrl: "ws://120.77.76.39:8080/websocket/"
+    baseurl: "http://172.30.207.8:8080/",
+    websocketUrl: "ws://172.30.207.8:8080/websocket/"
   },
   // 腾讯地图根据经纬度获取位置的apikey
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',
   location: '',
   lat: 0,
-  lng: 0,
-
-  // 消息数据
-  messages:[]
+  lng: 0
 })
