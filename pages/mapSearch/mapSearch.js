@@ -16,33 +16,37 @@ Page({
     data: {
         // 搜索框的值
         searchValue: '',
-
+        // QQ的map地图的key
         mapKey: 'BURBZ-XE7K3-TS43N-YRIQT-XIMFS-72F4H',
+        // 纬度
         latitude: 21.658257,
+        // 经度
         longitude: 110.935318,
+        // 距离
         distance: '',
-        distance: '',
+        // 缩放值
         scale: 16,
+        // 当前所选marker
         currMaker: {},
+        // 所有地图marker
         markers: [],
+        // 地图连线
         polyline: [{
             points: [],
             color: "#00a131",
             width: 4
         }],
-        routePlanningInfo: [
-
-        ],
+        // 路径规划信息
+        routePlanningInfo: [],
+        // 漂流的图书列表
         driftingBooks: [],
-
         // 图书详情
-        bookBorrowDetail: {
-
-        },
+        bookBorrowDetail: {},
+        // 是否显示图书
         showBook: false,
-
         // 导航标签
         tab_active: 0,
+        // 交通方式
         trafficType: [{
                 title: '驾车'
             },
@@ -53,17 +57,18 @@ Page({
                 title: '骑行'
             }
         ],
-
         // 是否显示导航提示
         isShow: false,
     },
 
+    // 点击图书
     clickBook(e) {
         wx.navigateTo({
-          url: `/pages/bookBorrowDetail/bookBorrowDetail?bookinfo=${JSON.stringify(this.data.bookBorrowDetail)}`,
+            url: `/pages/bookBorrowDetail/bookBorrowDetail?bookinfo=${JSON.stringify(this.data.bookBorrowDetail)}`,
         })
-      },
+    },
 
+    // 点击路线规划
     onClickRoutePlanning() {
         // 三种交通类型，分别操作
         // api文档：https://lbs.qq.com/service/webService/webServiceGuide/webServiceRoute#2
@@ -82,7 +87,6 @@ Page({
                 break;
             }
         }
-
         let url = `https://apis.map.qq.com/ws/direction/v1/${type}/`
         // 发起请求
         app.asyncRequest('GET', url, {
@@ -93,7 +97,6 @@ Page({
             })
             .then(res => {
                 console.log(res);
-
                 // polyline 坐标解压
                 let points = [];
                 let polyline = res.result.routes[0].polyline;
@@ -120,6 +123,7 @@ Page({
             })
     },
 
+    // 点击tab
     onClickTab(event) {
         console.log(event);
         this.setData({
@@ -129,7 +133,6 @@ Page({
 
     // 点击气泡
     clickCallout(e) {
-
         // 根据marketId（driftId）查询图书漂流信息
         app.asyncRequest('GET', app.globalData.baseurl + `book-drift/getDriftingById/${e.markerId}`)
             .then(res => {
@@ -144,10 +147,12 @@ Page({
             })
     },
 
+    // 清空地图
     clearMap() {
 
     },
 
+    // 搜索
     onSearch() {
         this.setData({
             showBook: false
@@ -218,6 +223,7 @@ Page({
         })
     },
 
+    // 点击放大
     clickAddScale() {
         var that = this;
         console.log("scale===" + this.data.scale)
@@ -226,6 +232,7 @@ Page({
         })
     },
 
+    // 点击缩小
     clickSubScale() {
         var that = this;
         console.log("scale===" + this.data.scale)
@@ -234,9 +241,7 @@ Page({
         })
     },
 
-    /**
-     * 回到自己位置
-     */
+    // 回到自己位置
     controltap() {
         this.mapCtx.moveToLocation()
         this.getMyLocation()
@@ -245,28 +250,7 @@ Page({
         })
     },
 
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        this.getDriftingBooks()
-
-        // 实例化API核心类
-        qqmapsdk = new QQMapWX({
-            key: this.data.mapKey
-        })
-
-    },
-
-
-    onReady: function (e) {
-        this.mapCtx = wx.createMapContext('myMap')
-    },
-
-    /**
-     * 获取正在漂流的图书数据
-     */
+    // 获取正在漂流的图书数据
     getDriftingBooks() {
         app.asyncRequest('GET', app.globalData.baseurl + 'book-drift/getDriftingBooks')
             .then(res => {
@@ -279,7 +263,7 @@ Page({
             })
     },
 
-    // 获取我的位置
+    // 初始化地图
     getMyLocation: function () {
         wx.getLocation({
             type: 'gcj02',
@@ -289,61 +273,8 @@ Page({
                     latitude: res.latitude,
                     longitude: res.longitude
                 })
-
-                /**
-                 * 测试数据
-                 */
-                //     {
-                //     iconPath: '/images/mapSearch/location.png',
-                //     width: 35,
-                //     height: 35,
-                //     address: '文化广场',
-                //     latitude: 21.666565,
-                //     longitude: 110.947368,
-                //     id: 0,
-                //     callout: {
-                //         display: 'BYCLICK'
-                //     }
-                // }, {
-                //     iconPath: '/images/mapSearch/location.png',
-                //     width: 35,
-                //     height: 35,
-                //     address: '宏御帝景豪庭',
-                //     latitude: 21.663962,
-                //     longitude: 110.940594,
-                //     id: 1,
-                //     callout: {
-                //         display: 'BYCLICK'
-                //     }
-                // }, {
-                //     iconPath: '/images/mapSearch/location.png',
-                //     width: 35,
-                //     height: 35,
-                //     address: '嘉隆公寓',
-                //     latitude: 21.661376,
-                //     longitude: 110.943846,
-                //     id: 2,
-                //     callout: {
-                //         display: 'BYCLICK'
-                //     }
-                // }
-
                 // 设置marker
-                let obj = {
-                    iconPath: '/images/mapSearch/location.png',
-                    width: 35,
-                    height: 35,
-                    callout: {
-                        display: 'BYCLICK'
-                    },
-                    address: '嘉隆公寓',
-                    latitude: 21.661376,
-                    longitude: 110.943846,
-                    id: 2
-                }
                 let arr = []
-
-
                 // 拼接后台请求的数据和obj
                 for (var book of this.data.driftingBooks) {
                     var marker = {}
@@ -357,10 +288,8 @@ Page({
                     marker.address = book.address
                     marker.latitude = book.latitude
                     marker.longitude = book.longitude
-
                     arr.push(marker)
                 }
-
                 this.setData({
                     markers: arr
                 })
@@ -374,7 +303,6 @@ Page({
             showBook: false,
             isShow: false
         })
-
         let that = this
         let _markers = that.data.markers
         let markerId = parseInt(e.detail.markerId)
@@ -391,13 +319,11 @@ Page({
         })
         let currMaker = that.data.currMaker
         console.log('currMaker', that.data.currMaker)
-
         // 地图中心移至点击的maker
         this.mapCtx.moveToLocation({
             latitude: currMaker.latitude,
             longitude: currMaker.longitude
         });
-
         // 连线
         let points = [{
             latitude: this.data.latitude,
@@ -413,8 +339,6 @@ Page({
                 width: 4,
             }]
         })
-
-
         qqmapsdk.calculateDistance({
             to: [{
                 latitude: currMaker.latitude,
@@ -476,9 +400,21 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
+     * 生命周期函数--监听页面加载
      */
-    onReady: function () {
+    onLoad: function (options) {
+        // 获取图书列表
+        this.getDriftingBooks()
+        // 实例化API核心类
+        qqmapsdk = new QQMapWX({
+            key: this.data.mapKey
+        })
+    },
+
+    /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+    onReady: function (e) {
         this.mapCtx = wx.createMapContext('myMap')
     },
 

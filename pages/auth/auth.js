@@ -7,15 +7,21 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 学号
         number: '',
+        // 真名
         realName: '',
+        // 手机号
         phone: '',
+        // 邮箱
         email: '',
+        // 图片列表
         fileList: [],
-
         // 审核结果
         status: 1,
+        // 审核意见
         description: '',
+        // 审核提示
         result: [{
                 img: '/images/auth/checking.png',
                 title: '您提交的认证信息正在审核中'
@@ -31,17 +37,19 @@ Page({
         ]
     },
 
-    reAuth(){
+    // 点击“重新申请”
+    reAuth() {
         this.setData({
             status: -1
         })
     },
 
+    // 获取审核信息
     getAuthInfo() {
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthInfo/${app.globalData.userinfo.id}`)
-            .then(res=>{
+            .then(res => {
                 // 未验证
-                if(res.data.campusStaffAuth == null){
+                if (res.data.campusStaffAuth == null) {
                     this.setData({
                         status: -1
                     })
@@ -54,6 +62,7 @@ Page({
             })
     },
 
+    // 提交审核
     commit() {
         let imgList = [];
         this.data.fileList.forEach(img => {
@@ -117,6 +126,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 获取审核信息
         this.getAuthInfo();
     },
 

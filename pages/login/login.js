@@ -1,15 +1,14 @@
 // index.js
-var websocket = require('../../utils/websocket') 
+var websocket = require('../../utils/websocket')
 // 获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    modalHidden: true, //是否隐藏对话框
+    // 是否隐藏对话框
+    modalHidden: true,
+    // logo图片url
     picurl: "https://edu-wuhaojie.oss-cn-shenzhen.aliyuncs.com/bookshare/2022/12/16/7b3aebe1ed9146b5a53e742343b02611f778738c-e4f8-4870-b634-56703b4acafe.gif"
-  },
-  onLoad() {
-
   },
 
   // 对话框-取消按钮事件
@@ -19,6 +18,7 @@ Page({
     })
   },
 
+  // 对话框-确认按钮事件
   modalBindConfirm() {
     this.setData({
       modalHidden: true
@@ -35,7 +35,7 @@ Page({
     })
 
     wx.login({
-      fail: res=>{
+      fail: res => {
         console.log(res);
       },
       success: res => {
@@ -60,10 +60,10 @@ Page({
               modalHidden: false
             });
             wx.hideLoading({
-              
+
             })
           },
-          fail: ret=>{
+          fail: ret => {
             wx.hideLoading({
               fail: (err) => {
                 wx.showToast({
@@ -75,5 +75,61 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })

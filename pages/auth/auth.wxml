@@ -1,8 +1,8 @@
 <!--pages/auth/auth.wxml-->
 <view class="container1">
+    <!-- 填写审核信息 -->
     <view wx:if="{{status == -1}}">
         <view class="tip">请输入正确的信息，以便后台进行审核：</view>
-
         <view class="input">
             <van-field model:value="{{ number }}" placeholder="请输入学号/工号" label="学号/工号" required left-icon="chat-o" />
             <van-field model:value="{{ realName }}" placeholder="请输入真实姓名" label="姓名" required left-icon="user-o" />
@@ -17,8 +17,9 @@
             <van-button color="#47a78a" block round size="small" bindtap="commit">提交申请</van-button>
         </view>
     </view>
+    <!-- 其他 -->
     <view wx:if="{{status != -1}}" class="result">
-        <view >
+        <view>
             <image class="img" src="{{result[status].img}}"></image>
         </view>
         <view class="title">{{result[status].title}}</view>

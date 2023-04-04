@@ -1,22 +1,20 @@
 /* pages/mapSearch/mapSearch.wxss */
-.search{
+.search {
     margin: 0 80rpx;
 }
 
-.control{
+.control {
     margin-right: 1.5vh;
     margin-top: 1.5vh;
     display: flex;
     flex-direction: row-reverse;
 }
 
-.control_img{
+.control_img {
     margin-left: 8rpx;
     height: 40rpx;
     width: 40rpx;
 }
-
-
 
 .location {
     float: right;
@@ -30,26 +28,27 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contentBottomBox {
+}
+
+.contentBottomBox {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-  }
-  .locationIcon {
+}
+
+.locationIcon {
     width: 42rpx;
     height: 42rpx;
-  }
+}
 
-  .title{
-      margin-left: 25rpx;
-      font-weight: 700;
-      font-size: 30rpx;
-  }
+.title {
+    margin-left: 25rpx;
+    font-weight: 700;
+    font-size: 30rpx;
+}
 
-  .book {
+.book {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -63,51 +62,51 @@
 }
 
 
-.book > image {
+.book>image {
     margin: 0 30rpx;
     width: 130rpx;
     height: 100%;
 }
 
-.book > view view:nth-child(1){
+.book>view view:nth-child(1) {
     font-size: 28rpx;
     font-weight: 700;
 }
 
-.book > view view:nth-child(2){
+.book>view view:nth-child(2) {
     font-size: 28rpx;
     color: #C0C0C0;
 }
 
-.book > view view:nth-child(3){
+.book>view view:nth-child(3) {
     font-size: 28rpx;
 }
 
-.book > view view:nth-child(4){
+.book>view view:nth-child(4) {
     font-size: 28rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.book > view view:nth-child(4) > image{
+.book>view view:nth-child(4)>image {
     margin-right: 3rpx;
     height: 30rpx;
     width: 30rpx;
 }
 
-.book > view view:nth-child(5){
+.book>view view:nth-child(5) {
     font-size: 28rpx;
 }
 
-.guide{
+.guide {
     display: flex;
     flex-direction: row;
     margin: 25rpx;
     font-size: 27rpx;
 }
 
-.guide > view{
+.guide>view {
     margin-right: 10rpx;
     display: flex;
     flex-direction: row;
@@ -118,7 +117,7 @@
     box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
 }
 
-.guide_tip{
+.guide_tip {
     display: flex;
     flex-direction: column !important;
     font-size: 27.5rpx;

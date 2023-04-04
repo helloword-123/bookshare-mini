@@ -1,46 +1,47 @@
-.tip{
+.tip {
     margin: 20rpx 0 0 20rpx;
     font-weight: 700;
 }
 
-.input{
+.input {
     margin-top: 40rpx;
 }
 
-.upload_share_img{
+.upload_share_img {
     margin: 35rpx 30rpx 0 30rpx;
 }
-.upload_share_img > view{
+
+.upload_share_img>view {
     font-weight: 700;
     font-size: 28rpx;
     margin-bottom: 15rpx;
 }
 
-.share_button{
+.share_button {
     margin: 20rpx 100rpx 0 100rpx;
 }
 
-.result{
+.result {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 300rpx;
 }
 
-.img{
+.img {
     height: 300rpx;
     width: 300rpx;
 }
 
-.title{
+.title {
     margin: 30rpx 0;
 }
 
-.reply{
+.reply {
     color: #9b9292;
     margin: 0 50rpx;
 }
 
-.reAuthButton{
+.reAuthButton {
     margin-top: 30rpx;
 }

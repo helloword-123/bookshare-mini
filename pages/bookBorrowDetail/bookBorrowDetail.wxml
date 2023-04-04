@@ -1,5 +1,6 @@
 <!--pages/bookBorrowDetail/bookBorrowDetail.wxml-->
 <view class="container1">
+    <!-- 图书信息 -->
     <view class="book1">
         <view class="bookinfo">
             <image src="{{bookinfo.picture_url}}"></image>
@@ -14,63 +15,59 @@
         <view class="category">
             <view>分类：{{bookinfo.categoryFullName}}</view>
             <view>
-                <image src="{{collectPic}}" style="height: 60rpx; width: 60rpx;" bindtap="clickCollectPic"/>
+                <image src="{{collectPic}}" style="height: 60rpx; width: 60rpx;" bindtap="clickCollectPic" />
             </view>
         </view>
     </view>
+    <!-- 内容简介 -->
     <view class="detail">
         <view class="title">内容简介</view>
         <view class="content">{{bookinfo.detail}}</view>
     </view>
+    <!-- 漂流信息 -->
     <view class="drift_info">
         <van-row class="row">
             <van-col span="8" class="col1">分享者昵称：</van-col>
             <van-col span="16" class="col2">{{bookinfo.sharer}}</van-col>
         </van-row>
         <view class="divide" />
-
         <van-row class="row">
             <van-col span="8" class="col1">分享者手机号：</van-col>
             <van-col span="16" class="col2">{{bookinfo.sharerPhone}}</van-col>
         </van-row>
         <view class="divide" />
-
         <van-row class="row text-ellipsis">
             <van-col span="8" class="col1">分享者愿望：</van-col>
             <van-col span="16" class="col2">{{bookinfo.note}}</van-col>
         </van-row>
         <view class="divide" />
-
         <van-row class="row">
             <van-col span="8" class="col1">发布时间：</van-col>
             <van-col span="16" class="col2">{{bookinfo.releaseTime}}</van-col>
         </van-row>
         <view class="divide" />
-
         <van-row class="row text-ellipsis">
             <van-col span="8" class="col1">地址：</van-col>
             <van-col span="16" class="col2">{{bookinfo.location}}</van-col>
         </van-row>
         <view class="divide" />
-
         <van-row class="row">
             <van-col span="8" class="col1">距离：</van-col>
             <van-col span="16" class="col2">{{bookinfo.distance}} m</van-col>
         </van-row>
         <view class="divide" />
-
         <van-row class="row">
             <van-col span="8" class="col1">漂流图片：</van-col>
         </van-row>
         <scroll-view scroll-x class='scroll-container'>
             <image class="img" src="{{item}}" bindtap="preView" data-src="{{item}}" wx:for="{{bookinfo.imgList}}" wx:key="index"></image>
         </scroll-view>
-
     </view>
-
+    <!-- 借阅按钮 -->
     <view class="borrow_button">
         <van-button color="#47a78a" block round size="small" bindtap="borrowCommit">我要借阅</van-button>
     </view>
+    <!-- 提示框 -->
     <van-dialog id="van-dialog" show="{{showDialog}}" theme="round-button" confirmButtonText="确认" confirm-button-open-type="editCommit" bind:close="commit" message='系统检测您不在发布点附近，借阅失败！' />
     <modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
         请扫描图书封底条形码

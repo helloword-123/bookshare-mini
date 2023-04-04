@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 头像url
     avatarUrl: '',
     // 输入框值
     nickname: '',
@@ -20,10 +21,12 @@ Page({
 
   },
 
-  onChangeName(){
+  // 修改名字监听事件
+  onChangeName() {
     // console.log(this.data.nickname);
   },
 
+  // “立即登录”按钮点击事件
   onClose() {
     console.log(this.data.nickname);
     this.setData({
@@ -46,7 +49,7 @@ Page({
       });
   },
 
-
+  // 点击头像
   onChooseAvatar(e) {
     console.log(e);
     const {
@@ -87,6 +90,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 登录成功，显示数据库的头像和昵称
     this.setData({
       nickname: options.nickname,
       avatarUrl: options.avatarurl

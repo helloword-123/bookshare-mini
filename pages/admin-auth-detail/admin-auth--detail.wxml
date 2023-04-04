@@ -1,6 +1,6 @@
 <!--pages/auth/auth.wxml-->
 <view class="container1">
-
+    <!-- 认证信息 -->
     <view class="input" wx:if="user.length != 0">
         <van-field model:value="{{ auth.number }}" placeholder="学号/工号" label="学号/工号" readonly left-icon="chat-o" />
         <van-field model:value="{{ auth.realName }}" placeholder="真实姓名" label="姓名" readonly left-icon="user-o" />
@@ -14,13 +14,14 @@
             <image class="img" src="{{item}}" bindtap="preView" data-src="{{item}}" wx:for="{{imgList}}" wx:key="index"></image>
         </scroll-view>
     </view>
+    <!-- 审核意见 -->
     <view class="pic">
         <view>审核意见：</view>
         <view class="content_wrap">
-                <view class="content">
-                    <textarea name="opinion" maxlength="50" model:value="{{content}}" auto-height placeholder-class="placeholder" placeholder="请填写审核信息..." />
-                </view>
+            <view class="content">
+                <textarea name="opinion" maxlength="50" model:value="{{content}}" auto-height placeholder-class="placeholder" placeholder="请填写审核信息..." />
             </view>
+        </view>
     </view>
     <view class="commit">
         <van-button type="danger" round bindtap="saveCheckData" data-type="2">驳回</van-button>

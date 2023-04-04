@@ -1,5 +1,6 @@
 <!--pages/help/help.wxml-->
 <view class="container1">
+    <!-- 列表显示问题与回答 -->
     <van-collapse value="{{ activeNames }}" bind:change="onChange">
         <van-collapse-item title="如何共享图书" name="1">
             进入首页，点击“共享”；扫描图书底部条形码。扫码成功后，填写基本信息，再拍照图书放置地即可共享！

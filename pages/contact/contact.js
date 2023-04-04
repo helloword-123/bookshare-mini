@@ -5,11 +5,15 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 邮件
         email: "446475135@qq.com",
+        // 微信号
         weixin: "666666",
+        // QQ号
         qq: "446475135"
     },
 
+    // 点击复制
     copy: function (e) {
         let id = e.currentTarget.dataset.id;
         let data = '';

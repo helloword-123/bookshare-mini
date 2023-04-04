@@ -1,6 +1,8 @@
 <!--pages/mine/mine.wxml-->
 <view class="container1">
+    <!-- 头部 -->
     <view class="top">
+        <!-- 用户信息 -->
         <view>
             <view class="userinfo">
                 <van-image fit="cover" round width="3rem" height="3rem" src="{{userinfo.avatarUrl}}" />
@@ -12,6 +14,7 @@
                 <view class="divright" wx:if="{{msgNum > 0}}">{{msgNum}}</view>
             </view>
         </view>
+        <!-- 会员卡片 -->
         <view class="card">
             <view class="t1">普通用户</view>
             <view class="t2">
@@ -20,13 +23,16 @@
             </view>
         </view>
     </view>
+    <!-- 其余 -->
     <view class="div">
+        <!-- icons -->
         <view class="content">
             <view class="icon" wx:for="{{icons}}" wx:for-item="icon" wx:key="id" bindtap="clickIcon" data-id="{{icon.id}}">
                 <image src="{{icon.img}}"></image>
                 <view>{{icon.title}}</view>
             </view>
         </view>
+        <!-- 其他 -->
         <view class="bottom">
             <van-cell title="我要评价" is-link icon='records' bindtap="clickAdvice" />
             <van-cell title="帮助中心" is-link icon='question-o' bindtap="clickHelp" />

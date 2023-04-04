@@ -7,11 +7,14 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 是否加载
         loading: false,
+        // 联系方式
         contact: '',
+        // 内容
         contant: '',
         value: 3,
-        // 图片上传
+        // 图片列表
         fileList: [],
     },
 
@@ -51,8 +54,8 @@ Page({
         });
     },
 
+    // 表单提交
     formSubmit: function (e) {
-        let _that = this;
         let content = e.detail.value.opinion;
         let contact = e.detail.value.contact;
         let regPhone = /^1[3578]\d{9}$/;

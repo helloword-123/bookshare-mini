@@ -1,6 +1,6 @@
 // pages/home/home.js
 const app = getApp();
-var websocket = require('../../utils/websocket') 
+var websocket = require('../../utils/websocket')
 
 // 引入SDK核心类，js文件根据自己业务，位置可自行放置
 var QQMapWX = require('../../lib/qqmap-wx-jssdk1.2/qqmap-wx-jssdk');
@@ -17,6 +17,7 @@ Page({
   data: {
     // 搜索框值
     value: '',
+    // 位置
     location: app.location,
     // 轮播图相关数据
     imgList: ['/images/swiper/1.jpg', '/images/swiper/2.jpg', '/images/swiper/3.jpg'],
@@ -24,26 +25,32 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 500,
-    // 分类标签
+    // 图书分类所选值
     tab_active: 0,
+    // 图书列表
     bookList: []
   },
 
-  getAllRolesById(userId){
+  // 获取用户角色
+  getAllRolesById(userId) {
     app.asyncRequest('GET', app.globalData.baseurl + `user/getUserRoles/${userId}`)
-    .then(res=>{
-      app.globalData.userRoles = res.data.roles;
-    })
+      .then(res => {
+        app.globalData.userRoles = res.data.roles;
+      })
   },
 
+  // 点击图书
   clickBook(e) {
-    const {categoryid, bookid} = e.currentTarget.dataset;
-    
+    const {
+      categoryid,
+      bookid
+    } = e.currentTarget.dataset;
+
     let param = {}
-    this.data.bookList.forEach(b=>{
-      if(b.bookCategory.id == categoryid){
-        b.list.forEach(book=>{
-          if(book.bookId == bookid){
+    this.data.bookList.forEach(b => {
+      if (b.bookCategory.id == categoryid) {
+        b.list.forEach(book => {
+          if (book.bookId == bookid) {
             param = book;
             return;
           }
@@ -55,24 +62,14 @@ Page({
     })
   },
 
+  // 点击借阅
   borrowClick() {
     wx.navigateTo({
       url: '/pages/borrow/borrow',
     })
   },
 
-  getIdByCategoryName(name) {
-    const {
-      categorys
-    } = this.data;
-    for (var item of categorys) {
-      if (item.name == name) {
-        return item.id;
-      }
-    }
-    return 1;
-  },
-
+  // 获取图书列表
   getListWithCategory() {
     wx.showLoading({
       title: '加载中',
@@ -90,30 +87,19 @@ Page({
       })
   },
 
-  // watch:{
-  //   // van-tabs 组件 切换tabs时
-  //   tab_active:{
-  //     immediate:true,
-  //     handler:function(val){
-  //       console.log('第几个',val)
-  //     }
-  //   },
-  // },
-
+  // 点击地图搜索
   clickSearch() {
     wx.navigateTo({
       url: '/pages/mapSearch/mapSearch',
     })
   },
 
+  // 点击tab
   onClickTab(event) {
     console.log(event);
     this.setData({
       tab_active: event.detail.name
     })
-
-    // 获取分类id
-    var id = this.getIdByCategoryName(event.detail.title);
 
     wx.showToast({
       title: `点击标签 ${event.detail.name}`,
@@ -121,10 +107,12 @@ Page({
     });
   },
 
+  // 点击地址
   clickLocation() {
 
   },
 
+  // 获取定位
   initGetLocationFlunction() {
     var that = this
     // 调用接口，获取用户地理位置
@@ -204,6 +192,7 @@ Page({
     })
   },
 
+  // 点击分享
   shareClick() {
     wx: wx.navigateTo({
       url: '/pages/share/share',
@@ -218,20 +207,8 @@ Page({
     websocket.ws_connect(app.receiveMsg);
     // 获取用户所有角色
     this.getAllRolesById(app.globalData.userinfo.id);
-
     // 获取一级目录
     this.getListWithCategory();
-
-    // wx.getLocation({
-    //   type: 'gcj02',
-    //   success(res) {
-    //     console.log('纬度' + res.latitude)
-    //     console.log('经度' + res.longitude)
-    //   },
-    //   fail(err) {
-    //     console.log(err);
-    //   }
-    // })
   },
 
   /**

@@ -1,5 +1,6 @@
 <!--pages/shareBorrowRecords/shareBorrowRecords.wxml-->
 <view class="container1">
+    <!-- 分类显示列表数据 -->
     <view>
         <van-tabs bind:click="onClickTab" active="{{ tab_active }}" animated>
             <!-- 这里的item包括category和bookList数据 -->

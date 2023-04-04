@@ -7,14 +7,15 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 图书列表
         bookList: []
     },
 
+    // 点击图书
     clickBook(e) {
         const {
             bookid
         } = e.currentTarget.dataset;
-
         let param = {}
         this.data.bookList.forEach(book => {
             if (book.bookId == bookid) {
@@ -27,6 +28,7 @@ Page({
         })
     },
 
+    // 获取收藏图书列表
     getCollectedBookList() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/getCollectedBooks/${app.globalData.userinfo.id}`)
             .then(res => {

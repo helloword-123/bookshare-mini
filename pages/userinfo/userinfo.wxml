@@ -1,10 +1,12 @@
 <!--pages/userinfo/userinfo.wxml-->
 <view class="container1">
+    <!-- 头像 -->
     <view class="t1">
         <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
             <image class="avatar" src="{{userinfo.avatarUrl}}" />
         </button>
     </view>
+    <!-- 昵称、手机号、退出登录 -->
     <view class="div">
         <view class="info">
             <van-field label="昵称" readonly="{{isReadonly[0]}}" model:value="{{userinfo.nickName}}" icon="edit" bind:click-icon="onClickIcon" data-id="0" />
@@ -16,6 +18,7 @@
         <view class="logoutButton">
             <van-button block round color="#ec9191" size="small" bindtap="logoutButton">退出登录</van-button>
         </view>
+        <!-- 退出登录提示 -->
         <modal hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindConfirm" bindcancel="modalBindCancel">
             确定要退出登录吗？
         </modal>

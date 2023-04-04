@@ -1,6 +1,7 @@
 <!--pages/borrow/borrow.wxml-->
 <view class="container1">
     <view class="top">
+        <!-- 搜索 -->
         <view class="search">
             <van-search model:value="{{ searchValue }}" placeholder="请输入搜索关键词" shape="round" bind:search="onSearch"/>
             <van-button type="default" icon="location-o" round size="small" bindtap="clickMapSearch">地图搜索</van-button>

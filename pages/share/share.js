@@ -16,8 +16,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        // 步骤
+        // 当前步骤
         active: 0,
+        // 所有步骤信息
         steps: [{
                 text: '步骤一',
                 desc: '扫ISBN编码',
@@ -36,7 +37,6 @@ Page({
         fileList: [],
         // 是否显示dialog
         showDialog: false,
-
         // 分类级联组件
         fieldNames: {
             text: 'name',
@@ -49,6 +49,7 @@ Page({
         cascaderValue: '',
     },
 
+    // 获取定位
     initGetLocationFlunction() {
         if (app.location != '') {
             this.setData({
@@ -78,6 +79,7 @@ Page({
         })
     },
 
+    // 点击获取昵称icon
     onClickUserNameIcon() {
         if (app.globalData.userinfo.nickName == undefined) {
             wx.showToast({
@@ -95,6 +97,7 @@ Page({
         })
     },
 
+    // 点击获取手机号icon
     onClickPhoneNumIcon() {
         if (app.globalData.userinfo.phone == undefined) {
             wx.showToast({
@@ -124,18 +127,21 @@ Page({
             })
     },
 
+    // 点击图书分类
     onClickCascader() {
         this.setData({
             showCascader: true,
         });
     },
 
+    // 关闭图书分类
     onCloseCascader() {
         this.setData({
             showCascader: false,
         });
     },
 
+    // 结束图书分类选择
     onFinishCascader(e) {
         const {
             selectedOptions,
@@ -274,7 +280,6 @@ Page({
 
     // 点击扫一扫
     clickScanButton() {
-
         // 检测是否认证通过
         if (app.globalData.userinfo.isAuth == false) {
             wx.showModal({

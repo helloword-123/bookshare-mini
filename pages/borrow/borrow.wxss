@@ -1,6 +1,4 @@
 /* pages/borrow/borrow.wxss */
-
-
 .top{
     position: fixed;
     top: 0%;
@@ -39,7 +37,6 @@
     margin: 45rpx 25rpx;
     box-shadow: 0px 2rpx 8rpx 0px rgba(0, 0, 0, 0.1);
 }
-
 
 .book>image {
     margin: 0 30rpx;

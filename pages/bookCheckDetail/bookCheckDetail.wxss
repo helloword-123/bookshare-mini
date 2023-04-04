@@ -100,7 +100,7 @@
 }
 
 
-.img{
+.img {
     margin-right: 20rpx;
     height: 150rpx;
     width: 150rpx;
@@ -120,21 +120,22 @@
     width: 100%;
 }
 
-.content{
+.content {
     margin: 0 auto;
     border-radius: 10rpx;
 }
-textarea{
+
+textarea {
     min-height: 300rpx;
     width: 100%;
 }
 
-.commit{
+.commit {
     margin: 0 200rpx 100rpx 200rpx;
     display: flex;
     justify-content: space-between;
 }
 
-.title{
+.title {
     margin: 30rpx 0 20rpx 50rpx;
 }

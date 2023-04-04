@@ -5,9 +5,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 点击列表
         activeNames: [],
     },
 
+    // 点击问题
     onChange(event) {
         this.setData({
             activeNames: event.detail,

@@ -14,9 +14,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 图书信息
         bookinfo: {},
         // 步骤
         active: 0,
+        // 步骤条信息
         steps: [{
                 text: '步骤一',
                 desc: '扫ISBN编码',
@@ -26,10 +28,13 @@ Page({
                 desc: '填写信息',
             }
         ],
+        // 图书漂流信息
         bookDriftSeries: [],
+        // 收藏图标
         collectPic: "/images/common/collect.png"
     },
 
+    // 获取用户是否收藏图书
     getBookCollectByIds() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/getBookCollectByIds/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
             .then(res => {
@@ -38,7 +43,7 @@ Page({
                     this.setData({
                         collectPic: "/images/common/collect_selected.png"
                     })
-                } else{
+                } else {
                     this.setData({
                         collectPic: "/images/common/collect.png"
                     })
@@ -46,6 +51,7 @@ Page({
             })
     },
 
+    // 点击图书收藏
     clickCollectPic() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/update/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
             .then(res => {
@@ -57,17 +63,18 @@ Page({
                     this.setData({
                         collectPic: "/images/common/collect_selected.png"
                     })
-                } else{
+                } else {
                     wx.showToast({
                         title: '取消收藏',
                     })
                     this.setData({
                         collectPic: "/images/common/collect.png"
                     })
-                } 
+                }
             })
     },
 
+    // 初始化图书漂流步骤条
     initSteps() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-drift/getBookDriftSeries/${this.data.bookinfo.bookId}`)
             .then(res => {
@@ -79,7 +86,6 @@ Page({
                 this.setData({
                     bookDriftSeries: res.data.bookDriftSeries
                 })
-
                 let steps = [];
                 for (var i = 0; i < res.data.bookDriftSeries.length; ++i) {
                     var book = res.data.bookDriftSeries[i];
@@ -87,15 +93,13 @@ Page({
                         text: '共享者',
                         desc: `${book.sharer}，发布时间：${book.releaseTime}`
                     });
-                    
-                    if(book.borrowerId != null){
+                    if (book.borrowerId != null) {
                         steps.push({
                             text: '借阅者',
                             desc: `${book.borrowerName}，借阅时间：${book.driftTime}`
                         });
                     }
                 }
-
                 this.setData({
                     steps: steps,
                     active: steps.length - 1
@@ -103,11 +107,12 @@ Page({
             })
     },
 
+    // 点击步骤
     clickStep(e) {
         console.log(e.detail);
     },
 
-
+    // 获取图书分类全名
     getCategoryFullName(categoryId) {
         app.asyncRequest('GET', app.globalData.baseurl + `book-category/getCategoryFullName/${categoryId}`)
             .then(res => {
@@ -133,6 +138,7 @@ Page({
         })
     },
 
+    // 预览图片
     preView(e) {
         let currentUrl = e.currentTarget.dataset.src
         wx.previewImage({
@@ -145,18 +151,21 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 设置图书信息
         this.setData({
             bookinfo: JSON.parse(options.bookinfo)
         })
+        // 计算距离
         this.calculateDistance();
+        // 获取图书分类全名
         this.getCategoryFullName(this.data.bookinfo.categoryId);
+        // 设置发布时间
         this.setData({
             ['bookinfo.releaseTime']: app.formatDate(this.data.bookinfo.releaseTime)
         })
-
         // 初始化漂流记录数据
         this.initSteps();
-
+        // 获取是否收藏
         this.getBookCollectByIds();
     },
 

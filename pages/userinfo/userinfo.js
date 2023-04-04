@@ -1,6 +1,6 @@
 // pages/userinfo/userinfo.js
 const app = getApp();
-var websocket = require('../../utils/websocket') 
+var websocket = require('../../utils/websocket')
 
 Page({
 
@@ -8,13 +8,18 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 用户信息
         userinfo: {
+            // 头像
             avatarUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
+            // 昵称
             username: 'Pluto',
-            
+            // 手机号
             phone: '1888888888',
         },
+        // 昵称和手机号是否只读
         isReadonly: [true, true],
+        // 提示框是否显示
         modalHidden: true
     },
 
@@ -25,6 +30,7 @@ Page({
         })
     },
 
+    // 对话框-确认按钮事件，退出登录
     modalBindConfirm() {
         this.setData({
             modalHidden: true
@@ -33,29 +39,35 @@ Page({
             .then(res => {
                 console.log(res);
                 // 清除信息
-                app.globalData.userinfo={};
-                app.globalData.openid='',
-                app.location='',
-                app.laat='',
-                app.lng=''
+                app.globalData.userinfo = {};
+                app.globalData.openid = '',
+                    app.location = '',
+                    app.laat = '',
+                    app.lng = ''
                 // 断开socket连接
                 websocket.onClose();
-
-                wx.navigateTo({
-                  url: '/pages/login/login',
-                })
-                wx.showToast({
-                  title: '退出成功',
+                // 返回首页
+                wx.showModal({
+                    title: '信息',
+                    content: '退出登录成功',
+                    showCancel: false,
+                    success(res) {
+                        wx.reLaunch({
+                            url: '/pages/login/login',
+                        })
+                    }
                 })
             })
     },
 
+    // “退出登录”按钮点击事件
     logoutButton() {
         this.setData({
             modalHidden: false
         });
     },
 
+    // 点击头像
     onChooseAvatar(e) {
         console.log(e);
         const {
@@ -89,6 +101,7 @@ Page({
         });
     },
 
+    // 保存信息
     saveButton() {
         app.asyncRequest('POST', app.globalData.baseurl + 'user/updateUserInfo', {
                 avatarUrl: this.data.userinfo.avatarUrl,
@@ -106,6 +119,7 @@ Page({
             });
     },
 
+    // 点击编辑icon
     onClickIcon(e) {
         let id = e.currentTarget.dataset.id;
         let arr = this.data.isReadonly;
@@ -119,7 +133,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options);
+        // 设置用户信息
         this.setData({
             userinfo: JSON.parse(options.userinfo)
         })

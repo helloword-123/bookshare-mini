@@ -7,8 +7,8 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 搜索值
         searchValue: '',
-
         // 分类级联组件
         fieldNames: {
             text: 'name',
@@ -19,8 +19,7 @@ Page({
         showCascader: false,
         fieldValue: '全部',
         cascaderValue: -1,
-
-        // 筛选
+        // 筛选条件
         option1: [{
                 text: '距离近',
                 value: 0,
@@ -54,11 +53,11 @@ Page({
             }
         ],
         value1: 0,
-
         // 图书列表
         list: []
     },
 
+    // 点击图书
     clickBook(e) {
         const {
             bookid
@@ -70,17 +69,18 @@ Page({
                 return;
             }
         })
-
         wx.navigateTo({
             url: `/pages/bookBorrowDetail/bookBorrowDetail?bookinfo=${JSON.stringify(param)}`,
         })
     },
 
+    // 点击不同筛选条件
     changeDropdownItem(e) {
         // 重新加载数据
         this.getListWithCondition();
     },
 
+    // 构造条件
     getConditons() {
         let params = {};
         params.categoryId = this.data.cascaderValue;
@@ -93,30 +93,25 @@ Page({
                 params.sortOrder = item.detail.sortOrder;
             }
         })
-
         console.log('params', params);
-
         return params;
     },
 
+    // 根据筛选条件获取图书列表
     getListWithCondition() {
         wx.showLoading({
             title: '加载中',
         })
         let params = this.getConditons();
-
         let url = app.addParamsToUrl(app.globalData.baseurl + 'book/getListWithCondition', params);
         console.log(url);
-
         app.asyncRequest('GET', url)
             .then(res => {
                 console.log(res);
                 this.setData({
                     list: res.data.list
                 })
-
                 wx.hideLoading({
-
                 })
             })
             .catch(err => {
@@ -130,7 +125,6 @@ Page({
 
     // 获取一二级图书分类
     getCategoryCascader() {
-
         app.asyncRequest('GET', app.globalData.baseurl + 'book-category/getCategoryCascader')
             .then(res => {
                 console.log(res);
@@ -146,18 +140,21 @@ Page({
             })
     },
 
+    // 点击分类
     onClickCascader() {
         this.setData({
             showCascader: true,
         });
     },
 
+    // 关闭分类
     onCloseCascader() {
         this.setData({
             showCascader: false,
         });
     },
 
+    // 分类1选择完成
     onFinishCascader(e) {
         const {
             selectedOptions,
@@ -176,11 +173,13 @@ Page({
         this.getListWithCondition();
     },
 
+    // 搜索
     onSearch() {
         // 重新加载数据
         this.getListWithCondition();
     },
 
+    // 点击地图搜索
     clickMapSearch() {
         wx.navigateTo({
             url: '/pages/mapSearch/mapSearch',
@@ -191,7 +190,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 获取图书分类数据
         this.getCategoryCascader();
+        // 获取图书列表
         this.getListWithCondition();
     },
 

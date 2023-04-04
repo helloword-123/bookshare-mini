@@ -7,16 +7,19 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 当前所选tab
         tab_active: 0,
+        // tab所有标题
         titles: ['共享', '借阅'],
+        // 图书列表
         bookList: []
     },
 
+    // 点击图书
     clickBook(e) {
         const {
             bookid
         } = e.currentTarget.dataset;
-
         let param = {}
         this.data.bookList[this.data.tab_active].forEach(book => {
             if (book.bookId == bookid) {
@@ -29,6 +32,7 @@ Page({
         })
     },
 
+    // 获取图书列表
     getShareBorrowBookList() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-drift/getShareBorrowBookList/${app.globalData.userinfo.id}`)
             .then(res => {
@@ -45,10 +49,10 @@ Page({
                 this.setData({
                     bookList: res.data.bookList
                 })
-
             })
     },
 
+    // 点击tab
     onClickTab(event) {
         console.log(event);
         this.setData({
@@ -60,11 +64,13 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 获取图书列表
         this.getShareBorrowBookList();
+        // 设置tab
         let type = options.type;
         console.log(options);
-        if(type != undefined){
-            if(type == 'borrow'){
+        if (type != undefined) {
+            if (type == 'borrow') {
                 this.setData({
                     tab_active: 1
                 })

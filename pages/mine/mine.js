@@ -9,7 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 用户信息
     userinfo: {},
+    // icon列表
     icons: [{
       img: '/images/mine/icon1.png',
       title: '共享记录',
@@ -39,9 +41,11 @@ Page({
       title: '后台管理',
       id: 7
     }],
+    // 未读消息数量
     msgNum: 0
   },
 
+  // 获取未读消息数量
   getMsgSize() {
     app.asyncRequest('GET', app.globalData.baseurl + `message/getUnReadMessagesSize/${app.globalData.userinfo.id}`)
       .then(res => {
@@ -53,12 +57,14 @@ Page({
 
   },
 
+  // 点击消息图图标
   clickMsg() {
     wx.navigateTo({
       url: '/pages/message/message',
     })
   },
 
+  // 点击icon
   clickIcon(e) {
     let id = e.currentTarget.dataset.id;
     if (id == 1) {
@@ -86,31 +92,34 @@ Page({
         title: '功能正在开发中...',
       })
     } else if (id == 7) {
-
       wx.navigateTo({
         url: '/pages/admin/admin',
       })
     }
   },
 
+  // 点击设置
   clickSetting() {
     wx.navigateTo({
       url: `/pages/userinfo/userinfo?userinfo=${JSON.stringify(app.globalData.userinfo)}`,
     })
   },
 
+  // 点击我要评价
   clickAdvice() {
     wx.navigateTo({
       url: '/pages/advice/advice',
     })
   },
 
+  // 点击帮助中心
   clickHelp() {
     wx.navigateTo({
       url: '/pages/help/help',
     })
   },
 
+  // 点击联系我们
   clickContact() {
     wx.navigateTo({
       url: '/pages/contact/contact',
@@ -135,10 +144,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 设置用户信息
     this.setData({
       userinfo: app.globalData.userinfo
     })
-
+    // 获取未读消息数量
     this.getMsgSize();
   },
 

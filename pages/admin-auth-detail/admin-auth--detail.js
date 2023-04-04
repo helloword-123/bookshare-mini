@@ -7,11 +7,15 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 认证信息
         auth: {},
-        imgList: ["/images/mine/icon2.png", "/images/mine/icon2.png", "/images/mine/icon2.png"],
+        // 认证图片
+        imgList: [],
+        // 审核内容
         content: ''
     },
 
+    // 预览图片
     preView(e) {
         let currentUrl = e.currentTarget.dataset.src
         wx.previewImage({
@@ -20,6 +24,7 @@ Page({
         })
     },
 
+    // 获取认证信息
     getAuthInfo(userId) {
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthInfo/${userId}`)
             .then(res => {
@@ -34,6 +39,7 @@ Page({
             })
     },
 
+    // 获取认证图片
     getAuthImgListByAuthId() {
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthImgList/${this.data.auth.id}`)
             .then(res => {
@@ -43,6 +49,7 @@ Page({
             })
     },
 
+    // 保存审核结果
     saveCheckData(e) {
         let status = e.currentTarget.dataset.type;
 

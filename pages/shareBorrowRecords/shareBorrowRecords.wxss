@@ -12,34 +12,34 @@
 }
 
 
-.book > image {
+.book>image {
     margin: 0 30rpx;
     width: 130rpx;
     height: 100%;
 }
 
-.book > view view:nth-child(1){
+.book>view view:nth-child(1) {
     font-size: 28rpx;
     font-weight: 700;
 }
 
-.book > view view:nth-child(2){
+.book>view view:nth-child(2) {
     font-size: 28rpx;
     color: #C0C0C0;
 }
 
-.book > view view:nth-child(3){
+.book>view view:nth-child(3) {
     font-size: 28rpx;
 }
 
-.book > view view:nth-child(4){
+.book>view view:nth-child(4) {
     font-size: 28rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.book > view view:nth-child(4) > image{
+.book>view view:nth-child(4)>image {
     margin-right: 3rpx;
     height: 30rpx;
     width: 30rpx;

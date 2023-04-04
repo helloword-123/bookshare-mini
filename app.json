@@ -10,7 +10,6 @@
     "pages/admin-auth/admin-auth",
     "pages/admin-auth-detail/admin-auth--detail",
     "pages/admin-book/admin-book",
-    "pages/admin-user/admin-user",
     "pages/auth/auth",
     "pages/shareBorrowRecords/shareBorrowRecords",
     "pages/bookDetail/bookDetail",

@@ -7,9 +7,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 图书列表
         bookList: []
     },
 
+    // 点击图书
     clickBook(e) {
         const {
             bookid
@@ -27,10 +29,10 @@ Page({
         })
     },
 
+    // 获取未审核图书
     getNotCheckedBooks() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-drift/getNotCheckedBooks`)
             .then(res => {
-               
                 // 修改时间格式
                 for (var j = 0; j < res.data.bookList.length; ++j) {
                     let book = res.data.bookList[j];
@@ -49,7 +51,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+
     },
 
     /**

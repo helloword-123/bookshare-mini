@@ -7,9 +7,11 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 为什恶化用户列表
         list:[]
     },
 
+    // 获取未审核用户列表
     getAuthList(){
         app.asyncRequest('GET', app.globalData.baseurl + `campus-staff-auth/getAuthList`)
         .then(res=>{
@@ -19,6 +21,7 @@ Page({
         })
     },
 
+    // 点击某一用户
     clickItem(e){
         let userId = e.currentTarget.dataset.id;
         wx.navigateTo({

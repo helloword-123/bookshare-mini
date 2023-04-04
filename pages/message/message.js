@@ -7,33 +7,35 @@ Page({
      * 页面的初始数据
      */
     data: {
+        // 当前所选tab
         tab_active: 0,
+        // tab标题
         titles: ['未读消息', '已读消息'],
+        // 消息列表
         messageList: []
     },
 
+    // 点击消息
     clickMessage(e) {
         const {
-            msgid, tab
+            msgid,
+            tab
         } = e.currentTarget.dataset;
-        if(tab == 1){
+        if (tab == 1) {
             return
         }
-        
         app.asyncRequest('GET', app.globalData.baseurl + `message/readMessage/${app.globalData.userinfo.id}/${msgid}`)
             .then(res => {
                 wx.showModal({
                     title: '提示',
                     content: '读取信息完成',
                     showCancel: false,
-                    success(res) {
-
-                    }
+                    success(res) {}
                 })
             })
-
     },
 
+    // 获取所有消息
     getAllMessages() {
         app.asyncRequest('GET', app.globalData.baseurl + `message/getAllMessages/${app.globalData.userinfo.id}`)
             .then(res => {
@@ -51,6 +53,7 @@ Page({
             })
     },
 
+    // 点击tab
     onClickTab(event) {
         this.setData({
             tab_active: event.detail.name

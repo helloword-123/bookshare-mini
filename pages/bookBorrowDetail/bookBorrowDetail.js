@@ -9,18 +9,21 @@ var qqmapsdk = new QQMapWX({
 });
 
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
+        // 图书信息
         bookinfo: {},
-
+        // 是否显示提示框
         showDialog: false,
+        // 是否显示modal
         modalHidden: true,
+        // 图书收藏图片
         collectPic: "/images/common/collect.png"
     },
 
+    // 获取是否收藏
     getBookCollectByIds() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/getBookCollectByIds/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
             .then(res => {
@@ -37,6 +40,7 @@ Page({
             })
     },
 
+    // 点击收藏
     clickCollectPic() {
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/update/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
             .then(res => {
@@ -66,6 +70,7 @@ Page({
         })
     },
 
+    // 对话框-确认按钮事件
     modalBindConfirm() {
         this.setData({
             modalHidden: true
@@ -84,7 +89,6 @@ Page({
                     })
                     return;
                 }
-
                 // 根据isbn号发起请求
                 var apikey = '14778.d240ab28c857b24b46148ca6351116a2.b03531cb33b522960cdb109e88e651bc';
                 var url = 'https://api.jike.xyz/situ/book/isbn/' + isbn + '?apikey=' + apikey;
@@ -131,6 +135,7 @@ Page({
         })
     },
 
+    // 获取图书分类全名
     getCategoryFullName(categoryId) {
         app.asyncRequest('GET', app.globalData.baseurl + `book-category/getCategoryFullName/${categoryId}`)
             .then(res => {
@@ -163,8 +168,8 @@ Page({
         })
     },
 
+    // 点击“我要借阅”
     borrowCommit() {
-
         // 检测是否认证通过
         if(app.globalData.userinfo.isAuth == false){
             wx.showModal({
@@ -176,13 +181,11 @@ Page({
                         url: '/pages/auth/auth',
                       })
                     } else if (res.cancel) {
-                      
                     }
                   }
             })
             return;
         }
-
         const {
             bookinfo
         } = this.data
@@ -193,13 +196,13 @@ Page({
             })
             return;
         }
-
         // 2.现场扫isbn码（后续可以配合图书庭等硬件）
         this.setData({
             modalHidden: false
         })
     },
 
+    // 预览图片
     preView(e) {
         let currentUrl = e.currentTarget.dataset.src
         wx.previewImage({
@@ -212,15 +215,19 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 设置图书信息
         this.setData({
             bookinfo: JSON.parse(options.bookinfo)
         })
+        // 计算距离
         this.calculateDistance();
+        // 获取图书分类全名
         this.getCategoryFullName(this.data.bookinfo.categoryId);
+        // 设置发布时间
         this.setData({
             ['bookinfo.releaseTime']: app.formatDate(this.data.bookinfo.releaseTime)
         })
-
+        // 获取是否收藏
         this.getBookCollectByIds();
     },
 
