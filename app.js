@@ -1,6 +1,8 @@
 // app.js
 import Notify from '@vant/weapp/notify/notify';
 
+const ip = '120.77.76.39'
+
 App({
   
   /**
@@ -118,8 +120,8 @@ App({
       isAuth: true
     },
     openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
-    baseurl: "http://172.30.207.8:8080/",
-    websocketUrl: "ws://172.30.207.8:8080/websocket/"
+    baseurl: `http://${ip}:8080/`,
+    websocketUrl: `ws://${ip}:8080/websocket/`
   },
   // 腾讯地图根据经纬度获取位置的apikey
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',

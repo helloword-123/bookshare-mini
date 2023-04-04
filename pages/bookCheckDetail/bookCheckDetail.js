@@ -39,8 +39,8 @@ Page({
                     showCancel: false,
                     success(res) {
                         if (res.confirm) {
-                            wx.navigateTo({
-                                url: '/pages/admin/admin',
+                            wx.navigateBack({
+                              delta: 1,
                             })
                         }
                     }

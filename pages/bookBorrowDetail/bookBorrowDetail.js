@@ -98,18 +98,26 @@ Page({
                             })
                             .then(ret => {
                                 // 跳转到首页
-                                wx: wx.switchTab({
-                                    url: '/pages/home/home'
-                                })
-                                wx.showToast({
-                                    title: '借阅成功',
+                                wx.showModal({
+                                    title: '信息',
+                                    content: '借阅成功',
+                                    showCancel: false,
+                                    success(res) {
+                                        wx: wx.switchTab({
+                                            url: '/pages/home/home'
+                                        })
+                                    }
                                 })
                             })
                     })
                     .catch(err => {
-                        wx.showToast({
-                            title: '借阅失败',
-                            icon: 'error'
+                        wx.showModal({
+                            title: '信息',
+                            content: '借阅失败',
+                            showCancel: false,
+                            success(res) {
+                                
+                            }
                         })
                     });
             },
