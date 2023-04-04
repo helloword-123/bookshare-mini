@@ -1,7 +1,7 @@
 // app.js
 import Notify from '@vant/weapp/notify/notify';
 
-const ip = '120.77.76.39'
+const ip = '127.0.0.1'
 
 App({
   
@@ -27,7 +27,7 @@ App({
         },
         dataType: 'json',
         success: function (res) {
-          // 统一拦截权限不足
+          // 1. 统一拦截权限不足
           if (res.data.status == 403) {
             wx.showModal({
               title: '错误',
@@ -37,6 +37,18 @@ App({
                 wx.navigateBack({
                   delta: 1,
                 })
+              }
+            })
+            return;
+          }
+          // 2. 统一拦截错误
+          if(res.data.code === 20001){
+            wx.showModal({
+              title: '错误',
+              content: res.data.message,
+              showCancel: false,
+              success(res) {
+                
               }
             })
             return;

@@ -9,14 +9,13 @@ Page({
      */
     data: {
         // 用户信息
-        userinfo: {
-            // 头像
-            avatarUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
-            // 昵称
-            username: 'Pluto',
-            // 手机号
-            phone: '1888888888',
-        },
+        id: 1,
+        // 头像
+        avatarUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        // 昵称
+        username: 'Pluto',
+        // 手机号
+        phone: '1888888888',
         // 昵称和手机号是否只读
         isReadonly: [true, true],
         // 提示框是否显示
@@ -35,7 +34,7 @@ Page({
         this.setData({
             modalHidden: true
         });
-        app.asyncRequest('GET', app.globalData.baseurl + `user/logout/${this.data.userinfo.id}`)
+        app.asyncRequest('GET', app.globalData.baseurl + `user/logout/${this.data.id}`)
             .then(res => {
                 console.log(res);
                 // 清除信息
@@ -92,7 +91,7 @@ Page({
                 console.log('上传成功')
                 let data = JSON.parse(res.data);
                 this.setData({
-                    ['userinfo.avatarUrl']: data.data.url
+                    avatarUrl: data.data.url
                 })
             },
             fail: e => {
@@ -103,11 +102,49 @@ Page({
 
     // 保存信息
     saveButton() {
+        // 校验
+        let regNickName = /^[\w\u4e00-\u9fa5]{5,18}$/;
+        let regPhone = /^1[3578]\d{9}$/;
+        // 1. 空判断
+        if (this.data.nickName == "") {
+            wx.showModal({
+                title: '提示',
+                content: '昵称不能为空!',
+                showCancel: false,
+            })
+            return false
+        }
+        if (this.data.phone == "") {
+            wx.showModal({
+                title: '提示',
+                content: '手机号不能为空!',
+                showCancel: false,
+            })
+            return false
+        }
+        // 2. 格式校验
+        if(!regNickName.test(this.data.nickName)){
+            wx.showModal({
+                title: '提示',
+                content: '昵称格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+        if(!regPhone.test(this.data.phone)){
+            wx.showModal({
+                title: '提示',
+                content: '手机号格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+
         app.asyncRequest('POST', app.globalData.baseurl + 'user/updateUserInfo', {
-                avatarUrl: this.data.userinfo.avatarUrl,
-                id: this.data.userinfo.id,
-                nickName: this.data.userinfo.nickName,
-                phone: this.data.userinfo.phone
+                avatarUrl: this.data.avatarUrl,
+                id: this.data.id,
+                nickName: this.data.nickName,
+                phone: this.data.phone
             })
             .then(res => {
                 console.log(res);
@@ -127,6 +164,18 @@ Page({
         this.setData({
             isReadonly: arr
         })
+        // 提示
+        let title = id == 0 ? '昵称' : '手机号';
+        if(arr[id] == false){
+            wx.showToast({
+                title: '打开编辑' + title,
+            })
+        } else{
+            wx.showToast({
+                title: '关闭编辑' + title,
+            })
+        }
+        
     },
 
     /**
@@ -134,8 +183,12 @@ Page({
      */
     onLoad: function (options) {
         // 设置用户信息
+        let userinfo = JSON.parse(options.userinfo);
         this.setData({
-            userinfo: JSON.parse(options.userinfo)
+            id: userinfo.id,
+            avatarUrl: userinfo.avatarUrl,
+            nickName: userinfo.nickName,
+            phone: userinfo.phone
         })
     },
 

@@ -101,10 +101,10 @@ Page({
       tab_active: event.detail.name
     })
 
-    wx.showToast({
-      title: `点击标签 ${event.detail.name}`,
-      icon: 'none',
-    });
+    // wx.showToast({
+    //   title: `点击标签 ${event.detail.name}`,
+    //   icon: 'none',
+    // });
   },
 
   // 点击地址

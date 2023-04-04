@@ -1,6 +1,6 @@
 <view class="container1">
   <!-- 弹出框 -->
-  <van-dialog use-slot title="请先登录享受更多功能" show="{{ show }}" theme="round-button" confirmButtonText="立即登录" confirm-button-open-type="editConfirm" bind:close="onClose">
+  <van-dialog use-slot title="请先登录享受更多功能" show="{{ show }}" theme="round-button" confirmButtonText="立即登录" bind:confirm="onClose">
     <!-- 头像 -->
     <view class="box1">
       <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">

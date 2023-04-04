@@ -28,7 +28,6 @@ Page({
 
   // “立即登录”按钮点击事件
   onClose() {
-    console.log(this.data.nickname);
     this.setData({
       show: false
     });

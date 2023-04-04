@@ -64,6 +64,61 @@ Page({
 
     // 提交审核
     commit() {
+        // 校验
+        let regRealName = /^[\u4E00-\u9FA5]{2,10}(·[\u4E00-\u9FA5]{2,10}){0,2}$/;
+        let regPhone = /^1[3578]\d{9}$/;
+        let regEmail = /^[a-z\d_\-\.]+@[a-z\d_\-]+\.[a-z\d_\-]+$/i;
+        // 1. 空判断
+        if (this.data.number == "") {
+            wx.showModal({
+                title: '提示',
+                content: '学号/工号不能为空!',
+                showCancel: false,
+            })
+            return false
+        }
+        if (this.data.realName == "") {
+            wx.showModal({
+                title: '提示',
+                content: '姓名不能为空!',
+                showCancel: false,
+            })
+            return false
+        }
+        if (this.data.phone == "") {
+            wx.showModal({
+                title: '提示',
+                content: '手机号不能为空!',
+                showCancel: false,
+            })
+            return false
+        }
+        // 2. 格式校验
+        if(!regRealName.test(this.data.realName)){
+            wx.showModal({
+                title: '提示',
+                content: '姓名格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+        if(!regPhone.test(this.data.phone)){
+            wx.showModal({
+                title: '提示',
+                content: '手机号格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+        if(!regEmail.test(this.data.email)){
+            wx.showModal({
+                title: '提示',
+                content: '邮箱格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+
         let imgList = [];
         this.data.fileList.forEach(img => {
             imgList.push(img.url);
@@ -77,12 +132,16 @@ Page({
                 fileList: imgList
             })
             .then(res => {
-                wx.showToast({
-                    title: '提交成功',
-                })
-                wx.navigateBack({
-                    delta: 1
-                })
+                wx.showModal({
+                    title: '提示',
+                    content: '提交成功',
+                    showCancel: false,
+                    success(res) {
+                      wx.navigateBack({
+                        delta: 1,
+                      })
+                    }
+                  })
             })
     },
 
