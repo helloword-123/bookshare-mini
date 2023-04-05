@@ -28,7 +28,9 @@ Page({
     // 图书分类所选值
     tab_active: 0,
     // 图书列表
-    bookList: []
+    bookList: [],
+    // 是否需要加载数据
+    isLogin: false
   },
 
   // 获取用户角色
@@ -192,11 +194,19 @@ Page({
     })
   },
 
-  // 验证token
+  // 验证token（处理未登录）
   checkToken() {
     app.asyncRequest('GET', app.globalData.baseurl + 'user/checkToken')
       .then(res => {
         if(res.data.isValid == true){
+          if(websocket.socketOpen == false){
+            // 连接websocket
+            websocket.ws_connect(app.receiveMsg);
+          }
+          // 获取用户所有角色
+          this.getAllRolesById(app.globalData.userinfo.id);
+          // 获取一级目录
+          this.getListWithCategory();
           return;
         }
         wx.showModal({
@@ -209,6 +219,7 @@ Page({
             })
           }
         })
+        result = false;
       })
   },
 
@@ -223,12 +234,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 连接websocket
-    websocket.ws_connect(app.receiveMsg);
-    // 获取用户所有角色
-    this.getAllRolesById(app.globalData.userinfo.id);
-    // 获取一级目录
-    this.getListWithCategory();
+    
   },
 
   /**

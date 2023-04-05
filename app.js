@@ -20,10 +20,9 @@ App({
         method: method,
         data: data,
         header: {
-          // 'content-type': method == 'GET'?'application/json':'application/x-www-form-urlencoded',
           'Accept': 'application/json',
           // 请求需要带上token
-          'token': wx.getStorageSync('header_token')
+          // 'token': wx.getStorageSync('header_token')
         },
         dataType: 'json',
         success: function (res) {
@@ -42,7 +41,20 @@ App({
             return;
           }
           // 2. 统一拦截错误
-          if(res.data.code === 20001){
+          if(res.data.code !== 20000){
+            if(res.data.code === 20002){
+              wx.showModal({
+                title: '提示',
+                content: '请重新登录',
+                showCancel: false,
+                success(res) {
+                  wx.reLaunch({
+                    url: '/pages/login/login',
+                  })
+                }
+              })
+              return;
+            }
             wx.showModal({
               title: '错误',
               content: res.data.message,

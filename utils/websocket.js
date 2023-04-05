@@ -29,7 +29,7 @@ function ws_connect(func){
   })
   // 出错
   sotk.onError(onError => {
-    socketOpen = true;
+    socketOpen = false;
     console.log('监听 WebSocket 错误。错误信息', onError)
   })
   // 收到服务器消息
