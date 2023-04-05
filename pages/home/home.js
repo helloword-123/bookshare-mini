@@ -192,6 +192,26 @@ Page({
     })
   },
 
+  // 验证token
+  checkToken() {
+    app.asyncRequest('GET', app.globalData.baseurl + 'user/checkToken')
+      .then(res => {
+        if(res.data.isValid == true){
+          return;
+        }
+        wx.showModal({
+          title: '提示',
+          content: '请先登录',
+          showCancel: false,
+          success(res) {
+            wx.reLaunch({
+              url: '/pages/login/login',
+            })
+          }
+        })
+      })
+  },
+
   // 点击分享
   shareClick() {
     wx: wx.navigateTo({
@@ -222,9 +242,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 验证token
+    this.checkToken();
     // 获取位置信息
     this.initLocationPersmiss();
-
   },
 
   /**

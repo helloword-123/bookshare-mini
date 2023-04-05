@@ -80,7 +80,16 @@ Page({
         wx.scanCode({
             scanType: ['barCode'],
             success: res => {
-                console.log(res.result)
+                let regISBN = /^[0-9]{10}|[0-9]{13}$/;
+                if (!regISBN.test(res.result)) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '扫码错误',
+                        showCancel: false,
+                        success(res) {}
+                    })
+                    return;
+                }
                 var isbn = res.result;
                 if (isbn != this.data.bookinfo.isbn) {
                     wx.showToast({
