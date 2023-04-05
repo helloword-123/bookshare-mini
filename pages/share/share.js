@@ -202,72 +202,106 @@ Page({
             bookinfo
         } = this.data;
 
-        // 检验必填信息
+        // 检验
+        // 1. 空检测
         if (this.data.cascaderValue == '') {
-            wx.showToast({
-                title: '请选择图书分类',
-                icon: 'error'
+            wx.showModal({
+                title: '提示',
+                content: '图书分类不能为空!',
+                showCancel: false,
             })
-        } else if (this.data.userName == '') {
-            wx.showToast({
-                title: '请输入名称',
-                icon: 'error'
-            })
-        } else if (this.data.phoneNumber == '') {
-            wx.showToast({
-                title: '请输入手机号',
-                icon: 'error'
-            })
-        } else if (this.data.will == '') {
-            wx.showToast({
-                title: '请输入共享愿望',
-                icon: 'error'
-            })
-        } else if (this.data.location == '点击按钮获取位置') {
-            wx.showToast({
-                title: '未获取当前位置',
-                icon: 'error'
-            })
-        } else {
-            app.asyncRequest('POST', app.globalData.baseurl + 'book-drift/shareBook', {
-                    // 传给后端的信息
-                    // 图书信息
-                    code: bookinfo.code,
-                    name: bookinfo.name,
-                    author: bookinfo.author,
-                    publishing: bookinfo.publishing,
-                    published: bookinfo.published,
-                    photoUrl: bookinfo.photoUrl,
-                    description: bookinfo.description,
-                    cascaderValue: this.data.cascaderValue,
-                    // 表单信息
-                    userName: this.data.userName,
-                    phoneNumber: this.data.phoneNumber,
-                    will: this.data.will,
-                    location: this.data.location,
-                    latitude: app.lat,
-                    longitude: app.lng,
-                    fileList: this.data.fileList,
-                    userId: app.globalData.userinfo.id
-                })
-                .then(res => {
-                    console.log(res);
-                    if (res.code == 20000) {
-                        // 弹出框显示
-                        this.setData({
-                            showDialog: true
-                        })
-                    } else if (res.code == 20001) {
-                        wx.showToast({
-                            title: '分享出错',
-                            icon: 'error'
-                        })
-                    }
-                })
-                .catch(err => {
-                    console.log(res);
-                })
+            return;
         }
+        if (this.data.userName == '') {
+            wx.showModal({
+                title: '提示',
+                content: '昵称不能为空!',
+                showCancel: false,
+            })
+            return;
+        }
+        if (this.data.phoneNumber == '') {
+            wx.showModal({
+                title: '提示',
+                content: '手机号不能为空!',
+                showCancel: false,
+            })
+            return;
+        }
+        if (this.data.will == '') {
+            wx.showModal({
+                title: '提示',
+                content: '共享愿望不能为空!',
+                showCancel: false,
+            })
+            return;
+        }
+        if (this.data.location == '点击按钮获取位置') {
+            wx.showModal({
+                title: '提示',
+                content: '未获取当前位置!',
+                showCancel: false,
+            })
+            return;
+        }
+        // 2. 格式校验
+        let regPhoneNumber = /^1[3578]\d{9}$/;
+        let regUserName = /^[\w\u4e00-\u9fa5]{5,18}$/;
+        if(!regUserName.test(this.data.userName)){
+            wx.showModal({
+                title: '提示',
+                content: '昵称格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+        if(!regPhoneNumber.test(this.data.phoneNumber)){
+            wx.showModal({
+                title: '提示',
+                content: '手机号格式有误!',
+                showCancel: false,
+            })
+            return false
+        }
+
+        app.asyncRequest('POST', app.globalData.baseurl + 'book-drift/shareBook', {
+                // 传给后端的信息
+                // 图书信息
+                code: bookinfo.code,
+                name: bookinfo.name,
+                author: bookinfo.author,
+                publishing: bookinfo.publishing,
+                published: bookinfo.published,
+                photoUrl: bookinfo.photoUrl,
+                description: bookinfo.description,
+                cascaderValue: this.data.cascaderValue,
+                // 表单信息
+                userName: this.data.userName,
+                phoneNumber: this.data.phoneNumber,
+                will: this.data.will,
+                location: this.data.location,
+                latitude: app.lat,
+                longitude: app.lng,
+                fileList: this.data.fileList,
+                userId: app.globalData.userinfo.id
+            })
+            .then(res => {
+                console.log(res);
+                if (res.code == 20000) {
+                    // 弹出框显示
+                    this.setData({
+                        showDialog: true
+                    })
+                } else if (res.code == 20001) {
+                    wx.showToast({
+                        title: '分享出错',
+                        icon: 'error'
+                    })
+                }
+            })
+            .catch(err => {
+                console.log(res);
+            })
     },
 
     // 点击”确定“按钮
@@ -302,7 +336,16 @@ Page({
         wx.scanCode({
             scanType: ['barCode'],
             success: res => {
-                console.log(res.result)
+                let regISBN = /^[0-9]{10}|[0-9]{13}$/;
+                if (!regISBN.test(res.result)) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '扫码错误',
+                        showCancel: false,
+                        success(res) {}
+                    })
+                    return;
+                }
                 var isbn = res.result;
                 // 根据isbn号发起请求
                 var apikey = '14778.d240ab28c857b24b46148ca6351116a2.b03531cb33b522960cdb109e88e651bc';
