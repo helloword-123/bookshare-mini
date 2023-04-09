@@ -1,7 +1,7 @@
 // app.js
 import Notify from '@vant/weapp/notify/notify';
 
-const ip = '127.0.0.1'
+const ip = '120.77.76.39'
 
 App({
   
@@ -22,7 +22,7 @@ App({
         header: {
           'Accept': 'application/json',
           // 请求需要带上token
-          // 'token': wx.getStorageSync('header_token')
+          'token': wx.getStorageSync('header_token')
         },
         dataType: 'json',
         success: function (res) {

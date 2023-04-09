@@ -1,6 +1,6 @@
 /* pages/shareBorrowRecords/shareBorrowRecords.wxss */
 .container1{
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background-color: #f1f1f1;
 }
