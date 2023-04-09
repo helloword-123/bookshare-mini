@@ -41,10 +41,12 @@ Page({
                 app.globalData.userinfo = {};
                 app.globalData.openid = '',
                     app.location = '',
-                    app.laat = '',
+                    app.lat = '',
                     app.lng = ''
                 // 断开socket连接
-                websocket.onClose();
+                if(websocket.socketOpen === true){
+                    websocket.onClose();
+                }
                 // 返回首页
                 wx.showModal({
                     title: '信息',

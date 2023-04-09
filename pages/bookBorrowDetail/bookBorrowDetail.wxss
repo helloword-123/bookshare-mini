@@ -43,6 +43,12 @@
     align-items: center;
 }
 
+.collectPic{
+    height: 60rpx; 
+    width: 60rpx;
+    margin-right: 20rpx;
+}
+
 .detail {
     margin: 20rpx 30rpx 0 30rpx;
 

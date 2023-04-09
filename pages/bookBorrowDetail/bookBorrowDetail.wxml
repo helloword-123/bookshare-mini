@@ -15,7 +15,8 @@
         <view class="category">
             <view>分类：{{bookinfo.categoryFullName}}</view>
             <view>
-                <image src="{{collectPic}}" style="height: 60rpx; width: 60rpx;" bindtap="clickCollectPic" />
+                <image src="{{collectPic}}" class="collectPic" bindtap="clickCollectPic" />
+                <image src="{{commentPic}}" style="height: 50rpx; width: 91.5rpx;" bindtap="clickCommentPic" data-bookId="{{bookinfo.bookId}}"/>
             </view>
         </view>
     </view>

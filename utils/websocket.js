@@ -39,7 +39,6 @@ function ws_connect(func){
 }
 
 function onClose(){
-  console.log("111");
   sotk.close()
 }
 

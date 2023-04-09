@@ -20,7 +20,16 @@ Page({
         // 是否显示modal
         modalHidden: true,
         // 图书收藏图片
-        collectPic: "/images/common/collect.png"
+        collectPic: "/images/common/collect.png",
+        // 评论图片
+        commentPic: "/images/borrow/comment.png"
+    },
+
+    // 点击评论
+    clickCommentPic(e) {
+        wx.navigateTo({
+          url: `/pages/comment/comment?bookId=${e.currentTarget.dataset.bookid}`,
+        })
     },
 
     // 获取是否收藏
