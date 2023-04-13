@@ -51,6 +51,7 @@ Page({
 
     // 点击收藏
     clickCollectPic() {
+        // console.log(this.data);
         app.asyncRequest('GET', app.globalData.baseurl + `book-collect/update/${this.data.bookinfo.bookId}/${app.globalData.userinfo.id}`)
             .then(res => {
                 console.log(res);

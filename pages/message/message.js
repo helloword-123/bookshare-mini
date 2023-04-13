@@ -17,6 +17,7 @@ Page({
 
     // 点击消息
     clickMessage(e) {
+        var that = this;
         const {
             msgid,
             tab
@@ -30,7 +31,9 @@ Page({
                     title: '提示',
                     content: '读取信息完成',
                     showCancel: false,
-                    success(res) {}
+                    success(res) {
+                        that.getAllMessages();
+                    }
                 })
             })
     },

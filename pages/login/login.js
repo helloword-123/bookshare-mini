@@ -50,9 +50,8 @@ Page({
           success: (ret) => {
             console.log(ret);
             wx.setStorageSync('header_token', ret.data.data.token)
-            // console.log(wx.getStorageSync('header_token'))
+            //console.log(wx.getStorageSync('header_token'))
             app.globalData.userinfo = ret.data.data.userinfo;
-            app.globalData.openid = ret.data.data.openid;
             // 登陆成功后，提示用户
             // 连接websocket
             //websocket.ws_connect(app.receiveMsg);

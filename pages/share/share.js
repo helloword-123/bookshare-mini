@@ -247,14 +247,14 @@ Page({
         // 2. 格式校验
         let regPhoneNumber = /^1[3578]\d{9}$/;
         let regUserName = /^[\w\u4e00-\u9fa5]{5,18}$/;
-        if(!regUserName.test(this.data.userName)){
-            wx.showModal({
-                title: '提示',
-                content: '昵称格式有误!',
-                showCancel: false,
-            })
-            return false
-        }
+        // if(!regUserName.test(this.data.userName)){
+        //     wx.showModal({
+        //         title: '提示',
+        //         content: '昵称格式有误!',
+        //         showCancel: false,
+        //     })
+        //     return false
+        // }
         if(!regPhoneNumber.test(this.data.phoneNumber)){
             wx.showModal({
                 title: '提示',
@@ -374,21 +374,16 @@ Page({
         app.asyncRequest('GET', app.globalData.baseurl + 'book/isDrifting/' + isbn)
             .then(ret => {
                 console.log(ret);
-                if (ret.code == 20002) {
-                    // 提示共享失败
-                    Toast.fail('该图书正在共享中，无法重复共享！');
-                } else {
-                    wx.showToast({
-                        title: '扫码成功',
-                        icon: 'success'
-                    })
-                    // 获取一二级目录
-                    this.getCategoryCascader();
-                    // 跳转下一步
-                    this.setData({
-                        active: 1
-                    })
-                }
+                wx.showToast({
+                    title: '扫码成功',
+                    icon: 'success'
+                })
+                // 获取一二级目录
+                this.getCategoryCascader();
+                // 跳转下一步
+                this.setData({
+                    active: 1
+                })
             })
             .catch(err => {
                 Toast.fail('请求出错！');

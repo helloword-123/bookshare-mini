@@ -39,12 +39,11 @@ Page({
                 console.log(res);
                 // 清除信息
                 app.globalData.userinfo = {};
-                app.globalData.openid = '',
-                    app.location = '',
-                    app.lat = '',
-                    app.lng = ''
+                app.location = '',
+                app.lat = '',
+                app.lng = ''
                 // 断开socket连接
-                if(websocket.socketOpen === true){
+                if (websocket.socketOpen === true) {
                     websocket.onClose();
                 }
                 // 返回首页
@@ -125,15 +124,15 @@ Page({
             return false
         }
         // 2. 格式校验
-        if(!regNickName.test(this.data.nickName)){
-            wx.showModal({
-                title: '提示',
-                content: '昵称格式有误!',
-                showCancel: false,
-            })
-            return false
-        }
-        if(!regPhone.test(this.data.phone)){
+        // if(!regNickName.test(this.data.nickName)){
+        //     wx.showModal({
+        //         title: '提示',
+        //         content: '昵称格式有误!',
+        //         showCancel: false,
+        //     })
+        //     return false
+        // }
+        if (!regPhone.test(this.data.phone)) {
             wx.showModal({
                 title: '提示',
                 content: '手机号格式有误!',
@@ -168,16 +167,16 @@ Page({
         })
         // 提示
         let title = id == 0 ? '昵称' : '手机号';
-        if(arr[id] == false){
+        if (arr[id] == false) {
             wx.showToast({
                 title: '打开编辑' + title,
             })
-        } else{
+        } else {
             wx.showToast({
                 title: '关闭编辑' + title,
             })
         }
-        
+
     },
 
     /**

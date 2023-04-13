@@ -1,7 +1,7 @@
 // app.js
 import Notify from '@vant/weapp/notify/notify';
 
-const ip = '127.0.0.1'
+const ip = '172.24.174.240'
 
 App({
   
@@ -26,20 +26,6 @@ App({
         },
         dataType: 'json',
         success: function (res) {
-          // 1. 统一拦截权限不足
-          if (res.data.status == 403) {
-            wx.showModal({
-              title: '错误',
-              content: '权限不足',
-              showCancel: false,
-              success(res) {
-                wx.navigateBack({
-                  delta: 1,
-                })
-              }
-            })
-            return;
-          }
           // 2. 统一拦截错误
           if(res.data.code === 20002){
             wx.showModal({
@@ -54,13 +40,25 @@ App({
             })
             return;
           }
+          if(res.data.code === 20004){
+            wx.showModal({
+              title: '提示',
+              content: res.data.message,
+              showCancel: false,
+              success(res) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            })
+            return;
+          }
           if(res.data.code === 20001){
             wx.showModal({
               title: '错误',
               content: res.data.message,
               showCancel: false,
               success(res) {
-                
               }
             })
             return;
@@ -143,7 +141,6 @@ App({
       roles: ['super_admin', 'admin', 'user'],
       isAuth: true
     },
-    openid: '"oQAtH5TBXXq45UAa22fC6_uY70jA"',
     baseurl: `http://${ip}:8080/`,
     websocketUrl: `ws://${ip}:8080/websocket/`
   },

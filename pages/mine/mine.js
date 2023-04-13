@@ -1,6 +1,6 @@
 // pages/mine/mine.js
 import Notify from '@vant/weapp/notify/notify';
-var websocket = require('../../utils/websocket') 
+var websocket = require('../../utils/websocket')
 const app = getApp();
 
 Page({
@@ -43,6 +43,20 @@ Page({
     }],
     // 未读消息数量
     msgNum: 0
+  },
+
+  // 获取用户信息
+  getUserInfoByToken() {
+    app.asyncRequest('GET', app.globalData.baseurl + `user/getUserInfoByToken`)
+      .then(res => {
+        // 设置用户信息
+        app.globalData.userinfo = res.data.userinfo;
+        this.setData({
+          userinfo: app.globalData.userinfo
+        })
+        // 获取未读消息数量
+        return this.getMsgSize();
+      })
   },
 
   // 获取未读消息数量
@@ -130,7 +144,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -144,12 +158,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 设置用户信息
-    this.setData({
-      userinfo: app.globalData.userinfo
-    })
-    // 获取未读消息数量
-    this.getMsgSize();
+    this.getUserInfoByToken();
   },
 
   /**

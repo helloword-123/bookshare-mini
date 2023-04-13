@@ -2,7 +2,7 @@
 <view class="container1">
     <!-- 图书卡片 -->
     <view>
-        <view class="book" wx:for="{{bookList}}" wx:for-item="book" wx:key="id" bindtap="clickBook" data-bookId="{{book.bookId}}">
+        <view class="book" wx:for="{{bookList}}" wx:for-item="book" wx:key="id" bindtap="clickBook" data-bookId="{{book.bookId}}" wx:if="{bookList.length != 0}}">
             <image src="{{book.picture_url}}"></image>
             <view class="text-ellipsis">
                 <view>{{book.name}}</view>
@@ -13,6 +13,7 @@
                 </view>
             </view>
         </view>
+        <van-empty description="没有记录！" wx:if="{{bookList.length == 0}}" />
     </view>
     <!-- 全局消息通知 -->
     <van-notify id="van-notify" />

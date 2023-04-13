@@ -23,14 +23,14 @@ Page({
 
   // 修改名字监听事件
   onChangeName() {
-    // console.log(this.data.nickname);
+
   },
 
   // “立即登录”按钮点击事件
   onClose() {
-    this.setData({
-      show: false
-    });
+    // this.setData({
+    //   show: false
+    // });
     // 更新用户信息
     app.asyncRequest('POST', app.globalData.baseurl + 'user/updateUserInfo', {
         avatarUrl: this.data.avatarUrl,

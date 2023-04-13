@@ -64,8 +64,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        // 获取图书列表
-        this.getShareBorrowBookList();
+        
         // 设置tab
         let type = options.type;
         console.log(options);
@@ -89,7 +88,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        // 获取图书列表
+        this.getShareBorrowBookList();
     },
 
     /**
