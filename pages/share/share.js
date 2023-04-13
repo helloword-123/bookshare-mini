@@ -197,6 +197,9 @@ Page({
 
     // 点击”我要共享“按钮
     shareCommit() {
+        wx.showLoading({
+            title: '加载中',
+        })
         // 上传表单信息到后台
         const {
             bookinfo
@@ -255,7 +258,7 @@ Page({
         //     })
         //     return false
         // }
-        if(!regPhoneNumber.test(this.data.phoneNumber)){
+        if (!regPhoneNumber.test(this.data.phoneNumber)) {
             wx.showModal({
                 title: '提示',
                 content: '手机号格式有误!',
@@ -302,6 +305,9 @@ Page({
             .catch(err => {
                 console.log(res);
             })
+        wx.hideLoading({
+            success: (res) => {},
+        })
     },
 
     // 点击”确定“按钮
