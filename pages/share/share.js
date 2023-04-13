@@ -197,9 +197,6 @@ Page({
 
     // 点击”我要共享“按钮
     shareCommit() {
-        wx.showLoading({
-            title: '加载中',
-        })
         // 上传表单信息到后台
         const {
             bookinfo
@@ -267,6 +264,9 @@ Page({
             return false
         }
 
+        wx.showLoading({
+            title: '加载中',
+        })
         app.asyncRequest('POST', app.globalData.baseurl + 'book-drift/shareBook', {
                 // 传给后端的信息
                 // 图书信息

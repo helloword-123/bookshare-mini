@@ -146,6 +146,7 @@ App({
   },
   // 腾讯地图根据经纬度获取位置的apikey
   mapApiKey: 'OWTBZ-ZK4KJ-FXFFZ-FIHPE-EMT4E-U6FI3',
+  chooseLocation: false,
   location: '',
   lat: 0,
   lng: 0

@@ -82,7 +82,7 @@
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-notify": "@vant/weapp/notify/index"
   },
-  "requiredPrivateInfos": ["getLocation"],
+  "requiredPrivateInfos": ["getLocation", "chooseLocation"],
   "permission": {
     "scope.userLocation": {
       "desc": "获取你的当前位置"

@@ -18,7 +18,7 @@ Page({
     // 搜索框值
     value: '',
     // 位置
-    location: app.location,
+    location: '请授权获取位置',
     // 轮播图相关数据
     imgList: ['/images/swiper/1.jpg', '/images/swiper/2.jpg', '/images/swiper/3.jpg'],
     indicatorDots: true,
@@ -111,7 +111,20 @@ Page({
 
   // 点击地址
   clickLocation() {
-
+    var that = this;
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res);
+        app.location = res.address;
+        app.lat = res.latitude;
+        app.lng = res.longitude;
+        that.setData({
+          location: app.location
+        })
+      },
+      fail: function () {},
+      complete: function () {}
+    })
   },
 
   // 获取定位
@@ -127,6 +140,7 @@ Page({
         app.location = res.result.address;
         app.lat = res.result.location.lat;
         app.lng = res.result.location.lng;
+        app.chooseLocation = true;
       },
       fail: function (res) {
         console.log(res.status, res.message);
@@ -156,7 +170,7 @@ Page({
                 wx.showToast({
                   title: '拒绝授权 暂时无法使用本功能',
                   icon: 'none',
-                  duration: 1000
+                  duration: 2000
                 })
               } else if (res.confirm) {
                 //确定授权，通过wx.openSetting发起授权请求
@@ -186,9 +200,11 @@ Page({
           //用户首次进入页面,调用wx.getLocation的API
           that.initGetLocationFlunction();
         } else {
-          console.log('授权成功')
+          //console.log('授权成功')
           //调用wx.getLocation的API
-          that.initGetLocationFlunction();
+          if (app.chooseLocation == false) {
+            that.initGetLocationFlunction();
+          }
         }
       }
     })
@@ -198,8 +214,8 @@ Page({
   checkToken() {
     app.asyncRequest('GET', app.globalData.baseurl + 'user/checkToken')
       .then(res => {
-        if(res.data.isValid == true){
-          if(websocket.socketOpen == false){
+        if (res.data.isValid == true) {
+          if (websocket.socketOpen == false) {
             // 连接websocket
             websocket.ws_connect(app.receiveMsg);
           }
@@ -207,6 +223,8 @@ Page({
           this.getAllRolesById(app.globalData.userinfo.id);
           // 获取一级目录
           this.getListWithCategory();
+          // 获取位置信息
+          this.initLocationPersmiss();
           return;
         }
         wx.showModal({
@@ -234,7 +252,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -250,8 +268,6 @@ Page({
   onShow: function () {
     // 验证token
     this.checkToken();
-    // 获取位置信息
-    this.initLocationPersmiss();
   },
 
   /**
