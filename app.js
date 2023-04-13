@@ -1,7 +1,7 @@
 // app.js
 import Notify from '@vant/weapp/notify/notify';
 
-const ip = '120.77.76.39'
+const ip = '127.0.0.1'
 
 App({
   
@@ -41,20 +41,20 @@ App({
             return;
           }
           // 2. 统一拦截错误
-          if(res.data.code !== 20000){
-            if(res.data.code === 20002){
-              wx.showModal({
-                title: '提示',
-                content: '请重新登录',
-                showCancel: false,
-                success(res) {
-                  wx.reLaunch({
-                    url: '/pages/login/login',
-                  })
-                }
-              })
-              return;
-            }
+          if(res.data.code === 20002){
+            wx.showModal({
+              title: '提示',
+              content: '请重新登录',
+              showCancel: false,
+              success(res) {
+                wx.reLaunch({
+                  url: '/pages/login/login',
+                })
+              }
+            })
+            return;
+          }
+          if(res.data.code === 20001){
             wx.showModal({
               title: '错误',
               content: res.data.message,

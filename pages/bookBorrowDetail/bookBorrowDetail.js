@@ -27,9 +27,9 @@ Page({
 
     // 点击评论
     clickCommentPic(e) {
-        wx.navigateTo({
-          url: `/pages/comment/comment?bookId=${e.currentTarget.dataset.bookid}`,
-        })
+        // wx.navigateTo({
+        //   url: `/pages/comment/comment?bookId=${e.currentTarget.dataset.bookid}`,
+        // })
     },
 
     // 获取是否收藏

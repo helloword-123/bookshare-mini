@@ -1,2 +1,20 @@
 <!--pages/comment/comment.wxml-->
-<text>pages/comment/comment.wxml</text>
+<view class="container">
+  <view class="form">
+    <view class="input-box">
+      <input class="input-phone" type="number" placeholder="请输入手机号" bindinput="bindPhoneInput" value="{{phone}}"></input>
+    </view>
+    <view class="input-box">
+      <input class="input-code" type="number" placeholder="请输入验证码" bindinput="bindCodeInput" value="{{code}}"></input>
+      <button class="btn-send" disabled="{{!phoneValid}}" bindtap="sendCode">{{sendBtnText}}</button>
+    </view>
+    <view class="agreement">
+      <checkbox class="checkbox" value="{{agreed}}" bindchange="bindAgreeChange"></checkbox>
+      <text class="text-agree">我已阅读并同意</text>
+      <navigator class="link-agreement" url="/pages/agreement/agreement">《用户协议》</navigator>
+      <text class="text-agree">和</text>
+      <navigator class="link-privacy" url="/pages/privacy/privacy">《隐私政策》</navigator>
+    </view>
+    <button class="btn-login" disabled="{{!loginValid}}" bindtap="login">登录</button>
+  </view>
+</view>
