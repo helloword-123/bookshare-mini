@@ -6,7 +6,7 @@
     </view>
     <view class="input-box">
       <input class="input-code" type="number" placeholder="请输入验证码" bindinput="bindCodeInput" value="{{code}}"></input>
-      <button class="btn-send" disabled="{{!phoneValid}}" bindtap="sendCode">{{countdownText}}</button>
+      <button class="btn-send" disabled="{{!phoneValid}}" bindtap="sendCode" hover-class="button_active">{{countdownText}}</button>
     </view>
     <view class="agreement">
       <checkbox-group bindchange="bindAgreeChange">

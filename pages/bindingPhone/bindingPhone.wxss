@@ -55,6 +55,10 @@
     background-color: #1aad19;
 }
 
+.button_active {
+    background: #1cc41c;
+}
+
 .btn-countdown {
     background-color: #cccccc;
 }

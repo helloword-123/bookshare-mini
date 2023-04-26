@@ -13,7 +13,6 @@ Page({
         code: '',
         countdownActive: false,
         countdownText: '发送验证码',
-        sendBtnText: '发送验证码',
         countdownDuration: 60,
         agreed: false,
         loginValid: false,
