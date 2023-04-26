@@ -1,4 +1,4 @@
-// pages/comment/comment.js
+// pages/bindingPhone/bindingPhone.js
 
 const app = getApp()
 
@@ -16,7 +16,9 @@ Page({
         sendBtnText: '发送验证码',
         countdownDuration: 60,
         agreed: false,
-        loginValid: false
+        loginValid: false,
+        // logo图片url
+        picurl: "https://edu-wuhaojie.oss-cn-shenzhen.aliyuncs.com/bookshare/2022/12/16/7b3aebe1ed9146b5a53e742343b02611f778738c-e4f8-4870-b634-56703b4acafe.gif"
     },
 
     bindPhoneInput: function (e) {
@@ -45,28 +47,36 @@ Page({
     },
 
     sendCode: function () {
-        // TODO: 调用后端接口发送验证码
-        const that = this
-        let countdown = this.data.countdownDuration
-        this.setData({
-            countdownActive: true,
-            sendBtnText: `${countdown} 秒后重发`
-        })
-        const timer = setInterval(function () {
-            countdown--
-            if (countdown > 0) {
-                that.setData({
-                    countdownText: `${countdown} 秒后重发`
+        // 发起请求
+        app.asyncRequest('GET', app.globalData.baseurl + `user/sendSmsCode/${this.data.phone}`)
+            .then(res => {
+                const that = this
+                let countdown = this.data.countdownDuration
+                this.setData({
+                    countdownActive: true,
+                    sendBtnText: `${countdown} 秒后重发`
                 })
-            } else {
-                clearInterval(timer)
-                that.setData({
-                    countdownActive: false,
-                    countdownText: '重新发送',
-                    sendBtnText: '发送验证码'
+                const timer = setInterval(function () {
+                    countdown--
+                    if (countdown > 0) {
+                        that.setData({
+                            countdownText: `${countdown} 秒后重发`
+                        })
+                    } else {
+                        clearInterval(timer)
+                        that.setData({
+                            countdownActive: false,
+                            countdownText: '重新发送',
+                        })
+                    }
+                }, 1000)
+            })
+            .catch(err => {
+                wx.showToast({
+                    title: '发送失败！',
+                    icon: "error"
                 })
-            }
-        }, 1000)
+            })
     },
 
     countdown: function () {
@@ -74,26 +84,40 @@ Page({
             return
         }
         if (!this.data.phoneValid) {
-            // TODO: 弹出提示框提示用户输入正确的手机号
+            wx.showModal({
+                title: '提示',
+                content: '手机号格式有误!',
+                showCancel: false,
+            })
             return
         }
         this.sendCode()
     },
 
     login: function () {
-        if (!this.data.phoneValid) {
-            // TODO: 弹出提示框提示用户输入正确的手机号
+        if (!this.data.loginValid) {
             return
         }
-        if (!this.data.code) {
-            // TODO: 弹出提示框提示用户输入验证码
-            return
-        }
-        if (!this.data.agreed) {
-            // TODO: 弹出提示框提示用户同意用户协议和隐私政策
-            return
-        }
-        // TODO: 调用后端接口完成登录
+        // 验证
+        app.asyncRequest('POST', app.globalData.baseurl + `user/verifySmsCode`, {
+                userId: app.globalData.userinfo.id,
+                phone: this.data.phone,
+                code: this.data.code
+            })
+            .then(res => {
+                app.globalData.userinfo.isBindingPhone = true;
+                app.globalData.userinfo.phone = this.data.phone;
+                wx.showModal({
+                    title: '提示',
+                    content: '绑定成功！',
+                    showCancel: false,
+                    success(res) {
+                      wx.navigateBack({
+                        delta: 1,
+                      })
+                    }
+                })
+            })
     },
 
     updateLoginValid: function () {

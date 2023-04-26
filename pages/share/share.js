@@ -414,7 +414,19 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        if (app.globalData.userinfo.isBindingPhone == false) {
+            wx.showModal({
+                title: '提示',
+                content: '请先绑定手机号',
+                showCancel: false,
+                success(res) {
+                    wx.navigateTo({
+                        url: '/pages/bindingPhone/bindingPhone',
+                    })
+                }
+            })
+            return;
+        }
     },
 
     /**

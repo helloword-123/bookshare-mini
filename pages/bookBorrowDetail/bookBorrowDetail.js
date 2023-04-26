@@ -41,7 +41,7 @@ Page({
                     this.setData({
                         collectPic: "/images/common/collect_selected.png"
                     })
-                } else{
+                } else {
                     this.setData({
                         collectPic: "/images/common/collect.png"
                     })
@@ -62,14 +62,14 @@ Page({
                     this.setData({
                         collectPic: "/images/common/collect_selected.png"
                     })
-                } else{
+                } else {
                     wx.showToast({
                         title: '取消收藏',
                     })
                     this.setData({
                         collectPic: "/images/common/collect.png"
                     })
-                } 
+                }
             })
     },
 
@@ -139,7 +139,7 @@ Page({
                             content: '借阅失败',
                             showCancel: false,
                             success(res) {
-                                
+
                             }
                         })
                     });
@@ -189,19 +189,31 @@ Page({
 
     // 点击“我要借阅”
     borrowCommit() {
+        if (app.globalData.userinfo.isBindingPhone == false) {
+            wx.showModal({
+                title: '提示',
+                content: '请先绑定手机号',
+                showCancel: false,
+                success(res) {
+                    wx.navigateTo({
+                        url: '/pages/combindingPhonement/bindingPhone',
+                    })
+                }
+            })
+            return;
+        }
         // 检测是否认证通过
-        if(app.globalData.userinfo.isAuth == false){
+        if (app.globalData.userinfo.isAuth == false) {
             wx.showModal({
                 title: '提示',
                 content: '您未认证或者认证未通过，请先认证！',
-                success (res) {
+                success(res) {
                     if (res.confirm) {
-                      wx.navigateTo({
-                        url: '/pages/auth/auth',
-                      })
-                    } else if (res.cancel) {
-                    }
-                  }
+                        wx.navigateTo({
+                            url: '/pages/auth/auth',
+                        })
+                    } else if (res.cancel) {}
+                }
             })
             return;
         }

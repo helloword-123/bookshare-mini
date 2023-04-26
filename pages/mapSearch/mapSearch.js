@@ -345,7 +345,6 @@ Page({
                 longitude: currMaker.longitude
             }],
             success: function (res) {
-                console.log(111);
                 let destinationDistance = res.result.elements[0].distance
                 let distanceKm = `${(destinationDistance)}m` // 转换成m
                 let arr = []

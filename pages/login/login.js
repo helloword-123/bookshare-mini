@@ -40,7 +40,7 @@ Page({
       },
       success: res => {
         console.log("login code is: " + res.code);
-        // 发送 res.code 到后台换取token，openid和userinfo
+        // 发送 res.code 到后台换取token和userinfo
         wx.request({
           url: app.globalData.baseurl + "user/wxLogin",
           method: 'POST',
@@ -53,8 +53,6 @@ Page({
             //console.log(wx.getStorageSync('header_token'))
             app.globalData.userinfo = ret.data.data.userinfo;
             // 登陆成功后，提示用户
-            // 连接websocket
-            //websocket.ws_connect(app.receiveMsg);
             this.setData({
               modalHidden: false
             });

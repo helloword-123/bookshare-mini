@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/bindingPhone/bindingPhone",
     "pages/login/login",
-    "pages/comment/comment",
     "pages/mine/mine",
     "pages/message/message",
     "pages/admin/admin",

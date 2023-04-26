@@ -1,7 +1,7 @@
 // app.js
 import Notify from '@vant/weapp/notify/notify';
 
-const ip = '172.24.174.240'
+const ip = '127.0.0.1'
 
 App({
   
@@ -113,6 +113,7 @@ App({
     wx.setStorageSync('logs', logs)
   },
 
+  // 点击消息提示
   clickMsgNotify(){
     wx.navigateTo({
       url: '/pages/message/message',
@@ -138,8 +139,9 @@ App({
       id: 1,
       nickName: "Pluto",
       phone: "18888888888",
-      roles: ['super_admin', 'admin', 'user'],
-      isAuth: true
+      roles: [],
+      isAuth: false,
+      isBindingPhone: false
     },
     baseurl: `http://${ip}:8080/`,
     websocketUrl: `ws://${ip}:8080/websocket/`

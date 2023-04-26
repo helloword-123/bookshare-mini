@@ -30,7 +30,17 @@ Page({
     // 图书列表
     bookList: [],
     // 是否需要加载数据
-    isLogin: false
+    isLogin: false,
+    flag: false
+  },
+
+  // 获取用户信息
+  getUserInfoByToken() {
+    app.asyncRequest('GET', app.globalData.baseurl + `user/getUserInfoByToken`)
+      .then(res => {
+        // 设置用户信息
+        app.globalData.userinfo = res.data.userinfo;
+      })
   },
 
   // 获取用户角色
@@ -204,6 +214,14 @@ Page({
           //调用wx.getLocation的API
           if (app.chooseLocation == false) {
             that.initGetLocationFlunction();
+          } else{
+            if(app.location == ''){
+              that.initGetLocationFlunction();
+              return;
+            }
+            that.setData({
+              location: app.location
+            })
           }
         }
       }
@@ -219,12 +237,15 @@ Page({
             // 连接websocket
             websocket.ws_connect(app.receiveMsg);
           }
-          // 获取用户所有角色
-          this.getAllRolesById(app.globalData.userinfo.id);
+          // 获取用户信息
+          this.getUserInfoByToken();
           // 获取一级目录
           this.getListWithCategory();
           // 获取位置信息
           this.initLocationPersmiss();
+          this.setData({
+            flag: true
+          })
           return;
         }
         wx.showModal({
@@ -237,7 +258,6 @@ Page({
             })
           }
         })
-        result = false;
       })
   },
 
@@ -252,7 +272,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 验证token
+    this.checkToken();
   },
 
   /**
@@ -266,8 +287,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 验证token
-    this.checkToken();
+    if(this.data.flag == true){
+      // 获取位置信息
+      this.initLocationPersmiss();
+    }
   },
 
   /**
