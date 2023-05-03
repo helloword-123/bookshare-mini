@@ -245,7 +245,7 @@ Page({
             return;
         }
         // 2. 格式校验
-        let regPhoneNumber = /^1[3578]\d{9}$/;
+        let regPhoneNumber = /^1[34578]\d{9}$/;
         let regUserName = /^[\w\u4e00-\u9fa5]{5,18}$/;
         // if(!regUserName.test(this.data.userName)){
         //     wx.showModal({

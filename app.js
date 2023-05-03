@@ -27,6 +27,19 @@ App({
         dataType: 'json',
         success: function (res) {
           // 2. 统一拦截错误
+          if(res.data.status == 403){
+            wx.showModal({
+              title: '错误',
+              content: '权限不足！',
+              showCancel: false,
+              success(res) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            })
+            return;
+          }
           if(res.data.code === 20002){
             wx.showModal({
               title: '提示',

@@ -196,7 +196,7 @@ Page({
                 showCancel: false,
                 success(res) {
                     wx.navigateTo({
-                        url: '/pages/combindingPhonement/bindingPhone',
+                        url: '/pages/bindingPhone/bindingPhone',
                     })
                 }
             })

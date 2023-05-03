@@ -58,7 +58,7 @@ Page({
     formSubmit: function (e) {
         let content = e.detail.value.opinion;
         let contact = e.detail.value.contact;
-        let regPhone = /^1[3578]\d{9}$/;
+        let regPhone = /^1[34578]\d{9}$/;
         let regEmail = /^[a-z\d_\-\.]+@[a-z\d_\-]+\.[a-z\d_\-]+$/i;
         if (content == "") {
             wx.showModal({

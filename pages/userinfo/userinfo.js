@@ -105,7 +105,7 @@ Page({
     saveButton() {
         // 校验
         let regNickName = /^[\w\u4e00-\u9fa5]{5,18}$/;
-        let regPhone = /^1[3578]\d{9}$/;
+        let regPhone = /^1[34578]\d{9}$/;
         // 1. 空判断
         if (this.data.nickName == "") {
             wx.showModal({
